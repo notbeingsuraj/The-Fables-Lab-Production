@@ -9,11 +9,11 @@ import {
   MessageSquare, 
   FileText, 
   AlertCircle,
-  Search,
-  Filter,
-  ChevronRight,
   Activity,
-  Layers
+  Layers,
+  Zap,
+  Network,
+  ListTodo
 } from "lucide-react";
 
 // ─── Fade-up on scroll ────────────────────────────────────────────────────────
@@ -46,178 +46,145 @@ function Rule() {
   return <div className="w-full h-px bg-border/40" />;
 }
 
-// ─── UI FRAGMENT: Hero Collections Table ──────────────────────────────────────
-function HeroUIFragment() {
+// ─── UI FRAGMENT: Operational Storytelling Hero Flow ──────────────────────────
+function HeroSignatureFlowFragment() {
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className="w-full max-w-5xl mx-auto mt-16 lg:mt-24 rounded-xl border border-border/50 bg-surface/40 backdrop-blur-md shadow-[0_0_80px_-20px_rgba(74,158,255,0.05)] overflow-hidden relative"
-    >
-      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
-      {/* Header bar */}
-      <div className="flex items-center justify-between px-5 py-3.5 border-b border-border/40 bg-elevated/30">
-        <div className="flex items-center gap-3">
-          <div className="flex gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-border/80" />
-            <div className="w-2.5 h-2.5 rounded-full bg-border/80" />
-            <div className="w-2.5 h-2.5 rounded-full bg-border/80" />
-          </div>
-          <div className="h-4 w-px bg-border/50 mx-1" />
-          <span className="text-text-muted text-[11px] font-mono tracking-widest uppercase">Collections / Aging</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md bg-void border border-border/50">
-            <Search className="w-3.5 h-3.5 text-text-muted" />
-            <span className="text-text-muted text-[12px] font-medium pr-4">Search invoices...</span>
-          </div>
-          <div className="p-1.5 rounded-md bg-void border border-border/50 text-text-muted">
-            <Filter className="w-3.5 h-3.5" />
-          </div>
-        </div>
-      </div>
+    <div className="relative w-full h-[600px] md:h-[700px] mt-16 rounded-2xl border border-border/40 bg-surface/30 overflow-hidden shadow-2xl flex items-center justify-center">
+      {/* Background System Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_20%,transparent_100%)] opacity-80" />
       
-      {/* Table Content */}
-      <div className="px-5 pb-5 pt-2 overflow-x-auto">
-        <table className="w-full text-left border-collapse min-w-[700px]">
-          <thead>
-            <tr className="border-b border-border/40 text-text-dim text-[11px] uppercase tracking-wider font-medium">
-              <th className="py-4 font-medium w-1/4">Retailer</th>
-              <th className="py-4 font-medium">Invoice ID</th>
-              <th className="py-4 font-medium text-right">Amount</th>
-              <th className="py-4 font-medium pl-6">Status</th>
-              <th className="py-4 font-medium">Aging</th>
-              <th className="py-4 font-medium text-right">Action</th>
-            </tr>
-          </thead>
-          <tbody className="text-[13px] text-text-secondary">
-            {[
-              { retailer: "Sharma Provisions", id: "INV-24-0891", amount: "₹45,200", status: "Overdue", aging: "14 Days", action: "Follow up" },
-              { retailer: "Apex Enterprises", id: "INV-24-0892", amount: "₹1,12,500", status: "Pending", aging: "2 Days", action: "Wait" },
-              { retailer: "New India Stores", id: "INV-24-0885", amount: "₹28,400", status: "Overdue", aging: "21 Days", action: "Escalate" },
-              { retailer: "Global Traders", id: "INV-24-0898", amount: "₹89,000", status: "Paid", aging: "-", action: "Archive" },
-            ].map((row, i) => (
-              <motion.tr 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 + i * 0.1, duration: 0.5 }}
-                key={row.id} 
-                className="border-b border-border/20 last:border-b-0 hover:bg-border/10 transition-colors"
-              >
-                <td className="py-3.5 font-medium text-text-primary">{row.retailer}</td>
-                <td className="py-3.5 font-mono text-text-muted text-[12px]">{row.id}</td>
-                <td className="py-3.5 text-right tabular-nums text-text-primary">{row.amount}</td>
-                <td className="py-3.5 pl-6">
-                  <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-medium uppercase tracking-wider
-                    ${row.status === "Overdue" ? "bg-red-500/10 text-red-400 border border-red-500/20" : 
-                      row.status === "Paid" ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : 
-                      "bg-accent/10 text-accent border border-accent/20"}`}
-                  >
-                    {row.status === "Overdue" ? <AlertCircle className="w-3 h-3" /> : 
-                     row.status === "Paid" ? <CheckCircle2 className="w-3 h-3" /> : 
-                     <Clock className="w-3 h-3" />}
-                    {row.status}
-                  </div>
-                </td>
-                <td className="py-3.5 text-text-muted font-medium tabular-nums">{row.aging}</td>
-                <td className="py-3.5 text-right">
-                  <button className="text-text-muted hover:text-text-primary transition-colors text-[12px] font-medium">
-                    {row.action}
-                  </button>
-                </td>
-              </motion.tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </motion.div>
-  );
-}
-
-// ─── UI FRAGMENT: DistributorOS Parsing ───────────────────────────────────────
-function DistributorOSFragment() {
-  return (
-    <div className="relative w-full h-[550px] md:h-[600px] rounded-2xl border border-border/40 bg-surface/30 overflow-hidden flex items-center justify-center p-6 lg:p-12 shadow-2xl">
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_20%,transparent_100%)]" />
-      
-      {/* WhatsApp Message Panel */}
+      {/* 1. WhatsApp Input */}
       <motion.div 
         initial={{ y: 20, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        viewport={{ once: true, margin: "-10% 0px" }}
-        className="absolute left-6 md:left-12 top-12 md:top-24 w-[280px] md:w-[320px] rounded-xl border border-border/60 bg-elevated/90 backdrop-blur-md shadow-2xl z-10"
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute top-10 left-4 md:left-12 w-[280px] md:w-[320px] rounded-xl border border-border/60 bg-elevated/95 backdrop-blur-md shadow-2xl z-10"
       >
-        <div className="px-4 py-3 border-b border-border/50 flex items-center gap-2.5">
-          <MessageSquare className="w-4 h-4 text-emerald-500" />
-          <span className="text-[12px] font-medium text-text-primary">Incoming WhatsApp</span>
+        <div className="px-4 py-3 border-b border-border/50 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <MessageSquare className="w-3.5 h-3.5 text-emerald-500" />
+            <span className="text-[11px] font-medium text-text-primary uppercase tracking-wider">Communication Layer</span>
+          </div>
+          <span className="text-[10px] font-mono text-text-muted">10:42 AM</span>
         </div>
-        <div className="p-4 space-y-3">
-          <div className="flex flex-col gap-1.5">
-            <span className="text-[10px] text-text-dim uppercase tracking-wider font-medium">From: Ravi, Apex Enterprises</span>
-            <div className="bg-surface border border-border/50 rounded-lg p-3.5 text-[13px] text-text-secondary leading-relaxed relative">
-              &quot;Bhaiya, please send 50 peti of variant A and 20 peti of variant B. Also, adjust last month&apos;s pending 5,000 in this invoice.&quot;
-            </div>
-            <span className="text-[10px] text-text-dim font-mono text-right mt-1">10:42 AM</span>
+        <div className="p-4 space-y-2">
+          <span className="text-[10px] text-text-dim uppercase tracking-wider font-medium">From: Ravi, Apex Enterprises</span>
+          <div className="bg-surface border border-border/50 rounded-lg p-3.5 text-[12.5px] text-text-secondary leading-relaxed shadow-inner">
+            &quot;Bhaiya, send 50 peti Variant A. Also, adjust 5k pending from last invoice.&quot;
           </div>
         </div>
       </motion.div>
 
-      {/* AI Parsing Line */}
+      {/* Connection Line 1 */}
+      <motion.div 
+        initial={{ height: 0, opacity: 0 }}
+        animate={{ height: "70px", opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1.0, ease: "easeInOut" }}
+        className="absolute top-[160px] left-[140px] md:left-[172px] w-px bg-gradient-to-b from-border to-accent/60 z-0 hidden md:block"
+      />
+
+      {/* 2. AI Parsing Node */}
+      <motion.div 
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute top-[230px] left-8 md:left-24 w-[250px] md:w-[280px] rounded-xl border border-accent/30 bg-[#0f172a]/90 backdrop-blur-md shadow-[0_0_40px_rgba(74,158,255,0.1)] z-20 flex flex-col"
+      >
+        <div className="px-4 py-2.5 border-b border-accent/20 flex items-center gap-2">
+          <Zap className="w-3.5 h-3.5 text-accent" />
+          <span className="text-[10px] font-medium text-accent uppercase tracking-wider">Parsing Engine</span>
+        </div>
+        <div className="p-4 text-[11.5px] space-y-2 font-mono text-text-secondary">
+          <div className="flex justify-between items-center border-b border-accent/10 pb-1.5"><span>Intent:</span> <span className="text-text-primary">Order + Claim</span></div>
+          <div className="flex justify-between items-center border-b border-accent/10 pb-1.5"><span>Entity:</span> <span className="text-text-primary">Apex Enterprises</span></div>
+          <div className="flex justify-between items-center pt-0.5"><span>Risk:</span> <span className="text-yellow-500">Pending Balance</span></div>
+        </div>
+      </motion.div>
+
+      {/* Connection Line 2 */}
       <motion.div 
         initial={{ width: 0, opacity: 0 }}
-        whileInView={{ width: "120px", opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.8, ease: "easeInOut" }}
-        viewport={{ once: true }}
-        className="absolute left-[310px] md:left-[350px] top-[150px] md:top-[190px] h-[2px] bg-accent/40 hidden md:block"
+        animate={{ width: "160px", opacity: 1 }}
+        transition={{ duration: 0.8, delay: 2.0, ease: "easeInOut" }}
+        className="absolute top-[280px] left-[258px] md:left-[304px] h-[2px] bg-gradient-to-r from-accent/60 to-border/40 z-0 hidden md:block"
       >
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-accent shadow-[0_0_12px_rgba(74,158,255,0.8)]" />
+         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-border shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
       </motion.div>
 
-      {/* Structured Order Panel */}
+      {/* 3. Structured Record Layered Over Collections */}
       <motion.div 
-        initial={{ y: 20, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.8, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        viewport={{ once: true, margin: "-10% 0px" }}
-        className="absolute right-6 md:right-16 bottom-12 md:bottom-20 w-[300px] md:w-[360px] rounded-xl border border-border/60 bg-void/90 backdrop-blur-md shadow-2xl z-20"
+        initial={{ x: 30, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 2.4, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute right-4 md:right-16 top-32 md:top-24 w-[300px] md:w-[400px] rounded-xl border border-border/60 bg-void/98 backdrop-blur-xl shadow-2xl z-30"
       >
-         <div className="px-4 py-3.5 border-b border-border/50 flex items-center justify-between bg-surface/50">
-          <div className="flex items-center gap-2.5">
-            <FileText className="w-4 h-4 text-accent" />
-            <span className="text-[12px] font-medium text-text-primary">Parsed Order</span>
+        <div className="px-4 py-3.5 border-b border-border/50 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <FileText className="w-3.5 h-3.5 text-text-primary" />
+            <span className="text-[12px] font-medium text-text-primary">Operational Record</span>
           </div>
-          <span className="text-[10px] bg-accent/10 text-accent px-2 py-0.5 rounded uppercase tracking-wider font-medium border border-accent/20">Auto-Extracted</span>
+          <span className="text-[10px] bg-surface text-text-muted px-2 py-0.5 rounded uppercase tracking-wider border border-border/50 font-mono">INV-24-0892</span>
         </div>
-        <div className="p-5 text-[13px]">
-          <div className="space-y-5">
-            <div>
-              <span className="text-text-dim text-[10px] uppercase tracking-wider font-medium block mb-2">Line Items</span>
-              <div className="space-y-2">
-                <div className="flex justify-between items-center bg-elevated px-3 py-2.5 rounded-md border border-border/40">
-                  <span className="text-text-primary font-medium">Variant A (Peti)</span>
-                  <span className="text-text-secondary font-mono text-[12px]">x50</span>
-                </div>
-                <div className="flex justify-between items-center bg-elevated px-3 py-2.5 rounded-md border border-border/40">
-                  <span className="text-text-primary font-medium">Variant B (Peti)</span>
-                  <span className="text-text-secondary font-mono text-[12px]">x20</span>
-                </div>
-              </div>
+        
+        <div className="p-5">
+          <div className="space-y-3.5">
+            <div className="flex justify-between items-center text-[10px] text-text-dim uppercase tracking-wider border-b border-border/40 pb-2">
+              <span>Item</span>
+              <span>Qty</span>
+              <span>Total</span>
             </div>
-            <div>
-               <span className="text-text-dim text-[10px] uppercase tracking-wider font-medium block mb-2">Detected Conditions</span>
-               <div className="flex items-start gap-2.5 bg-yellow-500/10 text-yellow-500/90 border border-yellow-500/20 px-3 py-2.5 rounded-md text-[12px]">
-                 <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
-                 <span className="leading-snug">Adjust ₹5,000 from previous balance</span>
-               </div>
+            <div className="flex justify-between items-center text-[12.5px] text-text-secondary border-b border-border/20 pb-2.5">
+              <span className="text-text-primary font-medium">Variant A (Peti)</span>
+              <span className="font-mono">50</span>
+              <span className="font-mono text-text-primary">₹45,000</span>
             </div>
-            <div className="pt-2">
-              <button className="w-full bg-accent text-void py-2.5 rounded-md font-medium text-[12px] hover:bg-accent/90 transition-colors shadow-[0_0_20px_rgba(74,158,255,0.2)]">
-                Generate Invoice & Workflow
-              </button>
+            <div className="flex justify-between items-center text-[12.5px] text-text-secondary border-b border-border/20 pb-2.5">
+              <span className="text-red-400 font-medium">Previous Adjustment</span>
+              <span className="font-mono">-</span>
+              <span className="font-mono text-red-400">-₹5,000</span>
+            </div>
+            <div className="flex justify-between items-center text-[13.5px] pt-1">
+              <span className="text-text-primary font-medium">Net Payable</span>
+              <span className="font-mono text-text-primary font-medium">₹40,000</span>
             </div>
           </div>
+        </div>
+      </motion.div>
+
+      {/* 4. Collections Intelligence Panel */}
+      <motion.div 
+        initial={{ y: 30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 2.8, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute right-8 md:right-32 bottom-8 md:bottom-20 w-[280px] md:w-[360px] rounded-xl border border-border/50 bg-elevated/95 shadow-2xl z-20"
+      >
+        <div className="px-4 py-3 border-b border-border/40 flex items-center justify-between bg-surface/80">
+           <span className="text-[11px] font-medium text-text-muted uppercase tracking-wider">Workflow State</span>
+           <div className="flex items-center gap-1.5 px-2 py-0.5 rounded border border-yellow-500/20 bg-yellow-500/10 text-yellow-500/90 text-[10px] font-medium uppercase tracking-wider">
+             <Activity className="w-3 h-3" /> Aging Initiated
+           </div>
+        </div>
+        <div className="p-5 space-y-4 text-[12px]">
+           <div className="flex gap-4">
+             <div className="w-px bg-border/80 relative left-1.5" />
+             <div className="space-y-5">
+               <div className="relative">
+                 <div className="absolute -left-[23px] top-1 w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                 <p className="text-text-primary font-medium">Invoice Generated</p>
+                 <p className="text-[10px] text-text-dim mt-0.5 font-mono">Oct 12, 10:44 AM</p>
+               </div>
+               <div className="relative">
+                 <div className="absolute -left-[23px] top-1 w-2 h-2 rounded-full border-[1.5px] border-border bg-void" />
+                 <p className="text-text-secondary font-medium">Payment Due</p>
+                 <p className="text-[10px] text-text-dim mt-0.5 font-mono">Oct 19 (7 Days)</p>
+               </div>
+               <div className="relative">
+                 <div className="absolute -left-[23px] top-1 w-2 h-2 rounded-full border-[1.5px] border-border bg-void" />
+                 <p className="text-text-muted font-medium">Automated Escalation</p>
+                 <p className="text-[10px] text-text-dim mt-0.5 font-mono">Pending Execution</p>
+               </div>
+             </div>
+           </div>
         </div>
       </motion.div>
     </div>
@@ -225,10 +192,10 @@ function DistributorOSFragment() {
 }
 
 // ─── UI FRAGMENT: Transitioning Fragmentation to Clarity ──────────────────────
-function FragmentationUIFragment() {
+function ChaosToClarityFragment() {
   return (
-    <div className="w-full h-full min-h-[400px] flex flex-col justify-center gap-8 relative p-6">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.03),transparent_70%)] pointer-events-none" />
+    <div className="w-full h-[500px] flex flex-col justify-center gap-8 relative p-6 bg-surface/30 rounded-2xl border border-border/40 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03),transparent_70%)] pointer-events-none" />
       
       {/* Fragmented state */}
       <motion.div 
@@ -236,58 +203,142 @@ function FragmentationUIFragment() {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        className="flex gap-4 justify-center relative"
+        className="flex flex-wrap gap-4 justify-center relative z-10"
       >
-        <div className="w-32 h-16 rounded border border-dashed border-border/60 bg-surface/30 flex items-center justify-center opacity-50 transform -rotate-6">
-          <span className="text-[10px] text-text-dim uppercase tracking-wider">WhatsApp</span>
+        <div className="w-36 h-20 rounded-lg border border-dashed border-border/60 bg-surface/50 flex flex-col items-center justify-center opacity-60 transform -rotate-3 hover:opacity-100 transition-opacity">
+          <MessageSquare className="w-4 h-4 text-text-dim mb-2" />
+          <span className="text-[10px] text-text-muted uppercase tracking-wider font-medium">WhatsApp Thread</span>
         </div>
-        <div className="w-32 h-16 rounded border border-dashed border-border/60 bg-surface/30 flex items-center justify-center opacity-50 transform translate-y-4">
-          <span className="text-[10px] text-text-dim uppercase tracking-wider">Spreadsheet</span>
+        <div className="w-36 h-20 rounded-lg border border-dashed border-border/60 bg-surface/50 flex flex-col items-center justify-center opacity-60 transform translate-y-6 hover:opacity-100 transition-opacity">
+          <FileText className="w-4 h-4 text-text-dim mb-2" />
+          <span className="text-[10px] text-text-muted uppercase tracking-wider font-medium">Offline Invoice</span>
         </div>
-        <div className="w-32 h-16 rounded border border-dashed border-border/60 bg-surface/30 flex items-center justify-center opacity-50 transform rotate-6">
-          <span className="text-[10px] text-text-dim uppercase tracking-wider">Memory</span>
+        <div className="w-36 h-20 rounded-lg border border-dashed border-border/60 bg-surface/50 flex flex-col items-center justify-center opacity-60 transform rotate-3 hover:opacity-100 transition-opacity">
+          <ListTodo className="w-4 h-4 text-text-dim mb-2" />
+          <span className="text-[10px] text-text-muted uppercase tracking-wider font-medium">Manual Follow-up</span>
         </div>
       </motion.div>
 
       {/* Funnel/Transition arrow */}
       <motion.div 
         initial={{ height: 0, opacity: 0 }}
-        whileInView={{ height: 40, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
+        whileInView={{ height: 60, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
         viewport={{ once: true }}
-        className="w-px bg-gradient-to-b from-transparent via-text-dim to-accent mx-auto"
+        className="w-px bg-gradient-to-b from-transparent via-border to-accent mx-auto relative z-0"
       />
 
       {/* Structured state */}
       <motion.div 
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
         viewport={{ once: true }}
-        className="mx-auto w-full max-w-sm rounded-lg border border-border bg-elevated shadow-lg p-4 relative z-10"
+        className="mx-auto w-full max-w-md rounded-xl border border-border bg-elevated shadow-2xl p-5 relative z-10"
       >
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-8 rounded bg-accent/10 flex items-center justify-center">
-            <Activity className="w-4 h-4 text-accent" />
+        <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded bg-accent/10 border border-accent/20 flex items-center justify-center">
+              <Network className="w-4 h-4 text-accent" />
+            </div>
+            <div>
+              <div className="text-[12px] font-medium text-text-primary tracking-tight">Structured Coordination</div>
+              <div className="text-[10px] text-text-muted font-mono mt-0.5">Unified Operational State</div>
+            </div>
           </div>
-          <div>
-            <div className="text-[12px] font-medium text-text-primary">Operational Record</div>
-            <div className="text-[10px] text-text-muted">Structured & Auditable</div>
-          </div>
+          <CheckCircle2 className="w-4 h-4 text-text-dim" />
         </div>
-        <div className="space-y-2">
-          <div className="h-2 w-full bg-surface rounded-full" />
-          <div className="h-2 w-3/4 bg-surface rounded-full" />
+        <div className="space-y-2.5">
+          <div className="h-2 w-full bg-surface rounded-full overflow-hidden">
+             <motion.div 
+               initial={{ width: 0 }}
+               whileInView={{ width: "100%" }}
+               transition={{ delay: 1.4, duration: 1.2, ease: "easeInOut" }}
+               viewport={{ once: true }}
+               className="h-full bg-accent/40"
+             />
+          </div>
+          <div className="flex justify-between text-[10px] font-mono text-text-dim">
+            <span>Input Parsed</span>
+            <span>Workflow Active</span>
+          </div>
         </div>
       </motion.div>
     </div>
   );
 }
 
+// ─── UI FRAGMENT: Collections Intelligence Table ──────────────────────────────
+function CollectionsIntelligenceFragment() {
+  return (
+    <div className="w-full rounded-xl border border-border/50 bg-surface/40 backdrop-blur-md shadow-2xl overflow-hidden relative">
+       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px]" />
+       <div className="relative z-10 px-5 py-4 border-b border-border/40 flex items-center justify-between bg-void/50">
+          <div className="flex items-center gap-3">
+            <Activity className="w-4 h-4 text-text-primary" />
+            <span className="text-[13px] font-medium text-text-primary tracking-tight">Active Aging Report</span>
+          </div>
+          <div className="flex gap-2">
+            <div className="px-2.5 py-1 rounded border border-border/60 bg-surface text-[10px] font-medium text-text-muted uppercase tracking-wider font-mono">30 Days</div>
+            <div className="px-2.5 py-1 rounded border border-accent/20 bg-accent/10 text-[10px] font-medium text-accent uppercase tracking-wider font-mono">Overdue</div>
+          </div>
+       </div>
+       <div className="relative z-10 p-5 overflow-x-auto">
+         <table className="w-full text-left border-collapse min-w-[600px]">
+           <thead>
+             <tr className="border-b border-border/40 text-text-dim text-[10.5px] uppercase tracking-wider font-medium">
+               <th className="pb-3.5 w-1/3">Retailer Entity</th>
+               <th className="pb-3.5">Aging Duration</th>
+               <th className="pb-3.5 text-right">Outstanding</th>
+               <th className="pb-3.5 pl-8">Workflow State</th>
+             </tr>
+           </thead>
+           <tbody className="text-[13px] text-text-secondary">
+             {[
+               { name: "Global Traders", aging: "45 Days", amt: "₹2,14,000", state: "Escalated", type: "critical" },
+               { name: "Sharma Provisions", aging: "14 Days", amt: "₹45,200", state: "Reminder Sent", type: "warning" },
+               { name: "New India Stores", aging: "3 Days", amt: "₹18,500", state: "Pending", type: "normal" },
+             ].map((row, i) => (
+               <motion.tr 
+                 initial={{ opacity: 0, x: -10 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 transition={{ delay: i * 0.1, duration: 0.5 }}
+                 viewport={{ once: true }}
+                 key={i} 
+                 className="border-b border-border/20 last:border-b-0 hover:bg-border/10 transition-colors"
+               >
+                 <td className="py-4 text-text-primary font-medium tracking-tight">{row.name}</td>
+                 <td className="py-4">
+                   <div className="flex items-center gap-2.5">
+                     <div className={`w-1.5 h-1.5 rounded-full ${row.type === 'critical' ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]' : row.type === 'warning' ? 'bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.5)]' : 'bg-border'}`} />
+                     <span className="font-mono text-[12px]">{row.aging}</span>
+                   </div>
+                 </td>
+                 <td className="py-4 text-right font-mono text-[12.5px] text-text-primary">{row.amt}</td>
+                 <td className="py-4 pl-8">
+                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[10px] font-medium uppercase tracking-wider border ${
+                      row.type === 'critical' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
+                      row.type === 'warning' ? 'bg-yellow-500/10 text-yellow-500/90 border-yellow-500/20' :
+                      'bg-surface text-text-muted border-border/50'
+                    }`}>
+                      {row.type === 'critical' ? <AlertCircle className="w-2.5 h-2.5" /> : row.type === 'warning' ? <Clock className="w-2.5 h-2.5" /> : <Activity className="w-2.5 h-2.5" />}
+                      {row.state}
+                    </span>
+                 </td>
+               </motion.tr>
+             ))}
+           </tbody>
+         </table>
+       </div>
+    </div>
+  )
+}
+
+
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
 export default function Home() {
   return (
-    <div className="w-full">
+    <div className="w-full selection:bg-accent/20 selection:text-text-primary">
 
       {/* ───────────────────────────────────────────────────────────── */}
       {/* SECTION 1 — HERO                                             */}
@@ -296,8 +347,7 @@ export default function Home() {
         id="hero"
         className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-void pt-32 pb-20"
       >
-        {/* Extremely subtle top glow — barely visible */}
-        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[60%] h-[40%] bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-[radial-gradient(ellipse_at_top,rgba(74,158,255,0.06),transparent_60%)] pointer-events-none" />
 
         <div className="relative z-10 w-full max-w-6xl mx-auto px-6 lg:px-8">
           {/* Eyebrow */}
@@ -307,8 +357,8 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="mb-8"
           >
-            <span className="inline-flex items-center gap-2 text-label-sm font-medium text-text-dim uppercase tracking-widest border border-border/40 px-3 py-1.5 rounded-full bg-surface/30">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+            <span className="inline-flex items-center gap-2 text-[10px] font-mono font-medium text-text-dim uppercase tracking-widest border border-border/40 px-3 py-1.5 rounded-full bg-surface/30">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
               The Fables Lab
             </span>
           </motion.div>
@@ -339,7 +389,7 @@ export default function Home() {
             className="text-text-secondary text-body-lg font-normal max-w-2xl mb-12 leading-relaxed"
           >
             We build systems that reduce payment delays, structure workflows,
-            and automate operational coordination.
+            and automate operational coordination for modern businesses.
           </motion.p>
 
           {/* CTAs */}
@@ -363,8 +413,10 @@ export default function Home() {
             </Link>
           </motion.div>
 
-          {/* Hero Visual */}
-          <HeroUIFragment />
+          {/* Signature Product Flow Visual */}
+          <FadeUp delay={0.2} className="mt-8">
+             <HeroSignatureFlowFragment />
+          </FadeUp>
 
         </div>
       </section>
@@ -374,14 +426,16 @@ export default function Home() {
       {/* ───────────────────────────────────────────────────────────── */}
       {/* SECTION 2 — WHY WE EXIST                                    */}
       {/* ───────────────────────────────────────────────────────────── */}
-      <section id="why-we-exist" className="bg-surface/20 py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      <section id="why-we-exist" className="bg-surface/10 py-24 md:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-[0.02] pointer-events-none" />
+        
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             
             {/* Left — Text */}
             <FadeUp>
               <span className="block text-[11px] font-mono text-text-dim uppercase tracking-widest mb-6">
-                01 / Why We Exist
+                01 / The Problem
               </span>
               <h2
                 className="font-display font-medium text-text-primary text-balance mb-8"
@@ -395,7 +449,10 @@ export default function Home() {
               </h2>
               <div className="space-y-6 text-text-secondary text-body-md leading-relaxed">
                 <p>
-                  Communication is scattered. Workflows are disconnected. Critical execution depends on memory and manual coordination.
+                  Communication happens in WhatsApp threads. Invoices live in spreadsheets. Critical execution—following up on payments, tracking orders—depends entirely on human memory and manual coordination.
+                </p>
+                <p>
+                  When someone is unavailable, the workflow breaks. The coordination overhead grows faster than the business.
                 </p>
                 <p className="text-text-primary font-medium">
                   We believe operational software should reduce complexity — not add to it.
@@ -405,7 +462,7 @@ export default function Home() {
 
             {/* Right — Visual */}
             <FadeUp delay={0.2} className="h-full">
-              <FragmentationUIFragment />
+              <ChaosToClarityFragment />
             </FadeUp>
           </div>
         </div>
@@ -414,14 +471,175 @@ export default function Home() {
       <Rule />
 
       {/* ───────────────────────────────────────────────────────────── */}
-      {/* SECTION 3 — PRINCIPLES                                      */}
+      {/* SECTION 3 — DISTRIBUTOR OS (Anchor Product)                 */}
+      {/* ───────────────────────────────────────────────────────────── */}
+      <section id="distributor-os" className="bg-void py-24 md:py-32 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+
+          {/* Header */}
+          <FadeUp className="mb-16">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10 border-b border-border/40">
+              <div className="max-w-2xl">
+                <span className="block text-[11px] font-mono text-accent uppercase tracking-widest mb-6 border border-accent/20 bg-accent/10 w-max px-2.5 py-1 rounded">
+                  In Development
+                </span>
+                <h2
+                  className="font-display font-medium text-text-primary mb-4"
+                  style={{
+                    fontSize: "clamp(2.25rem, 4.5vw, 3.5rem)",
+                    letterSpacing: "-0.03em",
+                    lineHeight: 1.05,
+                  }}
+                >
+                  Fables DistributorOS
+                </h2>
+                <p className="text-text-secondary text-body-lg leading-relaxed">
+                  The first major operational system we are building. An end-to-end workflow layer for businesses running on credit and relationships.
+                </p>
+              </div>
+            </div>
+          </FadeUp>
+
+          {/* Visual Narrative - Collections Focus */}
+          <FadeUp delay={0.1} className="mb-20">
+            <CollectionsIntelligenceFragment />
+          </FadeUp>
+
+          {/* Features */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <FileText className="w-4 h-4" />,
+                title: "Invoice Workflows",
+                desc: "Automated tracking from order parsing to invoice generation and payment clearing."
+              },
+              {
+                icon: <Activity className="w-4 h-4" />,
+                title: "Collections Systems",
+                desc: "Structured follow-ups based on real-time aging, payment priority, and retailer risk history."
+              },
+              {
+                icon: <Layers className="w-4 h-4" />,
+                title: "Retailer Coordination",
+                desc: "All interactions, claims, and returns automatically logged into a single, auditable record."
+              }
+            ].map((feat, i) => (
+              <FadeUp key={feat.title} delay={i * 0.1}>
+                <div className="p-6 rounded-xl border border-border/40 bg-surface/20">
+                  <div className="w-8 h-8 rounded-lg bg-elevated flex items-center justify-center text-text-primary mb-5 border border-border/50">
+                    {feat.icon}
+                  </div>
+                  <h3 className="text-[15px] font-medium text-text-primary mb-2 tracking-tight">
+                    {feat.title}
+                  </h3>
+                  <p className="text-[13px] text-text-muted leading-relaxed">
+                    {feat.desc}
+                  </p>
+                </div>
+              </FadeUp>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      <Rule />
+
+      {/* ───────────────────────────────────────────────────────────── */}
+      {/* SECTION 4 — CURRENT FOCUS                                   */}
+      {/* ───────────────────────────────────────────────────────────── */}
+      <section id="current-focus" className="bg-surface/10 py-24 md:py-32">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+            <FadeUp className="lg:col-span-5">
+              <span className="block text-[11px] font-mono text-text-dim uppercase tracking-widest mb-6">
+                03 / Focus Area
+              </span>
+              <h2
+                className="font-display font-medium text-text-primary mb-6"
+                style={{
+                  fontSize: "clamp(2rem, 3.5vw, 2.75rem)",
+                  letterSpacing: "-0.025em",
+                  lineHeight: 1.1,
+                }}
+              >
+                Current Focus
+              </h2>
+              <p className="text-text-muted text-[14px] leading-relaxed mb-8">
+                We are actively building the infrastructure required to solve the hardest coordination problems in distribution.
+              </p>
+              
+              <div className="space-y-3">
+                {[
+                  "Distributor & Wholesale Operations",
+                  "Automated Collections Workflows",
+                  "WhatsApp-based Operational Parsing",
+                  "Unified Operational Visibility"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-border" />
+                    <span className="text-[13px] font-medium text-text-secondary tracking-tight">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </FadeUp>
+
+            <FadeUp delay={0.15} className="lg:col-span-7">
+               {/* UI Fragment: Layered interface composition */}
+               <div className="relative w-full h-[360px] bg-void border border-border/40 rounded-2xl overflow-hidden shadow-2xl flex items-center justify-center p-6">
+                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px]" />
+                 
+                 <motion.div 
+                   initial={{ y: 20, opacity: 0 }}
+                   whileInView={{ y: 0, opacity: 1 }}
+                   transition={{ duration: 0.8 }}
+                   viewport={{ once: true }}
+                   className="absolute top-8 left-8 w-[240px] rounded-lg border border-border/60 bg-elevated p-4 shadow-xl z-10"
+                 >
+                    <div className="text-[10px] text-text-dim uppercase tracking-wider mb-3 font-medium">WhatsApp Sync</div>
+                    <div className="h-1.5 w-full bg-surface rounded-full mb-2" />
+                    <div className="h-1.5 w-3/4 bg-surface rounded-full" />
+                 </motion.div>
+
+                 <motion.div 
+                   initial={{ y: 20, opacity: 0 }}
+                   whileInView={{ y: 0, opacity: 1 }}
+                   transition={{ duration: 0.8, delay: 0.2 }}
+                   viewport={{ once: true }}
+                   className="absolute top-20 left-24 w-[280px] rounded-lg border border-accent/20 bg-void/90 p-4 shadow-2xl z-20 backdrop-blur-md"
+                 >
+                    <div className="text-[10px] text-accent uppercase tracking-wider mb-3 font-medium flex justify-between">
+                      <span>Workflow Engine</span>
+                      <span className="font-mono text-accent/70">Running</span>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center bg-surface px-2 py-1.5 rounded text-[11px] text-text-secondary border border-border/50">
+                        <span>Invoice Creation</span>
+                        <CheckCircle2 className="w-3 h-3 text-text-dim" />
+                      </div>
+                      <div className="flex justify-between items-center bg-accent/10 px-2 py-1.5 rounded text-[11px] text-text-primary border border-accent/20">
+                        <span>Aging Evaluation</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                      </div>
+                    </div>
+                 </motion.div>
+               </div>
+            </FadeUp>
+          </div>
+        </div>
+      </section>
+
+      <Rule />
+
+      {/* ───────────────────────────────────────────────────────────── */}
+      {/* SECTION 5 — PRINCIPLES                                      */}
       {/* ───────────────────────────────────────────────────────────── */}
       <section id="principles" className="bg-void py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             <FadeUp className="lg:col-span-5">
               <span className="block text-[11px] font-mono text-text-dim uppercase tracking-widest mb-6">
-                02 / Principles
+                04 / Principles
               </span>
               <h2
                 className="font-display font-medium text-text-primary"
@@ -450,7 +668,7 @@ export default function Home() {
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <p
-                        className="font-display font-medium text-text-secondary group-hover:text-text-primary transition-colors duration-500"
+                        className="font-display font-medium text-text-secondary group-hover:text-text-primary transition-colors duration-500 tracking-tight"
                         style={{
                           fontSize: "clamp(1.1rem, 2vw, 1.35rem)",
                           letterSpacing: "-0.015em",
@@ -470,131 +688,10 @@ export default function Home() {
       <Rule />
 
       {/* ───────────────────────────────────────────────────────────── */}
-      {/* SECTION 4 — DISTRIBUTOR OS (Anchor Product)                 */}
-      {/* ───────────────────────────────────────────────────────────── */}
-      <section id="distributor-os" className="bg-surface/20 py-24 md:py-32 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-
-          {/* Header */}
-          <FadeUp className="mb-16">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10 border-b border-border/40">
-              <div className="max-w-2xl">
-                <span className="block text-[11px] font-mono text-text-dim uppercase tracking-widest mb-6">
-                  03 / In Development
-                </span>
-                <h2
-                  className="font-display font-medium text-text-primary mb-4"
-                  style={{
-                    fontSize: "clamp(2.25rem, 4.5vw, 3.5rem)",
-                    letterSpacing: "-0.03em",
-                    lineHeight: 1.05,
-                  }}
-                >
-                  Fables DistributorOS
-                </h2>
-                <p className="text-text-secondary text-body-lg leading-relaxed">
-                  This is the first major operational system we are building.
-                </p>
-              </div>
-            </div>
-          </FadeUp>
-
-          {/* Visual Narrative */}
-          <FadeUp delay={0.1} className="mb-20">
-            <DistributorOSFragment />
-          </FadeUp>
-
-          {/* Features */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <FileText className="w-4 h-4" />,
-                title: "Invoice Workflows",
-                desc: "Automated tracking from order to invoice to payment. Full visibility."
-              },
-              {
-                icon: <Activity className="w-4 h-4" />,
-                title: "Collections Systems",
-                desc: "Structured follow-ups based on aging, priority, and retailer history."
-              },
-              {
-                icon: <Layers className="w-4 h-4" />,
-                title: "Retailer Coordination",
-                desc: "All interactions, claims, and returns logged in a single structured record."
-              }
-            ].map((feat, i) => (
-              <FadeUp key={feat.title} delay={i * 0.1}>
-                <div className="p-6 rounded-xl border border-border/40 bg-void">
-                  <div className="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-text-primary mb-5 border border-border/50">
-                    {feat.icon}
-                  </div>
-                  <h3 className="text-[15px] font-medium text-text-primary mb-2 tracking-tight">
-                    {feat.title}
-                  </h3>
-                  <p className="text-[13px] text-text-muted leading-relaxed">
-                    {feat.desc}
-                  </p>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      <Rule />
-
-      {/* ───────────────────────────────────────────────────────────── */}
-      {/* SECTION 5 — CURRENT FOCUS                                   */}
-      {/* ───────────────────────────────────────────────────────────── */}
-      <section id="current-focus" className="bg-void py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-            <FadeUp className="lg:col-span-4">
-              <span className="block text-[11px] font-mono text-text-dim uppercase tracking-widest mb-6">
-                04 / Focus Area
-              </span>
-              <h2
-                className="font-display font-medium text-text-primary mb-6"
-                style={{
-                  fontSize: "clamp(2rem, 3.5vw, 2.75rem)",
-                  letterSpacing: "-0.025em",
-                  lineHeight: 1.1,
-                }}
-              >
-                Current Focus
-              </h2>
-              <p className="text-text-muted text-[14px] leading-relaxed">
-                We are currently building systems focused on:
-              </p>
-            </FadeUp>
-
-            <FadeUp delay={0.15} className="lg:col-span-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-border/30 border border-border/30 rounded-xl overflow-hidden">
-                {[
-                  "Distributor operations",
-                  "Collections workflows",
-                  "WhatsApp-based operational coordination",
-                  "Operational visibility"
-                ].map((item, i) => (
-                  <div key={i} className="bg-surface/50 p-6 flex items-start gap-3">
-                    <ChevronRight className="w-4 h-4 text-accent shrink-0 mt-0.5 opacity-70" />
-                    <span className="text-[14px] font-medium text-text-secondary">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </FadeUp>
-          </div>
-        </div>
-      </section>
-
-      <Rule />
-
-      {/* ───────────────────────────────────────────────────────────── */}
       {/* SECTION 6 — RESEARCH & INITIATIVES                          */}
       {/* ───────────────────────────────────────────────────────────── */}
-      <section id="initiatives" className="bg-surface/20 py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      <section id="initiatives" className="bg-surface/10 py-24 md:py-32 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
 
           <FadeUp className="mb-16">
             <span className="block text-[11px] font-mono text-text-dim uppercase tracking-widest mb-6">
@@ -621,23 +718,23 @@ export default function Home() {
             {[
               {
                 title: "Workflow Structuring",
-                desc: "Moving beyond forms into state-driven workflow systems."
+                desc: "Moving beyond forms into state-driven workflow systems. Treating operations as a series of inevitable transitions."
               },
               {
                 title: "Operational Memory",
-                desc: "Persistent context layers that retain business knowledge over time."
+                desc: "Persistent context layers that retain business knowledge over time, reducing reliance on individual recall."
               },
               {
                 title: "Business Coordination Layers",
-                desc: "Reducing noise by intercepting and structuring communication."
+                desc: "Reducing noise by intercepting and structuring communication before it reaches the human operator."
               },
               {
                 title: "AI-Native Workflow Systems",
-                desc: "Using LLMs not as chatbots, but as invisible routing and parsing infrastructure."
+                desc: "Using LLMs not as conversational chatbots, but as invisible routing, parsing, and execution infrastructure."
               }
             ].map((item, i) => (
               <FadeUp key={item.title} delay={i * 0.1}>
-                <div className="p-8 h-full border border-border/30 bg-void rounded-xl hover:border-border/60 transition-colors">
+                <div className="p-8 h-full border border-border/40 bg-void rounded-xl hover:border-border/70 transition-colors shadow-sm">
                   <h3 className="font-medium text-text-primary text-[15px] mb-3 tracking-tight">
                     {item.title}
                   </h3>
@@ -650,8 +747,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-
 
     </div>
   );
