@@ -64,9 +64,9 @@ export default function ContactPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full mb-16 pt-12 text-center border-x border-gridline bg-charcoal/50 pb-16">
             <span className="text-neon-cyan font-mono font-bold text-xs tracking-widest uppercase mb-4 block">{"// Initialize Sequence"}</span>
             <h1 className="font-grotesk font-black text-6xl md:text-8xl tracking-tighter text-off-white mb-8">
-              START YOUR <br />
+              Want to Contribute ? <br />
               <span className="font-grotesk italic font-light text-transparent text-stroke">
-                BUILD.
+                
               </span>
             </h1>
             <p className="text-xl text-off-white/70 max-w-2xl mx-auto font-grotesk font-light leading-relaxed">
