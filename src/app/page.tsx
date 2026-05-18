@@ -12,8 +12,6 @@ import {
   Activity,
   Layers,
   Zap,
-  Network,
-  ListTodo
 } from "lucide-react";
 
 // ─── Fade-up on scroll ────────────────────────────────────────────────────────
@@ -191,148 +189,68 @@ function HeroSignatureFlowFragment() {
   );
 }
 
-// ─── UI FRAGMENT: Transitioning Fragmentation to Clarity ──────────────────────
+// ─── UI FRAGMENT: Chaos → Clarity ───────────────────────────────────────────
 function ChaosToClarityFragment() {
   return (
-    <div className="w-full h-[500px] flex flex-col justify-center gap-8 relative p-6 bg-surface/30 rounded-2xl border border-border/40 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03),transparent_70%)] pointer-events-none" />
-      
-      {/* Fragmented state */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        className="flex flex-wrap gap-4 justify-center relative z-10"
-      >
-        <div className="w-36 h-20 rounded-lg border border-dashed border-border/60 bg-surface/50 flex flex-col items-center justify-center opacity-60 transform -rotate-3 hover:opacity-100 transition-opacity">
-          <MessageSquare className="w-4 h-4 text-text-dim mb-2" />
-          <span className="text-[10px] text-text-muted uppercase tracking-wider font-medium">WhatsApp Thread</span>
+    <div className="w-full flex flex-col gap-5 relative">
+      {/* Chaos state */}
+      <div className="rounded-xl border border-dashed border-border/50 bg-surface/20 p-5">
+        <p className="text-[10px] font-mono text-text-dim uppercase tracking-widest mb-4">Before — Fragmented</p>
+        <div className="space-y-3">
+          {[
+            { src: "WhatsApp", msg: "Ravi: bhaiya 50 peti bhejo, 5k adjust kar dena", time: "10:42" },
+            { src: "WhatsApp", msg: "Sharma: invoice nahi mila abhi tak", time: "11:15" },
+            { src: "Memory", msg: "[Note to self] Global Traders overdue 2 weeks", time: "—" },
+          ].map((row, i) => (
+            <div key={i} className="flex items-start gap-3 opacity-60">
+              <span className={`text-[10px] font-mono mt-0.5 shrink-0 w-16 ${row.src === 'Memory' ? 'text-yellow-600' : 'text-text-dim'}`}>{row.src}</span>
+              <span className="text-[12px] text-text-muted italic leading-snug">{row.msg}</span>
+              <span className="text-[10px] font-mono text-text-dim ml-auto shrink-0">{row.time}</span>
+            </div>
+          ))}
         </div>
-        <div className="w-36 h-20 rounded-lg border border-dashed border-border/60 bg-surface/50 flex flex-col items-center justify-center opacity-60 transform translate-y-6 hover:opacity-100 transition-opacity">
-          <FileText className="w-4 h-4 text-text-dim mb-2" />
-          <span className="text-[10px] text-text-muted uppercase tracking-wider font-medium">Offline Invoice</span>
-        </div>
-        <div className="w-36 h-20 rounded-lg border border-dashed border-border/60 bg-surface/50 flex flex-col items-center justify-center opacity-60 transform rotate-3 hover:opacity-100 transition-opacity">
-          <ListTodo className="w-4 h-4 text-text-dim mb-2" />
-          <span className="text-[10px] text-text-muted uppercase tracking-wider font-medium">Manual Follow-up</span>
-        </div>
-      </motion.div>
+      </div>
 
-      {/* Funnel/Transition arrow */}
-      <motion.div 
+      {/* Funnel */}
+      <motion.div
         initial={{ height: 0, opacity: 0 }}
-        whileInView={{ height: 60, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
+        whileInView={{ height: 40, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
         viewport={{ once: true }}
-        className="w-px bg-gradient-to-b from-transparent via-border to-accent mx-auto relative z-0"
+        className="w-px bg-gradient-to-b from-border/60 to-accent/60 mx-auto"
       />
 
-      {/* Structured state */}
-      <motion.div 
-        initial={{ y: 20, opacity: 0 }}
+      {/* Clarity state */}
+      <motion.div
+        initial={{ y: 16, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
         viewport={{ once: true }}
-        className="mx-auto w-full max-w-md rounded-xl border border-border bg-elevated shadow-2xl p-5 relative z-10"
+        className="rounded-xl border border-border/60 bg-void shadow-xl overflow-hidden"
       >
-        <div className="flex items-center justify-between mb-5">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded bg-accent/10 border border-accent/20 flex items-center justify-center">
-              <Network className="w-4 h-4 text-accent" />
-            </div>
-            <div>
-              <div className="text-[12px] font-medium text-text-primary tracking-tight">Structured Coordination</div>
-              <div className="text-[10px] text-text-muted font-mono mt-0.5">Unified Operational State</div>
-            </div>
-          </div>
-          <CheckCircle2 className="w-4 h-4 text-text-dim" />
+        <div className="px-5 py-3.5 border-b border-border/40 flex items-center justify-between">
+          <p className="text-[10px] font-mono text-text-dim uppercase tracking-widest">After — Structured</p>
+          <span className="text-[10px] font-mono text-accent border border-accent/20 bg-accent/10 px-2 py-0.5 rounded">Workflow Active</span>
         </div>
-        <div className="space-y-2.5">
-          <div className="h-2 w-full bg-surface rounded-full overflow-hidden">
-             <motion.div 
-               initial={{ width: 0 }}
-               whileInView={{ width: "100%" }}
-               transition={{ delay: 1.4, duration: 1.2, ease: "easeInOut" }}
-               viewport={{ once: true }}
-               className="h-full bg-accent/40"
-             />
-          </div>
-          <div className="flex justify-between text-[10px] font-mono text-text-dim">
-            <span>Input Parsed</span>
-            <span>Workflow Active</span>
-          </div>
+        <div className="p-5 space-y-3 text-[12.5px]">
+          {[
+            { label: "Retailer", val: "Apex Enterprises" },
+            { label: "Order", val: "50× Variant A" },
+            { label: "Adjustment", val: "-₹5,000 (prev. balance)" },
+            { label: "Net Payable", val: "₹40,000" },
+            { label: "Due Date", val: "Oct 19 — 7 days" },
+          ].map((row) => (
+            <div key={row.label} className="flex justify-between items-center border-b border-border/20 pb-2.5 last:border-0 last:pb-0">
+              <span className="text-text-dim">{row.label}</span>
+              <span className="text-text-primary font-medium font-mono">{row.val}</span>
+            </div>
+          ))}
         </div>
       </motion.div>
     </div>
   );
 }
 
-// ─── UI FRAGMENT: Collections Intelligence Table ──────────────────────────────
-function CollectionsIntelligenceFragment() {
-  return (
-    <div className="w-full rounded-xl border border-border/50 bg-surface/40 backdrop-blur-md shadow-2xl overflow-hidden relative">
-       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px]" />
-       <div className="relative z-10 px-5 py-4 border-b border-border/40 flex items-center justify-between bg-void/50">
-          <div className="flex items-center gap-3">
-            <Activity className="w-4 h-4 text-text-primary" />
-            <span className="text-[13px] font-medium text-text-primary tracking-tight">Active Aging Report</span>
-          </div>
-          <div className="flex gap-2">
-            <div className="px-2.5 py-1 rounded border border-border/60 bg-surface text-[10px] font-medium text-text-muted uppercase tracking-wider font-mono">30 Days</div>
-            <div className="px-2.5 py-1 rounded border border-accent/20 bg-accent/10 text-[10px] font-medium text-accent uppercase tracking-wider font-mono">Overdue</div>
-          </div>
-       </div>
-       <div className="relative z-10 p-5 overflow-x-auto">
-         <table className="w-full text-left border-collapse min-w-[600px]">
-           <thead>
-             <tr className="border-b border-border/40 text-text-dim text-[10.5px] uppercase tracking-wider font-medium">
-               <th className="pb-3.5 w-1/3">Retailer Entity</th>
-               <th className="pb-3.5">Aging Duration</th>
-               <th className="pb-3.5 text-right">Outstanding</th>
-               <th className="pb-3.5 pl-8">Workflow State</th>
-             </tr>
-           </thead>
-           <tbody className="text-[13px] text-text-secondary">
-             {[
-               { name: "Global Traders", aging: "45 Days", amt: "₹2,14,000", state: "Escalated", type: "critical" },
-               { name: "Sharma Provisions", aging: "14 Days", amt: "₹45,200", state: "Reminder Sent", type: "warning" },
-               { name: "New India Stores", aging: "3 Days", amt: "₹18,500", state: "Pending", type: "normal" },
-             ].map((row, i) => (
-               <motion.tr 
-                 initial={{ opacity: 0, x: -10 }}
-                 whileInView={{ opacity: 1, x: 0 }}
-                 transition={{ delay: i * 0.1, duration: 0.5 }}
-                 viewport={{ once: true }}
-                 key={i} 
-                 className="border-b border-border/20 last:border-b-0 hover:bg-border/10 transition-colors"
-               >
-                 <td className="py-4 text-text-primary font-medium tracking-tight">{row.name}</td>
-                 <td className="py-4">
-                   <div className="flex items-center gap-2.5">
-                     <div className={`w-1.5 h-1.5 rounded-full ${row.type === 'critical' ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]' : row.type === 'warning' ? 'bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.5)]' : 'bg-border'}`} />
-                     <span className="font-mono text-[12px]">{row.aging}</span>
-                   </div>
-                 </td>
-                 <td className="py-4 text-right font-mono text-[12.5px] text-text-primary">{row.amt}</td>
-                 <td className="py-4 pl-8">
-                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[10px] font-medium uppercase tracking-wider border ${
-                      row.type === 'critical' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
-                      row.type === 'warning' ? 'bg-yellow-500/10 text-yellow-500/90 border-yellow-500/20' :
-                      'bg-surface text-text-muted border-border/50'
-                    }`}>
-                      {row.type === 'critical' ? <AlertCircle className="w-2.5 h-2.5" /> : row.type === 'warning' ? <Clock className="w-2.5 h-2.5" /> : <Activity className="w-2.5 h-2.5" />}
-                      {row.state}
-                    </span>
-                 </td>
-               </motion.tr>
-             ))}
-           </tbody>
-         </table>
-       </div>
-    </div>
-  )
-}
 
 
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
@@ -500,41 +418,83 @@ export default function Home() {
             </div>
           </FadeUp>
 
-          {/* Visual Narrative - Collections Focus */}
-          <FadeUp delay={0.1} className="mb-20">
-            <CollectionsIntelligenceFragment />
+          {/* Full pipeline table */}
+          <FadeUp delay={0.1} className="mb-16">
+            <div className="rounded-xl border border-border/50 bg-surface/20 overflow-hidden shadow-xl">
+              <div className="px-5 py-4 border-b border-border/40 flex items-center justify-between bg-void/60">
+                <div className="flex items-center gap-3">
+                  <Activity className="w-4 h-4 text-text-primary" />
+                  <span className="text-[13px] font-medium text-text-primary tracking-tight">Invoice Pipeline — Live State</span>
+                </div>
+                <span className="text-[10px] font-mono text-text-dim">Updated Oct 18, 2024</span>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse min-w-[700px]">
+                  <thead>
+                    <tr className="border-b border-border/40 text-text-dim text-[10.5px] uppercase tracking-wider">
+                      <th className="px-5 py-3.5 font-medium">Retailer</th>
+                      <th className="px-5 py-3.5 font-medium">Invoice ID</th>
+                      <th className="px-5 py-3.5 font-medium text-right">Amount</th>
+                      <th className="px-5 py-3.5 font-medium">Stage</th>
+                      <th className="px-5 py-3.5 font-medium">Aging</th>
+                      <th className="px-5 py-3.5 font-medium">Next Action</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-[12.5px]">
+                    {[
+                      { name: "Global Traders",    id: "INV-24-0871", amt: "₹2,14,000", stage: "Escalated",     aging: "45d", next: "Legal notice",    type: "critical" },
+                      { name: "Sharma Provisions", id: "INV-24-0885", amt: "₹45,200",  stage: "Reminder Sent", aging: "14d", next: "2nd reminder",   type: "warning"  },
+                      { name: "Apex Enterprises",  id: "INV-24-0892", amt: "₹40,000",  stage: "Generated",     aging: "6d",  next: "Await payment", type: "normal"   },
+                      { name: "New India Stores",  id: "INV-24-0896", amt: "₹18,500",  stage: "Paid",          aging: "—",   next: "Archived",      type: "paid"     },
+                    ].map((row, i) => (
+                      <motion.tr
+                        initial={{ opacity: 0, x: -8 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.08, duration: 0.5 }}
+                        viewport={{ once: true }}
+                        key={row.id}
+                        className="border-b border-border/20 last:border-0 hover:bg-border/10 transition-colors"
+                      >
+                        <td className="px-5 py-4 font-medium text-text-primary">{row.name}</td>
+                        <td className="px-5 py-4 font-mono text-text-muted text-[11px]">{row.id}</td>
+                        <td className="px-5 py-4 text-right font-mono text-text-primary tabular-nums">{row.amt}</td>
+                        <td className="px-5 py-4">
+                          <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-medium border ${
+                            row.type === 'critical' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
+                            row.type === 'warning'  ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20' :
+                            row.type === 'paid'     ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' :
+                            'bg-surface text-text-muted border-border/50'
+                          }`}>
+                            {row.type === 'critical' ? <AlertCircle className="w-2.5 h-2.5" /> :
+                             row.type === 'paid'     ? <CheckCircle2 className="w-2.5 h-2.5" /> :
+                             <Clock className="w-2.5 h-2.5" />}
+                            {row.stage}
+                          </span>
+                        </td>
+                        <td className="px-5 py-4 font-mono text-text-muted text-[11px]">{row.aging}</td>
+                        <td className="px-5 py-4 text-text-muted text-[12px]">{row.next}</td>
+                      </motion.tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </FadeUp>
 
-          {/* Features */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Feature cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              {
-                icon: <FileText className="w-4 h-4" />,
-                title: "Invoice Workflows",
-                desc: "Automated tracking from order parsing to invoice generation and payment clearing."
-              },
-              {
-                icon: <Activity className="w-4 h-4" />,
-                title: "Collections Systems",
-                desc: "Structured follow-ups based on real-time aging, payment priority, and retailer risk history."
-              },
-              {
-                icon: <Layers className="w-4 h-4" />,
-                title: "Retailer Coordination",
-                desc: "All interactions, claims, and returns automatically logged into a single, auditable record."
-              }
+              { icon: <FileText className="w-4 h-4" />, title: "Invoice Workflows",      desc: "Order parsing → invoice creation → payment clearing. Full end-to-end visibility." },
+              { icon: <Activity className="w-4 h-4" />, title: "Collections Systems",    desc: "Structured follow-ups based on aging, payment priority, and retailer risk history." },
+              { icon: <Layers className="w-4 h-4" />,   title: "Retailer Coordination",  desc: "All interactions, claims, and returns logged into a single auditable record." },
             ].map((feat, i) => (
               <FadeUp key={feat.title} delay={i * 0.1}>
-                <div className="p-6 rounded-xl border border-border/40 bg-surface/20">
+                <div className="p-6 rounded-xl border border-border/40 bg-surface/10 hover:bg-surface/20 transition-colors">
                   <div className="w-8 h-8 rounded-lg bg-elevated flex items-center justify-center text-text-primary mb-5 border border-border/50">
                     {feat.icon}
                   </div>
-                  <h3 className="text-[15px] font-medium text-text-primary mb-2 tracking-tight">
-                    {feat.title}
-                  </h3>
-                  <p className="text-[13px] text-text-muted leading-relaxed">
-                    {feat.desc}
-                  </p>
+                  <h3 className="text-[14.5px] font-medium text-text-primary mb-2 tracking-tight">{feat.title}</h3>
+                  <p className="text-[13px] text-text-muted leading-relaxed">{feat.desc}</p>
                 </div>
               </FadeUp>
             ))}
@@ -744,6 +704,40 @@ export default function Home() {
                 </div>
               </FadeUp>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <Rule />
+
+      {/* ───────────────────────────────────────────────────────────── */}
+      {/* CLOSING — GET IN TOUCH                                       */}
+      {/* ───────────────────────────────────────────────────────────── */}
+      <section id="contact-cta" className="bg-void py-24 md:py-32">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <FadeUp>
+              <span className="block text-[11px] font-mono text-text-dim uppercase tracking-widest mb-8">
+                Get in Touch
+              </span>
+              <h2
+                className="font-display font-medium text-text-primary mb-6 text-balance"
+                style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.03em", lineHeight: 1.08 }}
+              >
+                If you run a distribution business and this resonates — we&rsquo;d like to hear from you.
+              </h2>
+            </FadeUp>
+            <FadeUp delay={0.12}>
+              <p className="text-text-muted text-[14px] leading-relaxed mb-10 max-w-lg">
+                We are early-stage and selective. We talk to businesses where operational friction is a real, daily problem — not a talking point.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3.5 border border-border/60 text-text-secondary font-medium text-[13px] rounded-lg transition-all duration-300 hover:border-border hover:text-text-primary active:scale-[0.98]"
+              >
+                Talk to us
+              </Link>
+            </FadeUp>
           </div>
         </div>
       </section>
