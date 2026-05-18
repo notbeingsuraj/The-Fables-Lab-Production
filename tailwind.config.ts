@@ -9,93 +9,82 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Core surfaces
-        void: "#080808",
-        surface: "#111111",
-        elevated: "#1a1a1a",
-        border: "#2a2a2a",
-        "border-subtle": "#1e1e1e",
-        // Text
-        "apple-white": "#f5f5f7",
+        // ─── Core Surfaces ────────────────────────────────────────────
+        void: "#0a0a0a",
+        surface: "#111113",
+        elevated: "#1a1a1e",
+        border: "#232326",
+        "border-subtle": "#1a1a1d",
+
+        // ─── Text Hierarchy ───────────────────────────────────────────
         "text-primary": "#f5f5f7",
         "text-secondary": "#a1a1a6",
         "text-muted": "#6e6e73",
-        "text-dim": "#3d3d40",
-        // Accent — singular, restrained
-        "fable-blue": "#2997ff",
-        "fable-blue-muted": "#1a6db5",
-        // Light surface (for contrast sections)
-        "light-bg": "#f5f5f7",
-        "light-surface": "#ffffff",
-        "light-border": "#d2d2d7",
-        "light-text": "#1d1d1f",
-        "light-secondary": "#6e6e73",
-        // Legacy pass-through (used in other pages — do not break)
-        charcoal: "#0a0a0c",
-        navy: "#050b14",
-        "neon-cyan": "#00E5FF",
-        "cyber-yellow": "#FFE600",
-        "hot-pink": "#FF007F",
-        "neon-green": "#39FF14",
-        "electric-blue": "#0044FF",
-        "neon-purple": "#B026FF",
-        "off-white": "#F4F4F0",
-        gridline: "rgba(255, 255, 255, 0.12)",
-        background: "#080808",
-        foreground: "#f5f5f7",
+        "text-dim": "#48484d",
+
+        // ─── Accent — singular, restrained ────────────────────────────
+        accent: "#4a9eff",
+        "accent-muted": "#3a7fd4",
+        "accent-subtle": "rgba(74, 158, 255, 0.08)",
+
+        // ─── Warm Neutrals (for contrast sections) ───────────────────
+        "warm-bg": "#fafaf9",
+        "warm-surface": "#ffffff",
+        "warm-border": "#e8e8e6",
+        "warm-text": "#1a1a1a",
+        "warm-secondary": "#6b6b6b",
+        "warm-muted": "#999999",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
-        mono: ["var(--font-space-mono)", "monospace"],
-        grotesk: ["var(--font-space-grotesk)", "sans-serif"],
-        display: ["var(--font-space-grotesk)", "sans-serif"],
+        sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
+        mono: ["var(--font-space-mono)", "ui-monospace", "monospace"],
+        display: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
       },
       fontSize: {
-        "display-2xl": ["clamp(3.5rem,8vw,7rem)", { lineHeight: "1.04", letterSpacing: "-0.03em" }],
-        "display-xl": ["clamp(2.8rem,6vw,5.5rem)", { lineHeight: "1.06", letterSpacing: "-0.025em" }],
-        "display-lg": ["clamp(2rem,4vw,3.75rem)", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
-        "display-md": ["clamp(1.5rem,3vw,2.5rem)", { lineHeight: "1.15", letterSpacing: "-0.015em" }],
-        "body-lg": ["1.1875rem", { lineHeight: "1.65" }],
-        "body-md": ["1rem", { lineHeight: "1.6" }],
-        "body-sm": ["0.875rem", { lineHeight: "1.55" }],
-        "label": ["0.75rem", { lineHeight: "1.4", letterSpacing: "0.06em" }],
+        // Display scale — typography IS the design
+        "display-hero": ["clamp(3rem, 6.5vw, 5.5rem)", { lineHeight: "1.05", letterSpacing: "-0.035em" }],
+        "display-xl": ["clamp(2.5rem, 5vw, 4rem)", { lineHeight: "1.08", letterSpacing: "-0.03em" }],
+        "display-lg": ["clamp(2rem, 3.5vw, 3rem)", { lineHeight: "1.12", letterSpacing: "-0.025em" }],
+        "display-md": ["clamp(1.5rem, 2.5vw, 2rem)", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
+        "body-lg": ["1.125rem", { lineHeight: "1.7" }],
+        "body-md": ["1rem", { lineHeight: "1.65" }],
+        "body-sm": ["0.875rem", { lineHeight: "1.6" }],
+        "label": ["0.6875rem", { lineHeight: "1.4", letterSpacing: "0.08em" }],
+        "label-sm": ["0.625rem", { lineHeight: "1.3", letterSpacing: "0.1em" }],
       },
       spacing: {
-        "section": "8rem",
-        "section-sm": "5rem",
+        section: "clamp(6rem, 12vw, 10rem)",
+        "section-sm": "clamp(4rem, 8vw, 6rem)",
+        18: "4.5rem",
+        22: "5.5rem",
       },
       borderRadius: {
+        "2xl": "16px",
+        "3xl": "20px",
         "4xl": "24px",
-        "pill": "9999px",
+        pill: "9999px",
       },
       backgroundImage: {
-        "noise": "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")",
-        "gradient-void": "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(41,151,255,0.07) 0%, transparent 70%)",
-        "gradient-dark": "linear-gradient(to bottom, #111111, #080808)",
-        "gradient-subtle": "linear-gradient(to bottom, rgba(255,255,255,0.03), transparent)",
+        "gradient-void": "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(74,158,255,0.04) 0%, transparent 70%)",
+        "gradient-subtle": "linear-gradient(to bottom, rgba(255,255,255,0.02), transparent)",
       },
       animation: {
-        "fade-up": "fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) both",
-        "fade-in": "fadeIn 1s ease both",
-        "scale-in": "scaleIn 1.2s cubic-bezier(0.16,1,0.3,1) both",
+        "fade-up": "fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) both",
+        "fade-in": "fadeIn 0.8s ease both",
       },
       keyframes: {
         fadeUp: {
-          from: { opacity: "0", transform: "translateY(24px)" },
+          from: { opacity: "0", transform: "translateY(20px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
         fadeIn: {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
-        scaleIn: {
-          from: { opacity: "0", transform: "scale(0.96)" },
-          to: { opacity: "1", transform: "scale(1)" },
-        },
       },
       transitionTimingFunction: {
-        "apple": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-        "spring": "cubic-bezier(0.16, 1, 0.3, 1)",
+        apple: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        spring: "cubic-bezier(0.16, 1, 0.3, 1)",
       },
     },
   },
