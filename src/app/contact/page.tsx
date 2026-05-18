@@ -70,7 +70,7 @@ export default function ContactPage() {
               </span>
             </h1>
             <p className="text-xl text-off-white/70 max-w-2xl mx-auto font-grotesk font-light leading-relaxed">
-              Skip the agency bloat. We build precise, high-performance MVPs in 30 days. Define parameters below via standard protocol.
+              We invite you to contribute to our current and upcoming initiatives. It will be fun to work with you.
             </p>
       </div>
 
@@ -81,7 +81,7 @@ export default function ContactPage() {
             {/* Contact Info */}
             <div className="lg:col-span-5 space-y-12 pr-8 border-b md:border-b-0 md:border-r border-gridline pb-12 md:pb-0">
                <div>
-                  <h3 className="font-grotesk italic font-light text-3xl md:text-5xl text-off-white mb-6">THE STUDIO</h3>
+                  <h3 className="font-grotesk italic font-light text-3xl md:text-5xl text-off-white mb-6">THE LAB</h3>
                   <p className="text-off-white/60 font-grotesk font-light text-lg leading-relaxed mb-8">
                      We operate out of Chandigarh but we have felt our presence everywhere. We selective about the projects we take on. If you&apos;re a founder with a clear vision, we want to hear from you.
                   </p>
@@ -93,7 +93,7 @@ export default function ContactPage() {
                         <Mail className="text-off-white group-hover:text-white" size={20} />
                      </div>
                      <div>
-                        <p className="text-off-white/40 font-mono text-xs font-bold uppercase tracking-widest mb-1">Comm.Link</p>
+                        <p className="text-off-white/40 font-mono text-xs font-bold uppercase tracking-widest mb-1">Founder-Email</p>
                         <p className="text-off-white font-mono text-sm tracking-widest uppercase">imysuraj1218@gmail.com</p>
                      </div>
                   </div>
@@ -103,7 +103,7 @@ export default function ContactPage() {
                      </div>
                      <div>
                         <p className="text-off-white/40 font-mono text-xs font-bold uppercase tracking-widest mb-1">Base.Coords</p>
-                        <p className="text-off-white font-mono text-sm tracking-widest uppercase">Aura Avenue, Mohali, Punjab</p>
+                        <p className="text-off-white font-mono text-sm tracking-widest uppercase">Mohali, Punjab</p>
                      </div>
                   </div>
                </div>
