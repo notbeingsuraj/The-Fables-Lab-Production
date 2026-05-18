@@ -254,7 +254,7 @@ export default function Home() {
               href="#distributor-os"
               className="inline-flex items-center gap-2 px-6 py-3.5 bg-text-primary text-void font-medium text-[13px] rounded-lg transition-all duration-300 hover:bg-text-secondary active:scale-[0.98]"
             >
-              Explore Flow
+              Explore Fables Flow
             </Link>
             <Link
               href="#why-we-exist"
