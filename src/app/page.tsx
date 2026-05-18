@@ -6,12 +6,10 @@ import Link from "next/link";
 import { 
   CheckCircle2, 
   Clock, 
-  MessageSquare, 
   FileText, 
   AlertCircle,
   Activity,
   Layers,
-  Zap,
 } from "lucide-react";
 
 // ─── Fade-up on scroll ────────────────────────────────────────────────────────
@@ -46,150 +44,85 @@ function Rule() {
 
 // ─── UI FRAGMENT: Operational Storytelling Hero Flow ──────────────────────────
 function HeroSignatureFlowFragment() {
+  // WhatsApp → Clarity: 5-step vertical pipeline
+  const steps = [
+    {
+      tag: "Input",
+      label: "WhatsApp Message",
+      detail: '"bhai 5 red aur 2 blue bhej do"',
+      mono: "Ravi Sharma · 10:42 AM",
+      color: "emerald",
+    },
+    {
+      tag: "Parse",
+      label: "AI Extraction",
+      detail: "Intent: Order  ·  Items: 2  ·  Risk: None",
+      mono: "Confidence 98%",
+      color: "accent",
+    },
+    {
+      tag: "Create",
+      label: "Invoice Generated",
+      detail: "INV-24-0914 · ₹17,500 · Due Oct 25",
+      mono: "Auto-logged",
+      color: "text",
+    },
+    {
+      tag: "Track",
+      label: "Collections Workflow",
+      detail: "Reminder scheduled · Aging counter active",
+      mono: "Day 0 of 14",
+      color: "yellow",
+    },
+    {
+      tag: "Resolve",
+      label: "Payment Received",
+      detail: "₹17,500 cleared · Workflow closed",
+      mono: "Oct 23, 3:18 PM",
+      color: "emerald",
+    },
+  ];
   return (
-    <div className="relative w-full h-[600px] md:h-[700px] mt-16 rounded-2xl border border-border/40 bg-surface/30 overflow-hidden shadow-2xl flex items-center justify-center">
-      {/* Background System Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_20%,transparent_100%)] opacity-80" />
-      
-      {/* 1. WhatsApp Input */}
-      <motion.div 
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute top-10 left-4 md:left-12 w-[280px] md:w-[320px] rounded-xl border border-border/60 bg-elevated/95 backdrop-blur-md shadow-2xl z-10"
-      >
-        <div className="px-4 py-3 border-b border-border/50 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <MessageSquare className="w-3.5 h-3.5 text-emerald-500" />
-            <span className="text-[11px] font-medium text-text-primary uppercase tracking-wider">Communication Layer</span>
-          </div>
-          <span className="text-[10px] font-mono text-text-muted">10:42 AM</span>
+    <div className="w-full mt-16 rounded-2xl border border-border/40 bg-surface/20 overflow-hidden shadow-2xl">
+      {/* Header */}
+      <div className="px-6 py-4 border-b border-border/40 flex items-center justify-between bg-void/60">
+        <div className="flex items-center gap-2.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+          <span className="text-[11px] font-mono text-text-dim uppercase tracking-widest">DistributorOS — Order to Collection Pipeline</span>
         </div>
-        <div className="p-4 space-y-2">
-          <span className="text-[10px] text-text-dim uppercase tracking-wider font-medium">From: Ravi, Apex Enterprises</span>
-          <div className="bg-surface border border-border/50 rounded-lg p-3.5 text-[12.5px] text-text-secondary leading-relaxed shadow-inner">
-            &quot;Bhaiya, send 50 peti Variant A. Also, adjust 5k pending from last invoice.&quot;
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Connection Line 1 */}
-      <motion.div 
-        initial={{ height: 0, opacity: 0 }}
-        animate={{ height: "70px", opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.0, ease: "easeInOut" }}
-        className="absolute top-[160px] left-[140px] md:left-[172px] w-px bg-gradient-to-b from-border to-accent/60 z-0 hidden md:block"
-      />
-
-      {/* 2. AI Parsing Node */}
-      <motion.div 
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute top-[230px] left-8 md:left-24 w-[250px] md:w-[280px] rounded-xl border border-accent/30 bg-[#0f172a]/90 backdrop-blur-md shadow-[0_0_40px_rgba(74,158,255,0.1)] z-20 flex flex-col"
-      >
-        <div className="px-4 py-2.5 border-b border-accent/20 flex items-center gap-2">
-          <Zap className="w-3.5 h-3.5 text-accent" />
-          <span className="text-[10px] font-medium text-accent uppercase tracking-wider">Parsing Engine</span>
-        </div>
-        <div className="p-4 text-[11.5px] space-y-2 font-mono text-text-secondary">
-          <div className="flex justify-between items-center border-b border-accent/10 pb-1.5"><span>Intent:</span> <span className="text-text-primary">Order + Claim</span></div>
-          <div className="flex justify-between items-center border-b border-accent/10 pb-1.5"><span>Entity:</span> <span className="text-text-primary">Apex Enterprises</span></div>
-          <div className="flex justify-between items-center pt-0.5"><span>Risk:</span> <span className="text-yellow-500">Pending Balance</span></div>
-        </div>
-      </motion.div>
-
-      {/* Connection Line 2 */}
-      <motion.div 
-        initial={{ width: 0, opacity: 0 }}
-        animate={{ width: "160px", opacity: 1 }}
-        transition={{ duration: 0.8, delay: 2.0, ease: "easeInOut" }}
-        className="absolute top-[280px] left-[258px] md:left-[304px] h-[2px] bg-gradient-to-r from-accent/60 to-border/40 z-0 hidden md:block"
-      >
-         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-border shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
-      </motion.div>
-
-      {/* 3. Structured Record Layered Over Collections */}
-      <motion.div 
-        initial={{ x: 30, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 2.4, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute right-4 md:right-16 top-32 md:top-24 w-[300px] md:w-[400px] rounded-xl border border-border/60 bg-void/98 backdrop-blur-xl shadow-2xl z-30"
-      >
-        <div className="px-4 py-3.5 border-b border-border/50 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <FileText className="w-3.5 h-3.5 text-text-primary" />
-            <span className="text-[12px] font-medium text-text-primary">Operational Record</span>
-          </div>
-          <span className="text-[10px] bg-surface text-text-muted px-2 py-0.5 rounded uppercase tracking-wider border border-border/50 font-mono">INV-24-0892</span>
-        </div>
-        
-        <div className="p-5">
-          <div className="space-y-3.5">
-            <div className="flex justify-between items-center text-[10px] text-text-dim uppercase tracking-wider border-b border-border/40 pb-2">
-              <span>Item</span>
-              <span>Qty</span>
-              <span>Total</span>
+        <span className="text-[10px] font-mono text-text-dim">Live Trace · INV-24-0914</span>
+      </div>
+      {/* Steps */}
+      <div className="grid grid-cols-1 md:grid-cols-5 divide-y md:divide-y-0 md:divide-x divide-border/30">
+        {steps.map((step, i) => (
+          <motion.div
+            key={step.tag}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 + i * 0.18, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="p-5 flex flex-col gap-3 relative"
+          >
+            <div className="flex items-center gap-2">
+              <span className={`text-[9px] font-mono font-medium uppercase tracking-widest px-1.5 py-0.5 rounded border ${
+                step.color === 'emerald' ? 'text-emerald-400 border-emerald-500/20 bg-emerald-500/10' :
+                step.color === 'accent'  ? 'text-accent border-accent/20 bg-accent/10' :
+                step.color === 'yellow'  ? 'text-yellow-500 border-yellow-500/20 bg-yellow-500/10' :
+                'text-text-muted border-border/50 bg-surface'
+              }`}>{step.tag}</span>
+              <span className="text-[9px] font-mono text-text-dim">{String(i + 1).padStart(2, '0')}</span>
             </div>
-            <div className="flex justify-between items-center text-[12.5px] text-text-secondary border-b border-border/20 pb-2.5">
-              <span className="text-text-primary font-medium">Variant A (Peti)</span>
-              <span className="font-mono">50</span>
-              <span className="font-mono text-text-primary">₹45,000</span>
-            </div>
-            <div className="flex justify-between items-center text-[12.5px] text-text-secondary border-b border-border/20 pb-2.5">
-              <span className="text-red-400 font-medium">Previous Adjustment</span>
-              <span className="font-mono">-</span>
-              <span className="font-mono text-red-400">-₹5,000</span>
-            </div>
-            <div className="flex justify-between items-center text-[13.5px] pt-1">
-              <span className="text-text-primary font-medium">Net Payable</span>
-              <span className="font-mono text-text-primary font-medium">₹40,000</span>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* 4. Collections Intelligence Panel */}
-      <motion.div 
-        initial={{ y: 30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 2.8, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute right-8 md:right-32 bottom-8 md:bottom-20 w-[280px] md:w-[360px] rounded-xl border border-border/50 bg-elevated/95 shadow-2xl z-20"
-      >
-        <div className="px-4 py-3 border-b border-border/40 flex items-center justify-between bg-surface/80">
-           <span className="text-[11px] font-medium text-text-muted uppercase tracking-wider">Workflow State</span>
-           <div className="flex items-center gap-1.5 px-2 py-0.5 rounded border border-yellow-500/20 bg-yellow-500/10 text-yellow-500/90 text-[10px] font-medium uppercase tracking-wider">
-             <Activity className="w-3 h-3" /> Aging Initiated
-           </div>
-        </div>
-        <div className="p-5 space-y-4 text-[12px]">
-           <div className="flex gap-4">
-             <div className="w-px bg-border/80 relative left-1.5" />
-             <div className="space-y-5">
-               <div className="relative">
-                 <div className="absolute -left-[23px] top-1 w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-                 <p className="text-text-primary font-medium">Invoice Generated</p>
-                 <p className="text-[10px] text-text-dim mt-0.5 font-mono">Oct 12, 10:44 AM</p>
-               </div>
-               <div className="relative">
-                 <div className="absolute -left-[23px] top-1 w-2 h-2 rounded-full border-[1.5px] border-border bg-void" />
-                 <p className="text-text-secondary font-medium">Payment Due</p>
-                 <p className="text-[10px] text-text-dim mt-0.5 font-mono">Oct 19 (7 Days)</p>
-               </div>
-               <div className="relative">
-                 <div className="absolute -left-[23px] top-1 w-2 h-2 rounded-full border-[1.5px] border-border bg-void" />
-                 <p className="text-text-muted font-medium">Automated Escalation</p>
-                 <p className="text-[10px] text-text-dim mt-0.5 font-mono">Pending Execution</p>
-               </div>
-             </div>
-           </div>
-        </div>
-      </motion.div>
+            <p className="text-[13px] font-medium text-text-primary tracking-tight leading-snug">{step.label}</p>
+            <p className="text-[11.5px] text-text-muted leading-relaxed">{step.detail}</p>
+            <p className="text-[10px] font-mono text-text-dim mt-auto">{step.mono}</p>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }
 
 // ─── UI FRAGMENT: Chaos → Clarity ───────────────────────────────────────────
+
 function ChaosToClarityFragment() {
   return (
     <div className="w-full flex flex-col gap-5 relative">
@@ -345,7 +278,7 @@ export default function Home() {
       {/* SECTION 2 — WHY WE EXIST                                    */}
       {/* ───────────────────────────────────────────────────────────── */}
       <section id="why-we-exist" className="bg-surface/10 py-24 md:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-[0.02] pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
         
         <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -398,9 +331,14 @@ export default function Home() {
           <FadeUp className="mb-16">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10 border-b border-border/40">
               <div className="max-w-2xl">
-                <span className="block text-[11px] font-mono text-accent uppercase tracking-widest mb-6 border border-accent/20 bg-accent/10 w-max px-2.5 py-1 rounded">
-                  In Development
-                </span>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="text-[11px] font-mono text-accent uppercase tracking-widest border border-accent/20 bg-accent/10 px-2.5 py-1 rounded">
+                    In Development
+                  </span>
+                  <span className="text-[11px] font-mono text-text-dim uppercase tracking-widest border border-border/30 px-2.5 py-1 rounded">
+                    First System
+                  </span>
+                </div>
                 <h2
                   className="font-display font-medium text-text-primary mb-4"
                   style={{
@@ -411,9 +349,14 @@ export default function Home() {
                 >
                   Fables DistributorOS
                 </h2>
-                <p className="text-text-secondary text-body-lg leading-relaxed">
-                  The first major operational system we are building. An end-to-end workflow layer for businesses running on credit and relationships.
+                <p className="text-text-secondary text-body-lg leading-relaxed mb-6">
+                  The operational backbone for distribution businesses running on credit and relationships. End-to-end workflow from WhatsApp order to cleared payment.
                 </p>
+                <div className="flex flex-wrap gap-3">
+                  {["Order Parsing", "Invoice Workflow", "Collections Aging", "Retailer State"].map((t) => (
+                    <span key={t} className="text-[11px] font-mono text-text-dim border border-border/40 px-2.5 py-1 rounded bg-surface/30">{t}</span>
+                  ))}
+                </div>
               </div>
             </div>
           </FadeUp>
