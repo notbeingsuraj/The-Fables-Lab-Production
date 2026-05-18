@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const NAV = {
   Products: [
-    { label: "DistributorOS", href: "#distributor-os" },
+    { label: "Fables Flow", href: "#distributor-os" },
     { label: "Initiatives", href: "#initiatives" },
   ],
   Company: [
@@ -49,7 +49,7 @@ export default function Footer() {
               <div className="flex items-center gap-2.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent/60 animate-pulse" />
                 <span className="text-[11px] font-mono text-text-dim tracking-wider">
-                  Currently focused on DistributorOS.
+                  Currently focused on Fables Flow.
                 </span>
               </div>
               <div className="flex items-center gap-2.5">

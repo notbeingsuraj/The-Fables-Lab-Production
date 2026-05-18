@@ -6,7 +6,7 @@ import { useState } from "react";
 import { X, Menu } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "DistributorOS", href: "#distributor-os" },
+  { label: "Fables Flow", href: "#distributor-os" },
   { label: "Principles", href: "#principles" },
   { label: "Initiatives", href: "#initiatives" },
 ];

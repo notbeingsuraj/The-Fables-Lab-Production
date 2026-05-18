@@ -88,7 +88,7 @@ function HeroSignatureFlowFragment() {
       <div className="px-6 py-4 border-b border-border/40 flex items-center justify-between bg-void/60">
         <div className="flex items-center gap-2.5">
           <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-          <span className="text-[11px] font-mono text-text-dim uppercase tracking-widest">DistributorOS — Order to Collection Pipeline</span>
+          <span className="text-[11px] font-mono text-text-dim uppercase tracking-widest">Fables Flow — Order to Collection Pipeline</span>
         </div>
         <span className="text-[10px] font-mono text-text-dim">Live Trace · INV-24-0914</span>
       </div>
@@ -254,7 +254,7 @@ export default function Home() {
               href="#distributor-os"
               className="inline-flex items-center gap-2 px-6 py-3.5 bg-text-primary text-void font-medium text-[13px] rounded-lg transition-all duration-300 hover:bg-text-secondary active:scale-[0.98]"
             >
-              Explore DistributorOS
+              Explore Flow
             </Link>
             <Link
               href="#why-we-exist"
@@ -347,7 +347,7 @@ export default function Home() {
                     lineHeight: 1.05,
                   }}
                 >
-                  Fables DistributorOS
+                  Fables Flow
                 </h2>
                 <p className="text-text-secondary text-body-lg leading-relaxed mb-6">
                   The operational backbone for distribution businesses running on credit and relationships. End-to-end workflow from WhatsApp order to cleared payment.
