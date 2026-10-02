@@ -110,7 +110,7 @@ export default function AdminNewProjectPage() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
         {success && (
           <motion.div initial={{opacity:0, y:-10}} animate={{opacity:1, y:0}} className="mb-8 p-4 border border-neon-green bg-neon-green/10 text-neon-green font-mono uppercase text-sm tracking-widest">
-            Data.Log Successfully Written to Supabase Core.
+            Data.Log Successfully Written to MongoDB Core.
           </motion.div>
         )}
         {error && (

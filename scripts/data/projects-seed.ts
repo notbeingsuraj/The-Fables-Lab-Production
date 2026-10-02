@@ -1,11 +1,36 @@
-import { createClient } from "@supabase/supabase-js";
-import * as dotenv from "dotenv";
-dotenv.config({ path: ".env.local" });
+/**
+ * Seed data for the `projects` collection.
+ *
+ * Auto-extracted from the former scripts/setup-db.ts (Supabase era) so the
+ * portfolio content carries over to MongoDB unchanged.
+ *
+ * Imported by: scripts/seed-projects.ts
+ */
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export interface SeedProject {
+  slug: string;
+  name: string;
+  description: string;
+  thumbnail: string;
+  tags: string[];
+  client: string;
+  role: string;
+  duration: string;
+  color: string;
+  heroText: string;
+  heroImage: string;
+  solutionImage: string;
+  summary: string;
+  problem: string;
+  solution: string;
+  techStack: string[];
+  metrics: { label: string; value: string }[];
+  thoughtProcess: { id: number; title: string; text: string }[];
+  process: {
+    dfd: { title: string; description: string; image: string };
+    prototyping: { title: string; description: string; image: string };
+  };
+}
 
 const PROJECTS_DATA: Record<string, any> = {
   carefree: {
@@ -451,17 +476,14 @@ const ALL_PROJECTS = [
   },
 ];
 
-async function seed() {
-  console.log("Starting DB seed...");
-  
-  for (const slug of Object.keys(PROJECTS_DATA)) {
-    const p = PROJECTS_DATA[slug];
-    const preview = ALL_PROJECTS.find(v => v.id === slug);
 
-    console.log(`Inserting ${slug}...`);
-
-    const { error } = await supabase.from("projects").upsert({
-      slug,
+/** Flattens PROJECTS_DATA + ALL_PROJECTS into insert-ready documents. */
+export function buildSeedProjects(): SeedProject[] {
+  return Object.keys(PROJECTS_DATA).map((key) => {
+    const p = PROJECTS_DATA[key];
+    const preview = ALL_PROJECTS.find((v) => v.id === key);
+    return {
+      slug: key,
       name: p.name,
       description: preview?.description || p.summary,
       thumbnail: preview?.image || p.heroImage,
@@ -470,27 +492,16 @@ async function seed() {
       role: p.role,
       duration: p.duration,
       color: p.color,
-      hero_text: p.heroText,
-      hero_image: p.heroImage,
-      solution_image: p.solutionImage,
+      heroText: p.heroText,
+      heroImage: p.heroImage,
+      solutionImage: p.solutionImage,
       summary: p.summary,
       problem: p.problem,
       solution: p.solution,
-      tech_stack: p.techStack,
+      techStack: p.techStack,
       metrics: p.metrics,
-      thought_process: p.thoughtProcess,
+      thoughtProcess: p.thoughtProcess,
       process: p.process,
-      created_at: new Date().toISOString()
-    });
-
-    if (error) {
-      console.error("Error inserting:", slug, error);
-    } else {
-      console.log(`Successfully inserted ${slug}`);
-    }
-  }
-
-  console.log("Finished DB migration.");
+    };
+  });
 }
-
-seed().catch(console.error);

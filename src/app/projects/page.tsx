@@ -6,7 +6,6 @@ import LineOverlay from "@/components/ui/LineOverlay";
 import ProjectCard from "@/components/ui/ProjectCard";
 import { VectorGrid, GeometricShapes, HandDrawnLines } from "@/components/ui/PhysicsIllustrations";
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<any[]>([]);
@@ -14,18 +13,17 @@ export default function ProjectsPage() {
 
   useEffect(() => {
     async function load() {
-      const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: true });
-      if (data) {
-        setProjects(data.map(p => ({
-          id: p.slug,
-          name: p.name,
-          description: p.description,
-          image: p.thumbnail,
-          tags: p.tags || [],
-          color: p.color
-        })));
+      try {
+        const res = await fetch("/api/projects");
+        const { data } = await res.json();
+        if (res.ok && Array.isArray(data)) {
+          setProjects(data);
+        }
+      } catch (error) {
+        console.error("Failed to load projects:", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
     load();
   }, []);

@@ -9,7 +9,6 @@ import { VectorGrid, GeometricShapes, HandDrawnLines, TopographicPattern, Magnet
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
 
 export default function DynamicCaseStudyPage() {
   const params = useParams() as any;
@@ -20,27 +19,35 @@ export default function DynamicCaseStudyPage() {
   useEffect(() => {
     async function load() {
       if (!projectSlug) return;
-      const { data } = await supabase.from('projects').select('*').eq('slug', projectSlug).single();
-      if (data) {
-        setProject({
-          name: data.name,
-          client: data.client,
-          role: data.role,
-          duration: data.duration,
-          color: data.color,
-          heroText: data.hero_text,
-          heroImage: data.hero_image,
-          solutionImage: data.solution_image,
-          summary: data.summary,
-          problem: data.problem,
-          solution: data.solution,
-          techStack: data.tech_stack || [],
-          metrics: data.metrics || [],
-          thoughtProcess: data.thought_process || [],
-          process: data.process || { dfd: {}, prototyping: {} }
-        });
+      try {
+        const res = await fetch(`/api/projects/${encodeURIComponent(projectSlug)}`);
+        if (res.ok) {
+          const { data } = await res.json();
+          if (data) {
+            setProject({
+              name: data.name,
+              client: data.client,
+              role: data.role,
+              duration: data.duration,
+              color: data.color,
+              heroText: data.heroText,
+              heroImage: data.heroImage,
+              solutionImage: data.solutionImage,
+              summary: data.summary,
+              problem: data.problem,
+              solution: data.solution,
+              techStack: data.techStack || [],
+              metrics: data.metrics || [],
+              thoughtProcess: data.thoughtProcess || [],
+              process: data.process || { dfd: {}, prototyping: {} }
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Failed to load project:", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
     load();
   }, [projectSlug]);

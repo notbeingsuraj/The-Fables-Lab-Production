@@ -6,13 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "db:setup": "ts-node -P tsconfig.scripts.json scripts/mongo-setup.ts",
+    "db:seed": "ts-node -P tsconfig.scripts.json scripts/seed-projects.ts",
+    "db:verify": "ts-node -P tsconfig.scripts.json scripts/verify-db.ts"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.98.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.34.4",
     "lucide-react": "^0.576.0",
+    "mongodb": "^6.21.0",
     "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
