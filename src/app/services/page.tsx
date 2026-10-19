@@ -149,7 +149,7 @@ export default function ServicesPage() {
               SYS_FILE // CAPABILITIES
             </Chip>
             <span className="font-mono text-label-mono-md uppercase tracking-wider text-outline">
-              // ENGINE SPECIFICATIONS
+              {"// ENGINE SPECIFICATIONS"}
             </span>
           </div>
           <h1 className="font-display text-[48px] uppercase leading-[0.95] tracking-tight text-primary sm:text-[72px] lg:text-[104px]">
@@ -193,7 +193,7 @@ export default function ServicesPage() {
 
                 <div className="pt-space-sm">
                   <p className="mb-space-sm font-mono text-label-mono-sm uppercase tracking-widest text-outline">
-                    // KEY DELIVERABLES
+                    {"// KEY DELIVERABLES"}
                   </p>
                   <div className="grid grid-cols-1 gap-space-xs sm:grid-cols-2">
                     {engine.deliverables.map((d) => (
@@ -331,7 +331,7 @@ export default function ServicesPage() {
         <div className="flex flex-wrap items-center justify-between gap-space-lg border border-outline-variant/30 bg-surface-container-low p-space-xl shadow-acid">
           <div>
             <span className="font-mono text-label-mono-sm font-bold uppercase tracking-widest text-primary-fixed">
-              // READY_WHEN_YOU_ARE
+              {"// READY_WHEN_YOU_ARE"}
             </span>
             <h2 className="mt-space-sm font-display text-headline-lg uppercase tracking-tight text-primary">
               PICK AN ENGINE. START THE SPRINT.

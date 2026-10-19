@@ -46,7 +46,7 @@ export default function ContactPage() {
               SYS_FILE // DISPATCH
             </Chip>
             <span className="font-mono text-label-mono-md uppercase tracking-wider text-outline">
-              // ENCRYPTED DIRECT CHANNEL
+              {"// ENCRYPTED DIRECT CHANNEL"}
             </span>
           </div>
           <h1 className="font-display text-[48px] uppercase leading-[0.95] tracking-tight text-primary sm:text-[72px] lg:text-[104px]">

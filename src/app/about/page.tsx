@@ -72,7 +72,7 @@ export default function AboutPage() {
               SYS_FILE // THE_LAB
             </Chip>
             <span className="font-mono text-label-mono-md uppercase tracking-wider text-outline">
-              // MANIFESTO &amp; OPERATING SYSTEM
+              {"// MANIFESTO & OPERATING SYSTEM"}
             </span>
           </div>
           <h1 className="font-display text-[48px] uppercase leading-[0.95] tracking-tight text-primary sm:text-[72px] lg:text-[104px]">
@@ -104,7 +104,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 gap-space-xl lg:grid-cols-12">
           <div className="space-y-space-lg lg:col-span-7">
             <span className="font-mono text-label-mono-sm font-bold uppercase tracking-widest text-secondary">
-              // ORIGIN_LOG :: 02:00 AM
+              {"// ORIGIN_LOG :: 02:00 AM"}
             </span>
             <h2 className="font-display text-headline-lg uppercase tracking-tight text-primary">
               A LAB, NOT A AGENCY FACTORY.
@@ -208,7 +208,7 @@ export default function AboutPage() {
         <div className="flex flex-wrap items-center justify-between gap-space-lg border border-outline-variant/30 bg-surface-container-low p-space-xl shadow-cyan">
           <div>
             <span className="font-mono text-label-mono-sm font-bold uppercase tracking-widest text-tertiary-fixed-dim">
-              // END_OF_FILE :: THE_LAB
+              {"// END_OF_FILE :: THE_LAB"}
             </span>
             <h2 className="mt-space-sm font-display text-headline-lg uppercase tracking-tight text-primary">
               THINK YOUR FABLE DESERVES A LAB?

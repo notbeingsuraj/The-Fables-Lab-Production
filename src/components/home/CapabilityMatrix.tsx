@@ -113,7 +113,7 @@ export default function CapabilityMatrix() {
             {/* Live code simulation window */}
             <div className="mb-space-md overflow-x-auto border border-outline-variant/20 bg-surface-container-lowest p-space-md font-mono text-label-mono-sm text-on-surface shadow-inner">
               <div className="mb-2 flex items-center justify-between border-b border-outline-variant/20 pb-1 text-outline-variant">
-                <span>// WebGL Vertex Shader Snippet</span>
+                <span>{"// WebGL Vertex Shader Snippet"}</span>
                 <span className="font-bold text-primary-fixed">ACTIVE_PASS</span>
               </div>
               {SHADER_LINES.map((line, i) => (
@@ -217,7 +217,7 @@ export default function CapabilityMatrix() {
                   CAPABILITY // 03
                 </span>
                 <span className="font-mono text-label-mono-sm font-bold uppercase tracking-widest text-primary-fixed">
-                  // HARDWARE CHASSIS &amp; SOUND
+                  {"// HARDWARE CHASSIS & SOUND"}
                 </span>
               </div>
               <h3 className="font-display text-headline-lg uppercase text-primary">

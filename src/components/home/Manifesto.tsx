@@ -27,7 +27,7 @@ export default function Manifesto({ className = "" }: { className?: string }) {
 
       <div className="relative z-10 max-w-5xl space-y-space-lg">
         <div className="inline-block bg-black px-space-sm py-1 font-mono text-label-mono-sm font-bold uppercase tracking-widest text-primary-fixed shadow-cyan-sm">
-          // UNAPOLOGETIC CREATIVE CODE
+          {"// UNAPOLOGETIC CREATIVE CODE"}
         </div>
         <h2 className="font-display text-[48px] uppercase leading-[0.92] tracking-tight text-black sm:text-[70px] lg:text-[96px]">
           THE FUTURE DOESN&apos;T BUILD ITSELF.
@@ -48,7 +48,7 @@ export default function Manifesto({ className = "" }: { className?: string }) {
           </div>
           <div className="flex flex-col justify-between border border-black bg-black p-space-md text-primary shadow-magenta md:col-span-4">
             <span className="font-mono text-label-mono-sm font-bold uppercase tracking-wider text-primary-fixed">
-              // CREED_RULE_01
+              {"// CREED_RULE_01"}
             </span>
             <p className="text-headline-sm uppercase tracking-tight text-primary py-space-sm">
               &quot;IDEAS ARE CHEAP. EXECUTION IS THE EXPERIMENT.&quot;

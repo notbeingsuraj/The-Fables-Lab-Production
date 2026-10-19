@@ -51,7 +51,7 @@ export default function HeroStatement() {
             SYS_ORIGIN // 00 / 06
           </span>
           <span className="hidden font-mono text-label-mono-md uppercase tracking-wider text-outline sm:inline-block">
-            // Creative Technology Studio
+            {"// Creative Technology Studio"}
           </span>
         </div>
         <div className="flex items-center gap-space-xs font-mono text-label-mono-sm uppercase tracking-wider text-tertiary-fixed-dim">
@@ -111,7 +111,7 @@ export default function HeroStatement() {
         <div className="border border-outline-variant/30 bg-surface-container-low p-space-lg shadow-panel">
           <div className="mb-space-md flex items-center justify-between border-b border-outline-variant/30 pb-space-sm">
             <span className="font-mono text-label-mono-sm font-bold uppercase tracking-widest text-primary-fixed">
-              // TELEMETRIC IMPACT STATS
+              {"// TELEMETRIC IMPACT STATS"}
             </span>
             <span className="font-mono text-label-mono-sm text-outline-variant">INDEX: 0x992</span>
           </div>

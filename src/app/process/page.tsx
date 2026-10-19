@@ -85,7 +85,7 @@ export default function ProcessPage() {
               SYS_FILE // PROCESS
             </Chip>
             <span className="font-mono text-label-mono-md uppercase tracking-wider text-outline">
-              // SPRINT PROTOCOL_REV_7
+              {"// SPRINT PROTOCOL_REV_7"}
             </span>
           </div>
           <h1 className="font-display text-[48px] uppercase leading-[0.95] tracking-tight text-primary sm:text-[72px] lg:text-[104px]">
@@ -188,7 +188,7 @@ export default function ProcessPage() {
         <div className="flex flex-wrap items-center justify-between gap-space-lg border border-outline-variant/30 bg-surface-container-low p-space-xl shadow-cyan">
           <div>
             <span className="font-mono text-label-mono-sm font-bold uppercase tracking-widest text-tertiary-fixed-dim">
-              // NEXT_COHORT_OPEN
+              {"// NEXT_COHORT_OPEN"}
             </span>
             <h2 className="mt-space-sm font-display text-headline-lg uppercase tracking-tight text-primary">
               SECURE A BUILD SLOT.

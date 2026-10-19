@@ -184,7 +184,7 @@ export default function BootGateway() {
         <div className="pointer-events-none relative z-20 max-w-xs space-y-space-md">
           <div className="pointer-events-auto border border-outline-variant/50 bg-surface-container-lowest/90 p-space-md shadow-acid-sm backdrop-blur-md">
             <span className="mb-1 block font-mono text-label-mono-sm uppercase tracking-widest text-tertiary-fixed-dim">
-              // SYS_SPEC 001 :: TACTILE CORE
+              {"// SYS_SPEC 001 :: TACTILE CORE"}
             </span>
             <h1 className="font-display text-headline-sm uppercase tracking-tight text-primary">
               MECHANICAL SWITCH GATEWAY
