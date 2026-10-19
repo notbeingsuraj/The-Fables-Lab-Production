@@ -35,7 +35,7 @@
 
   body {
     /* Clear the fixed telemetry feed bar pinned to the bottom edge. */
-    padding-bottom: 2.75rem;
+    padding-bottom: 3rem;
     color: var(--foreground);
     background: var(--background);
     font-family: var(--font-chivo), system-ui, -apple-system, sans-serif;

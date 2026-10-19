@@ -16,7 +16,7 @@ const SUGGESTIONS = [
 /** 404 — terminal-style signal loss. */
 export default function NotFound() {
   return (
-    <div className="flex min-h-[80vh] flex-col items-center justify-center px-space-md py-space-2xl text-center">
+    <div className="flex min-h-[80vh] flex-col items-center justify-center px-space-md pb-space-2xl pt-28 text-center">
       <div className="w-full max-w-3xl border border-outline-variant/40 bg-surface-container-low p-space-xl text-left shadow-magenta corner-ticks text-secondary-container">
         <div className="mb-space-lg flex flex-wrap items-center justify-between gap-space-sm border-b border-outline-variant/40 pb-space-sm font-mono text-label-mono-sm font-bold uppercase tracking-widest">
           <span className="text-secondary">&gt; KERNEL_ROUTE :: EXCEPTION</span>

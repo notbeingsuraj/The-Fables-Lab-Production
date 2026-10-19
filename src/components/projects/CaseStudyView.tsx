@@ -288,7 +288,11 @@ export default function CaseStudyView({ project }: { project: CaseStudyData }) {
 
       {/* Metrics */}
       {project.metrics.length > 0 && (
-        <div className="grid grid-cols-1 divide-y divide-outline-variant/40 border-b border-outline-variant/40 md:grid-cols-3 md:divide-x md:divide-y-0">
+        <div
+          className={`grid grid-cols-1 divide-y divide-outline-variant/40 border-b border-outline-variant/40 md:divide-x md:divide-y-0 ${
+            project.metrics.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"
+          }`}
+        >
           {project.metrics.map((metric, i) => (
             <div key={i} className="bg-surface-container-low p-space-xl text-center transition-colors md:text-left">
               <p className="mb-space-xs font-display text-[56px] leading-none tracking-tight text-primary lg:text-[72px]">
