@@ -1,9 +1,21 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { useSynth } from "@/components/providers/SynthProvider";
+
+/** Project accent tones mapped from the DB `color` enum to design tokens. */
+export const PROJECT_TONES: Record<
+  string,
+  { text: string; border: string; shadow: string; chip: string }
+> = {
+  "neon-cyan": { text: "text-tertiary-fixed-dim", border: "hover:border-tertiary-fixed-dim", shadow: "hover:shadow-cyan", chip: "bg-tertiary-fixed-dim" },
+  "cyber-yellow": { text: "text-primary-fixed", border: "hover:border-primary-fixed", shadow: "hover:shadow-acid", chip: "bg-primary-fixed" },
+  "hot-pink": { text: "text-secondary-container", border: "hover:border-secondary-container", shadow: "hover:shadow-magenta", chip: "bg-secondary-container" },
+  "neon-green": { text: "text-primary-fixed", border: "hover:border-primary-fixed", shadow: "hover:shadow-acid", chip: "bg-primary-fixed" },
+  "electric-blue": { text: "text-tertiary-fixed", border: "hover:border-tertiary-fixed", shadow: "hover:shadow-cyan", chip: "bg-tertiary-fixed" },
+  "neon-purple": { text: "text-ultraviolet", border: "hover:border-ultraviolet", shadow: "hover:shadow-[4px_4px_0px_0px_#8b5cff]", chip: "bg-ultraviolet" },
+  cobalt: { text: "text-tertiary-fixed-dim", border: "hover:border-tertiary-fixed-dim", shadow: "hover:shadow-cyan", chip: "bg-tertiary-fixed-dim" },
+};
 
 interface ProjectCardProps {
   id: string;
@@ -11,9 +23,10 @@ interface ProjectCardProps {
   description: string;
   image: string;
   tags: string[];
-  color: "neon-cyan" | "cyber-yellow" | "hot-pink" | "neon-green" | "electric-blue" | "neon-purple";
+  color: string;
 }
 
+/** Archive card — faux-hardware window with hard offset displacement. */
 export default function ProjectCard({
   id,
   name,
@@ -22,83 +35,64 @@ export default function ProjectCard({
   tags,
   color,
 }: ProjectCardProps) {
-  const textHoverMap = {
-    "neon-cyan": "group-hover:text-neon-cyan",
-    "cyber-yellow": "group-hover:text-cyber-yellow",
-    "hot-pink": "group-hover:text-hot-pink",
-    "neon-green": "group-hover:text-neon-green",
-    "electric-blue": "group-hover:text-electric-blue",
-    "neon-purple": "group-hover:text-neon-purple",
-  };
-
-  const glowMap = {
-    "neon-cyan": "hover:shadow-[0_0_40px_rgba(0,229,255,0.25)] border-neon-cyan/40",
-    "cyber-yellow": "hover:shadow-[0_0_40px_rgba(255,230,0,0.25)] border-cyber-yellow/40",
-    "hot-pink": "hover:shadow-[0_0_40px_rgba(255,0,127,0.25)] border-hot-pink/40",
-    "neon-green": "hover:shadow-[0_0_40px_rgba(57,255,20,0.25)] border-neon-green/40",
-    "electric-blue": "hover:shadow-[0_0_40px_rgba(0,68,255,0.25)] border-electric-blue/40",
-    "neon-purple": "hover:shadow-[0_0_40px_rgba(176,38,255,0.25)] border-neon-purple/40",
-  };
-
-  const bgMap = {
-    "neon-cyan": "from-neon-cyan",
-    "cyber-yellow": "from-cyber-yellow",
-    "hot-pink": "from-hot-pink",
-    "neon-green": "from-neon-green",
-    "electric-blue": "from-electric-blue",
-    "neon-purple": "from-neon-purple",
-  };
+  const tone = PROJECT_TONES[color] ?? PROJECT_TONES["neon-cyan"];
+  const { play } = useSynth();
 
   return (
-    <Link href={`/projects/${id}`} className="block h-full">
-      <motion.div
-        whileHover={{ scale: 1.02, y: -8 }}
-        whileTap={{ scale: 0.98 }}
-        className={`group relative h-full bg-charcoal/50 backdrop-blur-md border border-gridline p-5 transition-all duration-500 overflow-hidden flex flex-col ${glowMap[color]}`}
+    <Link href={`/projects/${id}`} className="block h-full" onClick={() => play(540, 0.05)}>
+      <div
+        className={`group relative flex h-full flex-col border border-outline-variant/40 bg-surface-container-low transition-all duration-300 ${tone.border} ${tone.shadow}`}
       >
-        {/* Top Tag Badge */}
-        <div className="absolute top-8 left-8 z-10 bg-black/80 backdrop-blur-md px-3 py-1 border border-gridline">
-          <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-off-white">
-            Case Study
+        {/* Header rail */}
+        <div className="flex items-center justify-between border-b border-outline-variant/40 px-space-sm py-2">
+          <span className="flex items-center gap-2 font-mono text-label-mono-sm uppercase tracking-widest text-outline">
+            <span className={`inline-block h-1.5 w-1.5 ${tone.chip}`} />
+            REF // {id.toUpperCase().slice(0, 18)}
+          </span>
+          <span className="font-mono text-label-mono-sm uppercase tracking-wider text-primary-fixed opacity-0 transition-opacity group-hover:opacity-100">
+            OPEN ↗
           </span>
         </div>
 
-        {/* Arrow Top Right */}
-        <div className={`absolute top-8 right-8 z-10 w-10 h-10 bg-black/80 backdrop-blur-md border border-gridline flex items-center justify-center text-off-white transition-all duration-300 group-hover:bg-off-white group-hover:-translate-y-1 group-hover:translate-x-1 ${textHoverMap[color]}`}>
-          <ArrowUpRight size={18} className="text-off-white group-hover:text-black transition-colors" />
-        </div>
-
-        {/* Image Container */}
-        <div className="relative h-64 w-full overflow-hidden mb-6 bg-navy border border-gridline">
-          {/* Fallback pattern */}
-          <div className={`absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${bgMap[color]} to-transparent`} />
-          <Image
-            src={image || "/placeholder-project.jpg"} // Replace with proper placeholder handling
-            alt={name}
-            fill
-            className="object-cover transition-transform duration-1000 ease-out mix-blend-luminosity group-hover:scale-105 group-hover:mix-blend-normal"
-          />
+        {/* Visual */}
+        <div className="relative h-48 w-full overflow-hidden border-b border-outline-variant/40 bg-surface-container-lowest">
+          {image ? (
+            // eslint-disable-next-line @next/next/no-img-element -- remote DB assets, host-agnostic
+            <img
+              src={image}
+              alt={name}
+              loading="lazy"
+              className="h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
+            />
+          ) : (
+            <div
+              aria-hidden
+              className="h-full w-full bg-[repeating-linear-gradient(45deg,#1a1b20_0_10px,#12141a_10px_20px)]"
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent" />
         </div>
 
         {/* Content */}
-        <div className="px-2 flex flex-col flex-grow">
-          <h3 className={`font-grotesk font-light italic text-3xl mb-2 text-off-white transition-colors duration-300 ${textHoverMap[color]}`}>
+        <div className="flex flex-1 flex-col p-space-md">
+          <h3 className={`font-display text-headline-sm uppercase tracking-wide text-primary transition-colors ${tone.text}`}>
             {name}
           </h3>
-          <p className="text-off-white/60 font-light text-sm mb-6 flex-grow leading-relaxed">
-            {description}
+          <p className="mt-space-sm flex-1 text-body-sm leading-relaxed text-on-surface-variant">
+            {description.length > 150 ? `${description.slice(0, 147)}…` : description}
           </p>
-
-          {/* Tags Row */}
-          <div className="flex flex-wrap gap-2 pt-4 border-t border-gridline">
-            {tags.map(tag => (
-              <span key={tag} className="px-3 py-1 bg-charcoal border border-gridline font-mono text-[10px] uppercase tracking-widest text-off-white/70">
+          <div className="mt-space-md flex flex-wrap gap-space-xs border-t border-outline-variant/40 pt-space-sm">
+            {tags.slice(0, 4).map((tag) => (
+              <span
+                key={tag}
+                className="border border-outline-variant/40 bg-surface-container px-2 py-0.5 font-mono text-label-mono-sm uppercase tracking-wider text-on-surface-variant"
+              >
                 {tag}
               </span>
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
     </Link>
   );
 }

@@ -11,6 +11,8 @@ import {
 import { getClientIp } from "@/lib/request";
 
 export const dynamic = "force-dynamic";
+/** Must stay on the Node runtime: the MongoDB driver and node:crypto are not Edge-compatible. */
+export const runtime = "nodejs";
 
 const RATE_LIMIT = 5; // submissions per IP per hour
 const MAX_BODY_BYTES = 64 * 1024;
@@ -84,10 +86,20 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true, id }, { status: 201 });
   } catch (error) {
     console.error("[contact] submission failed:", error);
-    const message =
-      error instanceof Error && error.message
-        ? "Could not record your inquiry right now. Please try again."
-        : "Internal server error";
-    return NextResponse.json({ error: message }, { status: 500 });
+
+    const raw = error instanceof Error ? error.message : String(error);
+
+    // Surface the actual cause in development so misconfiguration is obvious.
+    if (process.env.NODE_ENV !== "production") {
+      return NextResponse.json(
+        { error: `Could not record your inquiry: ${raw}` },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(
+      { error: "Could not record your inquiry right now. Please try again." },
+      { status: 500 }
+    );
   }
 }

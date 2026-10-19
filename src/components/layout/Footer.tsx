@@ -1,112 +1,91 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Marquee from "@/components/ui/Marquee";
+import { useSynth } from "@/components/providers/SynthProvider";
 
-const NAV = {
-  Products: [
-    { label: "Fables Flow", href: "#distributor-os" },
-    { label: "Initiatives", href: "#initiatives" },
-  ],
-  Company: [
-    { label: "Principles", href: "#principles" },
-    { label: "Why We Exist", href: "#why-we-exist" },
-    { label: "Contact", href: "/contact" },
-  ],
-};
+const FEED_ITEMS = [
+  { label: "Strategy", tone: "text-tertiary-fixed-dim", href: "/services" },
+  { label: "Interactive 3D", tone: "text-primary", href: "/services" },
+  { label: "AI-Powered Experiences", tone: "text-secondary-fixed-dim", href: "/services" },
+  { label: "Rapid MVP Engineering", tone: "text-primary-fixed", href: "/services" },
+  { label: "WebGL Shaders", tone: "text-tertiary-fixed", href: "/services" },
+  { label: "Kinetic Hardware", tone: "text-secondary", href: "/process" },
+  { label: "NYC After Hours", tone: "text-on-surface-variant", href: "/about" },
+];
 
+function useEstClock() {
+  const [time, setTime] = useState("02:00:00");
+  useEffect(() => {
+    const tick = () => {
+      try {
+        setTime(
+          new Date().toLocaleTimeString("en-US", {
+            timeZone: "America/New_York",
+            hour12: true,
+          })
+        );
+      } catch {
+        setTime(new Date().toLocaleTimeString());
+      }
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+}
+
+/**
+ * Fixed bottom-edge telemetry feed bar — live NYC clock, looping capability
+ * ticker, and the global synth (SFX) toggle.
+ */
 export default function Footer() {
+  const clock = useEstClock();
+  const { play, toggle, enabled } = useSynth();
+
   return (
-    <footer className="w-full bg-void border-t border-border/30 relative overflow-hidden">
-      {/* Subtle grid texture */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
-
-        {/* Main footer body */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 py-20 border-b border-border/25">
-
-          {/* Brand block */}
-          <div className="md:col-span-6 lg:col-span-5 flex flex-col gap-6">
-            <div>
-              <Link href="/" className="inline-block mb-4">
-                <span
-                  className="font-display font-medium text-text-primary tracking-tight"
-                  style={{ fontSize: "1.0625rem", letterSpacing: "-0.015em" }}
+    <footer className="fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest/95 backdrop-blur-md">
+      <div className="w-full h-0.5 bg-outline-variant/30" />
+      <div className="h-11 w-full px-space-md flex items-center justify-between gap-space-md overflow-hidden">
+        <div className="flex items-center gap-space-sm flex-1 overflow-hidden">
+          <span className="font-mono text-label-mono-sm text-secondary uppercase font-bold shrink-0">
+            FEED &gt;&gt;
+          </span>
+          <Marquee>
+            {FEED_ITEMS.map((item, i) => (
+              <span key={`${item.label}-${i}`}>
+                <Link
+                  href={item.href}
+                  className={`${item.tone} uppercase tracking-wider hover:text-primary-fixed transition-colors`}
                 >
-                  The Fables Lab
-                </span>
-              </Link>
-              <p className="text-text-muted text-[13.5px] leading-relaxed max-w-xs">
-                Software designed for operational clarity.
-              </p>
-              <p className="text-text-dim text-[12px] leading-relaxed max-w-xs mt-1.5">
-                Building operational systems for modern businesses.
-              </p>
-            </div>
-
-            {/* Builder-energy status */}
-            <div className="flex flex-col gap-2 pt-2">
-              <div className="flex items-center gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent/60 animate-pulse" />
-                <span className="text-[11px] font-mono text-text-dim tracking-wider">
-                  Currently focused on Fables Flow.
-                </span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-border" />
-                <span className="text-[11px] font-mono text-text-dim tracking-wider">
-                  Operational systems, in progress.
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Navigation groups */}
-          <div className="md:col-span-6 lg:col-span-7 grid grid-cols-2 gap-12 lg:pl-8">
-            {Object.entries(NAV).map(([group, links]) => (
-              <div key={group}>
-                <p className="text-[10px] font-mono font-medium text-text-dim uppercase tracking-widest mb-6">
-                  {group}
-                </p>
-                <ul className="space-y-4">
-                  {links.map((link) => (
-                    <li key={link.label}>
-                      <Link
-                        href={link.href}
-                        className="text-[13.5px] text-text-muted hover:text-text-primary transition-colors duration-300 tracking-tight"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                  {item.label}
+                </Link>
+                <span className="text-outline-variant">{" // "}</span>
+              </span>
             ))}
-          </div>
+          </Marquee>
         </div>
-
-        {/* Bottom bar */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 py-8">
-          <p className="text-[11px] font-mono text-text-dim tracking-wider">
-            © {new Date().getFullYear()} The Fables Lab — Chandigarh, India
-          </p>
-          <div className="flex items-center gap-5">
-            {[
-              { label: "X", href: "https://x.com/thefableslab" },
-              { label: "LinkedIn", href: "https://www.linkedin.com/company/109757348" },
-              { label: "GitHub", href: "https://github.com/notbeingsuraj" },
-            ].map((s) => (
-              <Link
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[11px] font-mono text-text-dim hover:text-text-muted transition-colors duration-300 uppercase tracking-widest"
-              >
-                {s.label}
-              </Link>
-            ))}
-          </div>
+        <div className="flex items-center gap-space-md shrink-0">
+          <span className="hidden sm:flex items-center gap-space-xs font-mono text-label-mono-sm text-on-surface-variant uppercase tracking-wider">
+            <span className="text-tertiary-fixed-dim">NYC_LOC:</span>
+            <span className="tabular-nums">{clock} EST</span>
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              toggle();
+              play(600, 0.05);
+            }}
+            aria-pressed={enabled}
+            className="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-1 font-mono text-label-mono-sm uppercase tracking-wider text-tertiary-fixed-dim transition-colors hover:bg-surface-bright"
+          >
+            <span
+              className={`inline-block w-1.5 h-1.5 rounded-full ${enabled ? "bg-tertiary-fixed-dim animate-ping" : "bg-outline"}`}
+            />
+            [SFX: {enabled ? "44.1kHz" : "MUTED"}]
+          </button>
         </div>
       </div>
     </footer>

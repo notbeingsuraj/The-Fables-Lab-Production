@@ -4,44 +4,189 @@
 
 /* ─── Design Tokens ──────────────────────────────────────────────────────── */
 :root {
-  --background: #0a0a0a;
-  --foreground: #f5f5f7;
-  --accent: #4a9eff;
-  --surface: #111113;
-  --border: #232326;
-  --muted: #6e6e73;
+  --background: #121317;
+  --surface-lowest: #0d0e12;
+  --surface-low: #1a1b20;
+  --surface: #1e1f24;
+  --surface-high: #292a2e;
+  --foreground: #e3e2e8;
+  --muted: #c5c9ac;
+  --outline: #8f9378;
+  --outline-variant: #454932;
+  --acid: #ccf200;
+  --acid-dim: #b3d400;
+  --magenta: #ff42ad;
+  --cyan: #00daf3;
+  --signal: #ff5a1f;
 }
 
 /* ─── Base ───────────────────────────────────────────────────────────────── */
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    /* Clear the fixed telemetry feed bar pinned to the bottom edge. */
+    padding-bottom: 2.75rem;
+    color: var(--foreground);
+    background: var(--background);
+    font-family: var(--font-chivo), system-ui, -apple-system, sans-serif;
+    overscroll-behavior: none;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+
+  ::selection {
+    background: rgba(204, 242, 0, 0.22);
+    color: #f5f4ef;
+  }
+
+  /* Brutalist focus ring — hard acid outline, no soft glow. */
+  :focus-visible {
+    outline: 2px solid var(--acid);
+    outline-offset: 2px;
+  }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+/* ─── Scrollbar — industrial rail ────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
 }
-
-/* ─── Selection ──────────────────────────────────────────────────────────── */
-::selection {
-  background: rgba(74, 158, 255, 0.15);
-  color: #f5f5f7;
+::-webkit-scrollbar-track {
+  background: #0d0e12;
 }
-
-/* ─── Scrollbar — minimal ────────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #232326; border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: #3a3a3e; }
+::-webkit-scrollbar-thumb {
+  background: #343439;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ccf200;
+}
 
 /* ─── Utilities ──────────────────────────────────────────────────────────── */
 @layer utilities {
-  .text-balance { text-wrap: balance; }
-  .text-pretty { text-wrap: pretty; }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* CRT / phosphor raster — 2px scanline grid at low opacity. */
+  .scanline-overlay {
+    background-image: linear-gradient(rgba(18, 19, 23, 0) 50%, rgba(0, 0, 0, 0.35) 50%),
+      linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    background-size: 100% 3px, 6px 100%;
+    pointer-events: none;
+  }
+
+  /* RGB-split aberration for hero words. */
+  .chromatic-glitch {
+    text-shadow: 2px 0 0 #ff42ad, -2px 0 0 #00daf3;
+  }
+
+  /* 45° chamfered corner cuts for hero blocks and primary buttons. */
+  .clip-chamfer {
+    clip-path: polygon(
+      0 0,
+      calc(100% - 12px) 0,
+      100% 12px,
+      100% 100%,
+      12px 100%,
+      0 calc(100% - 12px)
+    );
+  }
+  .clip-chamfer-sm {
+    clip-path: polygon(
+      0 0,
+      calc(100% - 8px) 0,
+      100% 8px,
+      100% 100%,
+      8px 100%,
+      0 calc(100% - 8px)
+    );
+  }
+
+  /* Corner registration ticks — L-shaped marks at container extremities. */
+  .corner-ticks::before,
+  .corner-ticks::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    pointer-events: none;
+  }
+  .corner-ticks::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid currentColor;
+    border-left: 2px solid currentColor;
+  }
+  .corner-ticks::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+  }
+
+  /* Legacy glow utilities — translated to hard displacement per design rules. */
+  .glow-cyan {
+    box-shadow: 3px 3px 0 0 #00daf3;
+  }
+  .glow-yellow {
+    box-shadow: 3px 3px 0 0 #d7ff00;
+  }
+  .glow-pink {
+    box-shadow: 3px 3px 0 0 #ff42ad;
+  }
+
+  /* Legacy outlined display text. */
+  .text-stroke {
+    color: transparent;
+    -webkit-text-stroke: 1px #e3e2e8;
+  }
+  .text-stroke-acid {
+    color: transparent;
+    -webkit-text-stroke: 1px #ccf200;
+  }
+
+  .hide-scrollbar {
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Blinking terminal cursor block. */
+  .cursor-block::after {
+    content: "_";
+    animation: blink 1s steps(1) infinite;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }

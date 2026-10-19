@@ -1,196 +1,173 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
+import type { Metadata } from "next";
+import Link from "next/link";
+import Chip from "@/components/ui/Chip";
+import DispatchForm from "@/components/contact/DispatchForm";
 
-import { useState } from "react";
-import LineOverlay from "@/components/ui/LineOverlay";
-import { ArrowRight, Mail, MapPin } from "lucide-react";
-import { VectorGrid, GeometricShapes, HandDrawnLines } from "@/components/ui/PhysicsIllustrations";
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Open a direct channel to The Fables Lab. Transmit your project vector and get a response within 24 operational hours — NYC night-shift studio, three commission slots per quarter.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact // The Fables Lab",
+    description:
+      "Have a wild idea? Transmit the dispatch. We answer within 24 operational hours.",
+    url: "https://thefableslab.com/contact",
+    type: "website",
+  },
+};
 
+const CHANNELS = [
+  { label: "COMMS", value: "HELLO@THEFABLESLAB.COM", href: "mailto:hello@thefableslab.com", tone: "text-primary-fixed" },
+  { label: "BASE", value: "NEW YORK CITY, NY", href: null, tone: "text-primary" },
+  { label: "HOURS", value: "24/7 DEDICATED SPRINT LAB", href: null, tone: "text-tertiary-fixed-dim" },
+  { label: "SLOTS", value: "3 COMMISSIONS / QUARTER", href: null, tone: "text-secondary" },
+] as const;
+
+const FAQ = [
+  ["HOW FAST DO YOU MOVE?", "Spikes ship in 1–2 weeks. Full product sprints run 2–6 weeks. Discovery starts within days of a signed scope."],
+  ["WHAT DOES A PROJECT COST?", "Every commission is fixed-bid per sprint after discovery — no open-ended hourly meters, no surprise change orders."],
+  ["DO YOU WORK REMOTE?", "Yes — globally. The lab operates on NYC time with async-heavy communication and weekly playable builds."],
+  ["CAN YOU TAKE OVER AN EXISTING CODEBASE?", "Often. We start with a technical audit sprint that maps risk, then stabilize before extending."],
+] as const;
+
+/** CONTACT — the terminal dispatch channel. */
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    project_name: "",
-    architecture_details: "",
-  });
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("submitting");
-    setErrorMessage("");
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to submit inquiry");
-      }
-
-      setStatus("success");
-      setFormData({
-        name: "",
-        email: "",
-        project_name: "",
-        architecture_details: "",
-      });
-    } catch (error: any) {
-      console.error("Submit error:", error);
-      setStatus("error");
-      setErrorMessage(error.message || "Something went wrong.");
-    }
-  };
-
   return (
-    <div className="relative w-full bg-transparent min-h-screen pt-32 pb-24">
-      <LineOverlay />
-      <VectorGrid className="opacity-10" />
-      <GeometricShapes className="opacity-60 mix-blend-screen z-0" />
-      <HandDrawnLines className="opacity-50 z-0" />
+    <div className="w-full pt-14">
+      {/* Header */}
+      <section className="relative w-full overflow-hidden border-b border-outline-variant/30 bg-surface-container-lowest px-space-md py-space-2xl lg:px-margin-desktop">
+        <div className="pointer-events-none absolute -right-10 top-0 select-none font-display text-[220px] leading-none text-surface-container-highest/25 lg:text-[320px]">
+          05
+        </div>
+        <div className="relative z-10 max-w-5xl">
+          <div className="mb-space-md flex flex-wrap items-center gap-space-sm">
+            <Chip tone="acid" dot>
+              SYS_FILE // DISPATCH
+            </Chip>
+            <span className="font-mono text-label-mono-md uppercase tracking-wider text-outline">
+              // ENCRYPTED DIRECT CHANNEL
+            </span>
+          </div>
+          <h1 className="font-display text-[48px] uppercase leading-[0.95] tracking-tight text-primary sm:text-[72px] lg:text-[104px]">
+            LAUNCH YOUR{" "}
+            <span className="chromatic-glitch inline-block bg-surface-container-low px-space-sm text-primary-fixed shadow-magenta">
+              FABLE.
+            </span>
+          </h1>
+          <p className="mt-space-lg max-w-2xl text-body-lg leading-relaxed text-on-surface-variant">
+            Have an ambitious digital product, a speculative 3D project, or an
+            unhinged narrative experiment? Fill the console below — we answer
+            incoming dispatches within 24 operational hours.
+          </p>
+        </div>
+      </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full mb-16 pt-12 text-center border-x border-gridline bg-charcoal/50 pb-16">
-            <span className="text-neon-cyan font-mono font-bold text-xs tracking-widest uppercase mb-4 block">{"// Initialize Sequence"}</span>
-            <h1 className="font-grotesk font-black text-6xl md:text-8xl tracking-tighter text-off-white mb-8">
-              Want to Contribute ? <br />
-              <span className="font-grotesk italic font-light text-transparent text-stroke">
-                
+      {/* Form + comms rail */}
+      <section className="w-full bg-background px-space-md py-space-2xl lg:px-margin-desktop">
+        <div className="grid grid-cols-1 items-start gap-space-xl lg:grid-cols-12">
+          <div className="space-y-space-md lg:col-span-4 lg:order-2">
+            {/* Comms board */}
+            <div className="border border-outline-variant/30 bg-surface-container-low p-space-lg shadow-magenta">
+              <div className="mb-space-md flex items-center justify-between border-b border-outline-variant/30 pb-space-sm">
+                <span className="font-mono text-label-mono-sm font-bold uppercase tracking-widest text-secondary">
+                  [COMMS BOARD]
+                </span>
+                <span className="flex items-center gap-1.5 font-mono text-label-mono-sm text-tertiary-fixed-dim">
+                  <span className="h-1.5 w-1.5 animate-ping rounded-full bg-tertiary-fixed-dim" />
+                  ONLINE
+                </span>
+              </div>
+              <div className="space-y-space-md">
+                {CHANNELS.map((channel) => {
+                  const inner = (
+                    <div className="flex items-center gap-space-sm">
+                      <span className="w-16 shrink-0 font-mono text-label-mono-sm uppercase text-outline">
+                        {channel.label}
+                      </span>
+                      <span className={`font-mono text-label-mono-sm ${channel.tone}`}>
+                        {channel.value}
+                      </span>
+                    </div>
+                  );
+                  return channel.href ? (
+                    <a
+                      key={channel.label}
+                      href={channel.href}
+                      className="block transition-opacity hover:opacity-75"
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    <div key={channel.label}>{inner}</div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Availability alert */}
+            <div className="flex items-center gap-space-md border border-outline-variant/30 bg-surface-container p-space-md">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-primary-container font-display text-headline-sm text-on-primary-container shadow-[2px_2px_0px_0px_#000]">
+                !
+              </div>
+              <div>
+                <span className="block font-mono text-label-mono-sm font-bold uppercase text-primary">
+                  ACCEPTING Q2 / Q3 CLIENT COMMISSIONS
+                </span>
+                <span className="font-mono text-label-mono-sm uppercase text-outline">
+                  3 SLOTS REMAINING FOR IMMERSIVE R&amp;D
+                </span>
+              </div>
+            </div>
+
+            {/* FAQ feed */}
+            <div className="border border-outline-variant/30 bg-surface-container-low p-space-lg shadow-cyan-sm">
+              <span className="mb-space-sm block border-b border-outline-variant/30 pb-space-sm font-mono text-label-mono-sm font-bold uppercase tracking-widest text-tertiary-fixed-dim">
+                &gt; FREQUENT_SIGNALS
               </span>
-            </h1>
-            <p className="text-xl text-off-white/70 max-w-2xl mx-auto font-grotesk font-light leading-relaxed">
-              We invite you to contribute to our current and upcoming initiatives. It will be fun to work with you.
-            </p>
-      </div>
-
-      {/* Main Contact Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 border border-gridline bg-charcoal p-8 md:p-16">
-            
-            {/* Contact Info */}
-            <div className="lg:col-span-5 space-y-12 pr-8 border-b md:border-b-0 md:border-r border-gridline pb-12 md:pb-0">
-               <div>
-                  <h3 className="font-grotesk italic font-light text-3xl md:text-5xl text-off-white mb-6">THE LAB</h3>
-                  <p className="text-off-white/60 font-grotesk font-light text-lg leading-relaxed mb-8">
-                     We operate out of Chandigarh but we have felt our presence everywhere. We selective about the projects we take on. If you&apos;re a founder with a clear vision, we want to hear from you.
-                  </p>
-               </div>
-               
-               <div className="space-y-6">
-                  <div className="flex items-center gap-4 group">
-                     <div className="w-12 h-12 border border-gridline bg-navy flex items-center justify-center group-hover:bg-electric-blue group-hover:border-electric-blue transition-colors">
-                        <Mail className="text-off-white group-hover:text-white" size={20} />
-                     </div>
-                     <div>
-                        <p className="text-off-white/40 font-mono text-xs font-bold uppercase tracking-widest mb-1">Founder-Email</p>
-                        <p className="text-off-white font-mono text-sm tracking-widest uppercase">imysuraj1218@gmail.com</p>
-                     </div>
+              <div className="space-y-space-md">
+                {FAQ.map(([q, a]) => (
+                  <div key={q}>
+                    <p className="font-mono text-label-mono-sm font-bold uppercase text-primary">
+                      {q}
+                    </p>
+                    <p className="mt-1 text-body-sm leading-relaxed text-on-surface-variant">
+                      {a}
+                    </p>
                   </div>
-                  <div className="flex items-center gap-4 group">
-                     <div className="w-12 h-12 border border-gridline bg-navy flex items-center justify-center group-hover:bg-hot-pink group-hover:border-hot-pink transition-colors">
-                        <MapPin className="text-off-white group-hover:text-white" size={20} />
-                     </div>
-                     <div>
-                        <p className="text-off-white/40 font-mono text-xs font-bold uppercase tracking-widest mb-1">Base.Coords</p>
-                        <p className="text-off-white font-mono text-sm tracking-widest uppercase">Mohali, Punjab</p>
-                     </div>
-                  </div>
-               </div>
+                ))}
+              </div>
             </div>
+          </div>
 
-            {/* High-Contrast Brutalist Form */}
-            <div className="lg:col-span-7">
-               <form onSubmit={handleSubmit} className="bg-navy/50 border border-gridline p-8 md:p-12 backdrop-blur-md relative overflow-hidden">
-                  <VectorGrid className="opacity-20 text-electric-blue" />
-                  <div className="relative z-10">
-                      {status === "success" && (
-                        <div className="mb-8 p-4 bg-neon-green/10 border border-neon-green text-neon-green font-mono text-sm tracking-widest text-center">
-                          Data Transmitted Successfully. We will be in touch.
-                        </div>
-                      )}
-                      {status === "error" && (
-                        <div className="mb-8 p-4 bg-hot-pink/10 border border-hot-pink text-hot-pink font-mono text-sm tracking-widest text-center">
-                          Error: {errorMessage}
-                        </div>
-                      )}
+          <div className="lg:col-span-8 lg:order-1">
+            <DispatchForm />
+          </div>
+        </div>
+      </section>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                         <div className="space-y-2">
-                            <label className="text-off-white/50 font-mono text-xs font-bold uppercase tracking-widest px-2 block">Name</label>
-                            <input 
-                              type="text" 
-                              name="name"
-                              value={formData.name}
-                              onChange={handleChange}
-                              required
-                              placeholder="John Doe" 
-                              className="w-full bg-charcoal border border-gridline px-6 py-4 font-mono text-sm tracking-widest text-off-white focus:outline-none focus:border-neon-cyan transition-colors rounded-none placeholder:text-gridline" 
-                            />
-                         </div>
-                         <div className="space-y-2">
-                            <label className="text-off-white/50 font-mono text-xs font-bold uppercase tracking-widest px-2 block">Email</label>
-                            <input 
-                              type="email" 
-                              name="email"
-                              value={formData.email}
-                              onChange={handleChange}
-                              required
-                              placeholder="john@startup.com" 
-                              className="w-full bg-charcoal border border-gridline px-6 py-4 font-mono text-sm tracking-widest text-off-white focus:outline-none focus:border-neon-cyan transition-colors rounded-none placeholder:text-gridline" 
-                            />
-                         </div>
-                      </div>
-
-                      <div className="space-y-2 mb-6">
-                         <label className="text-off-white/50 font-mono text-xs font-bold uppercase tracking-widest px-2 block">System / Project Name</label>
-                         <input 
-                           type="text" 
-                           name="project_name"
-                           value={formData.project_name}
-                           onChange={handleChange}
-                           required
-                           placeholder="Acme Inc." 
-                           className="w-full bg-charcoal border border-gridline px-6 py-4 font-mono text-sm tracking-widest text-off-white focus:outline-none focus:border-neon-cyan transition-colors rounded-none placeholder:text-gridline" 
-                         />
-                      </div>
-
-                      <div className="space-y-2 mb-10">
-                         <label className="text-off-white/50 font-mono text-xs font-bold uppercase tracking-widest px-2 block">Architecture Details</label>
-                         <textarea 
-                           name="architecture_details"
-                           value={formData.architecture_details}
-                           onChange={handleChange}
-                           required
-                           rows={5} 
-                           placeholder="Tell us about the vision, timeline, and current state..." 
-                           className="w-full bg-charcoal border border-gridline px-6 py-4 font-mono text-sm tracking-widest text-off-white focus:outline-none focus:border-neon-cyan transition-colors resize-none rounded-none placeholder:text-gridline" 
-                         />
-                      </div>
-
-                      <button 
-                        type="submit" 
-                        disabled={status === "submitting"}
-                        className="w-full py-5 bg-cyber-yellow text-charcoal font-mono font-bold uppercase tracking-widest text-sm hover:glow-yellow transition-all flex items-center justify-center gap-2 border border-gridline disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                         {status === "submitting" ? "Transmitting..." : "Transmit Data"} <ArrowRight size={18} />
-                      </button>
-                  </div>
-               </form>
-            </div>
-
-         </div>
-      </div>
+      {/* Closing band */}
+      <section className="w-full border-t border-outline-variant/30 bg-surface-container-lowest px-space-md py-space-xl lg:px-margin-desktop">
+        <div className="flex flex-wrap items-center justify-between gap-space-md">
+          <span className="font-mono text-label-mono-sm uppercase tracking-wider text-outline">
+            &gt;&gt; PREFER TO READ FIRST?
+          </span>
+          <div className="flex flex-wrap gap-space-sm">
+            <Link
+              href="/projects"
+              className="border border-outline-variant/50 px-space-lg py-space-sm font-mono text-label-mono-md uppercase tracking-wider text-on-surface transition-colors hover:border-tertiary-fixed-dim hover:text-tertiary-fixed-dim"
+            >
+              [ WORK ARCHIVE ]
+            </Link>
+            <Link
+              href="/process"
+              className="border border-outline-variant/50 px-space-lg py-space-sm font-mono text-label-mono-md uppercase tracking-wider text-on-surface transition-colors hover:border-primary-fixed hover:text-primary-fixed"
+            >
+              [ SPRINT PROTOCOL ]
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

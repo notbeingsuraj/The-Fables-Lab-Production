@@ -1,136 +1,215 @@
-"use client";
+import type { Metadata } from "next";
+import Link from "next/link";
+import SectionHeading from "@/components/ui/SectionHeading";
+import Chip from "@/components/ui/Chip";
 
-import LineOverlay from "@/components/ui/LineOverlay";
-import ColorBlock from "@/components/layout/ColorBlock";
-import { TopographicPattern, VectorGrid, MagneticField, GeometricShapes, HandDrawnLines } from "@/components/ui/PhysicsIllustrations";
-import { Search, PenTool, Braces, Rocket } from "lucide-react";
+export const metadata: Metadata = {
+  title: "Process",
+  description:
+    "The four-phase Fables sprint protocol: discovery & architecture, design system, rapid build, launch & iterate. Senior-only pods, ruthless scope, shipped outcomes.",
+  alternates: { canonical: "/process" },
+  openGraph: {
+    title: "Process // The Fables Lab",
+    description: "How a Fables sprint moves from raw concept to production in weeks, not quarters.",
+    url: "https://thefableslab.com/process",
+    type: "website",
+  },
+};
 
 const STEPS = [
   {
     num: "01",
-    title: "Discovery & Arch",
-    icon: Search,
-    desc: "We don't just write code; we interrogate the problem. In week one, we define the product scope, select the optimal database schema, and finalize the exact user journeys required for launch.",
-    deliverables: ["Technical Specification", "Database Schema", "User Flow Diagrams"],
-    color: "neon-cyan" as const,
+    title: "DISCOVERY & ARCHITECTURE",
+    est: "EST: 3–5 DAYS",
+    tone: "text-tertiary-fixed-dim",
+    marker: "bg-tertiary-fixed-dim",
+    shadow: "shadow-cyan-sm",
+    desc: "We don't just write code; we interrogate the problem. In the first week we lock product scope, choose the optimal data model, and finalize the exact user journeys required for launch — including the ones that will scare stakeholders.",
+    deliverables: ["Technical Specification", "Data Model / Schema", "User Flow Diagrams", "Risk + Scope Map"],
+    gate: "GATE: SPEC SIGNED // NOTHING BUILDABLE IS AMBIGUOUS",
   },
   {
     num: "02",
-    title: "Design System",
-    icon: PenTool,
-    desc: "A product is only as good as its interface. We build a comprehensive, modular design system in Figma, establishing the visual hierarchy, color tokens, and typographic scale before a single line of frontend code is written.",
-    deliverables: ["Figma Prototype", "Component Library", "Motion Specs"],
-    color: "neon-purple" as const,
+    title: "DESIGN SYSTEM",
+    est: "EST: 1 WEEK",
+    tone: "text-secondary",
+    marker: "bg-secondary",
+    shadow: "shadow-magenta-sm",
+    desc: "A product is only as good as its interface. We build a modular design system — tokens, geometry, motion, and telemetry voice — before a single line of frontend code is written. The brutalist language is decided here, not improvised later.",
+    deliverables: ["Figma Prototype", "Component Library", "Motion + Sound Specs", "Token Pipeline"],
+    gate: "GATE: CLICKABLE PROTOTYPE PASSES THE STRAIGHT-FACE TEST",
   },
   {
     num: "03",
-    title: "Rapid Build",
-    icon: Braces,
-    desc: "We execute the build phase with ruthless efficiency. Utilizing our proprietary boilerplate architectures alongside Next.js and Supabase, we transition from design to fully functional frontend and backend systems simultaneously.",
-    deliverables: ["Frontend App", "Backend API", "Admin Dashboard"],
-    color: "hot-pink" as const,
+    title: "RAPID BUILD",
+    est: "EST: 1–4 WEEKS",
+    tone: "text-primary-fixed",
+    marker: "bg-primary-fixed",
+    shadow: "shadow-acid-sm",
+    desc: "Execution with ruthless efficiency. Frontend and backend are built simultaneously against the design system, with weekly playable builds instead of status theater. WebGL, agents, and hardware integrate against real data from day one.",
+    deliverables: ["Frontend Application", "Backend / API Layer", "Admin Console", "Weekly Playable Builds"],
+    gate: "GATE: FEATURE-COMPLETE ON STAGING WITH REAL DATA",
   },
   {
     num: "04",
-    title: "Launch & Iterate",
-    icon: Rocket,
-    desc: "The MVP is deployed to production via Vercel. We set up analytics, monitor for critical errors, and remain on standby to iterate immediately based on initial user feedback.",
-    deliverables: ["Production Deployment", "Analytics Dashboard", "Source Code Handoff"],
-    color: "cyber-yellow" as const,
+    title: "LAUNCH & ITERATE",
+    est: "EST: 3–5 DAYS + SUPPORT",
+    tone: "text-signal",
+    marker: "bg-signal",
+    shadow: "shadow-[3px_3px_0px_0px_#ff5a1f]",
+    desc: "The product deploys to production behind edge delivery with analytics, error budgets, and performance alarms wired in. We stay on standby through the first real users and iterate immediately on what the telemetry tells us.",
+    deliverables: ["Production Deployment", "Analytics + Alerting", "Performance Audit", "Source Handoff"],
+    gate: "GATE: 60 FPS BUDGET HELD // ERROR BUDGET GREEN",
   },
-];
+] as const;
 
+const RULES = [
+  ["NO DEAD MEETINGS", "Decisions happen in writing, in the spec, where they can be argued with."],
+  ["ONE SENIOR POD", "No pyramid staffing. The people designing it are the people building it."],
+  ["PLAYABLE WEEKLY", "If you can't touch it by Friday, the week didn't count."],
+  ["SCOPE IS A WEAPON", "We cut features to protect the ones that make the product undeniable."],
+] as const;
+
+/** PROCESS — the four-phase sprint protocol. */
 export default function ProcessPage() {
   return (
-    <div className="relative w-full bg-transparent min-h-screen pt-20">
-      <LineOverlay />
-      <VectorGrid className="opacity-10" />
-      <GeometricShapes className="opacity-60 mix-blend-screen z-0" />
-      <HandDrawnLines className="opacity-50 z-0" />
-
-      <section className="relative pt-20 pb-20 border-b border-gridline bg-charcoal overflow-hidden">
-        <MagneticField className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[1200px] h-[1200px] text-hot-pink opacity-5" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full border-x border-gridline pt-12 min-h-[40vh] flex flex-col justify-center">
-            <span className="text-hot-pink font-mono font-bold text-xs tracking-widest uppercase mb-4 block">{"// The Formula"}</span>
-            <h1 className="font-grotesk italic font-light text-6xl md:text-8xl tracking-tighter text-off-white mb-8">
-              HOW WE <br />
-              <span className="font-grotesk not-italic font-black text-transparent text-stroke">
-                OPERATE.
-              </span>
-            </h1>
-            <p className="text-xl text-off-white/70 max-w-2xl font-grotesk font-light leading-relaxed">
-              We have productized startup engineering. Our 30-day MVP framework minimizes risk, eliminates redundant meetings, and maximizes speed to market.
-            </p>
+    <div className="w-full pt-14">
+      {/* Header */}
+      <section className="relative w-full overflow-hidden border-b border-outline-variant/30 bg-surface-container-lowest px-space-md py-space-2xl lg:px-margin-desktop">
+        <div className="pointer-events-none absolute -right-10 top-0 select-none font-display text-[220px] leading-none text-surface-container-highest/25 lg:text-[320px]">
+          03
+        </div>
+        <div className="relative z-10 max-w-5xl">
+          <div className="mb-space-md flex flex-wrap items-center gap-space-sm">
+            <Chip tone="magenta" dot>
+              SYS_FILE // PROCESS
+            </Chip>
+            <span className="font-mono text-label-mono-md uppercase tracking-wider text-outline">
+              // SPRINT PROTOCOL_REV_7
+            </span>
+          </div>
+          <h1 className="font-display text-[48px] uppercase leading-[0.95] tracking-tight text-primary sm:text-[72px] lg:text-[104px]">
+            FOUR PHASES.{" "}
+            <span className="chromatic-glitch inline-block bg-surface-container-low px-space-sm text-tertiary-fixed-dim shadow-magenta">
+              NO THEATER.
+            </span>
+          </h1>
+          <p className="mt-space-lg max-w-2xl text-body-lg leading-relaxed text-on-surface-variant">
+            We productized studio engineering. The sprint protocol minimizes risk,
+            eliminates redundant meetings, and maximizes speed to market — with a
+            hard gate at the end of every phase.
+          </p>
         </div>
       </section>
 
-      {/* The Timeline */}
-      <section className="max-w-7xl mx-auto relative z-10 bg-transparent">
-        
-        <div className="flex flex-col border-x border-gridline divide-y divide-gridline">
-          {STEPS.map((step) => (
-             <div key={step.num} className="grid grid-cols-1 lg:grid-cols-12 items-stretch relative group group-hover:bg-charcoal/30 transition-colors">
+      {/* Phase timeline */}
+      <section className="w-full bg-background">
+        {STEPS.map((step) => (
+          <div
+            key={step.num}
+            className="grid grid-cols-1 items-stretch border-b border-outline-variant/40 transition-colors hover:bg-surface-container-low/40 lg:grid-cols-12"
+          >
+            {/* Numeral rail */}
+            <div className="relative flex flex-col justify-center overflow-hidden border-b border-outline-variant/40 p-space-lg lg:col-span-4 lg:border-b-0 lg:border-r">
+              <span className={`font-display text-[96px] leading-none tracking-tighter lg:text-[144px] ${step.tone}`}>
+                {step.num}
+              </span>
+              <div className="relative z-10 mt-space-sm flex flex-wrap items-center gap-space-sm">
+                <span className="font-mono text-label-mono-sm uppercase tracking-widest text-on-surface">
+                  PHASE {parseInt(step.num)}
+                </span>
+                <span className="border border-outline-variant/50 px-2 py-0.5 font-mono text-label-mono-sm uppercase tracking-wider text-outline">
+                  {step.est}
+                </span>
+              </div>
+            </div>
 
-                <div className="lg:col-span-4 flex flex-col justify-center p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-gridline bg-charcoal/50 backdrop-blur-md relative overflow-hidden">
-                   <TopographicPattern className={`text-${step.color} opacity-10 absolute inset-0 mix-blend-screen scale-150 -translate-x-1/4`} />
-                   
-                   <h2 className={`font-grotesk font-black text-8xl md:text-9xl tracking-tighter text-${step.color} opacity-20 group-hover:opacity-100 transition-opacity duration-500 relative z-10`}>
-                     {step.num}
-                   </h2>
-                   <div className="mt-4 relative z-10">
-                     <p className="font-mono text-off-white uppercase tracking-widest text-xs mb-2">Phase {parseInt(step.num)}</p>
-                     <p className="text-off-white/40 font-mono text-[10px] tracking-widest uppercase border border-gridline inline-block px-2 py-1">Est: 1 Week</p>
-                   </div>
-                </div>
+            {/* Content */}
+            <div className="p-space-lg lg:col-span-8 lg:p-space-xl">
+              <div className="mb-space-md flex items-center gap-space-md border-b border-outline-variant/40 pb-space-md">
+                <span className={`h-3 w-3 shrink-0 ${step.marker}`} />
+                <h2 className="font-display text-headline-lg uppercase tracking-tight text-primary">
+                  {step.title}
+                </h2>
+              </div>
+              <p className="max-w-2xl text-body-md leading-relaxed text-on-surface-variant">
+                {step.desc}
+              </p>
 
-                <div className="lg:col-span-8 bg-black/40 p-8 md:p-16 backdrop-blur-sm transition-colors duration-500">
-                   <div className="flex items-center gap-6 mb-8 border-b border-gridline pb-8">
-                     <div className={`p-4 border border-gridline bg-charcoal shadow-[0_0_20px_rgba(255,255,255,0.02)]`}>
-                        <step.icon size={28} className={`text-${step.color}`} />
-                     </div>
-                     <h3 className="font-grotesk italic font-light text-4xl md:text-5xl text-off-white">{step.title}</h3>
-                   </div>
-                   
-                   <p className="text-off-white/70 font-grotesk font-light leading-relaxed text-lg mb-12 max-w-2xl">
-                     {step.desc}
-                   </p>
+              <div className="mt-space-lg">
+                <p className="mb-space-sm block font-mono text-label-mono-sm uppercase tracking-widest text-outline">
+                  {"// KEY DELIVERABLES"}
+                </p>
+                <ul className="grid grid-cols-1 gap-space-xs sm:grid-cols-2">
+                  {step.deliverables.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-center gap-space-xs border border-outline-variant/40 bg-surface-container-lowest p-space-sm font-mono text-label-mono-sm uppercase tracking-wide text-on-surface"
+                    >
+                      <span className={`h-1.5 w-1.5 shrink-0 ${step.marker}`} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-                   <div className="pt-6">
-                     <p className="text-off-white/40 font-mono tracking-widest uppercase text-xs mb-6 block">{"// Key Deliverables"}</p>
-                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {step.deliverables.map(item => (
-                           <li key={item} className="flex items-center gap-3 text-off-white/80 text-sm font-mono tracking-wide uppercase text-xs border border-gridline p-3 bg-charcoal/30">
-                              <div className={`w-1.5 h-1.5 bg-${step.color} shadow-[0_0_8px_currentColor]`} />
-                              {item}
-                           </li>
-                        ))}
-                     </ul>
-                   </div>
-                </div>
-             </div>
+              <p className={`mt-space-md inline-block border border-outline-variant/40 px-space-sm py-1 font-mono text-label-mono-sm uppercase tracking-wider ${step.tone} ${step.shadow}`}>
+                {step.gate}
+              </p>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* House rules */}
+      <section className="w-full bg-surface-container-lowest px-space-md py-space-2xl lg:px-margin-desktop">
+        <SectionHeading
+          eyebrow="// HOUSE_RULES"
+          title={<>HOW THE LAB OPERATES</>}
+          right={<span>LOCKED</span>}
+        />
+        <div className="grid grid-cols-1 gap-space-md sm:grid-cols-2">
+          {RULES.map(([rule, desc], i) => (
+            <div
+              key={rule}
+              className={`border border-outline-variant/40 bg-surface-container-low p-space-lg ${i === 0 ? "shadow-acid-sm" : i === 1 ? "shadow-magenta-sm" : i === 2 ? "shadow-cyan-sm" : "shadow-panel-sm"}`}
+            >
+              <h3 className="text-headline-sm uppercase tracking-wide text-primary">{rule}</h3>
+              <p className="mt-space-sm text-body-sm leading-relaxed text-on-surface-variant">
+                {desc}
+              </p>
+            </div>
           ))}
         </div>
-
       </section>
 
-      {/* Final CTA wrapped in ColorBlock */}
-      <ColorBlock color="navy" className="text-center border-t border-gridline border-b !py-0">
-        <div className="max-w-7xl mx-auto border-x border-gridline py-32 relative overflow-hidden">
-             <VectorGrid className="opacity-20 text-electric-blue" />
-             <div className="relative z-10">
-                 <h2 className="font-grotesk font-black text-6xl md:text-8xl tracking-tighter mb-8 leading-[0.9] text-off-white">
-                    READY TO <br/><span className="font-grotesk italic font-light text-electric-blue">BUILD?</span>
-                 </h2>
-                 <p className="text-off-white/70 font-grotesk font-light text-xl mb-12 max-w-xl mx-auto">
-                    Our next cohort begins soon. Secure your build slot and let&apos;s turn your concept into a tangible product.
-                 </p>
-                 <button className="px-8 py-4 bg-electric-blue text-off-white font-mono font-bold text-sm uppercase tracking-widest hover:glow-cyan transition-all duration-300">
-                    Initialize Discovery
-                 </button>
-             </div>
+      {/* CTA */}
+      <section className="w-full bg-background px-space-md py-space-2xl lg:px-margin-desktop">
+        <div className="flex flex-wrap items-center justify-between gap-space-lg border border-outline-variant/30 bg-surface-container-low p-space-xl shadow-cyan">
+          <div>
+            <span className="font-mono text-label-mono-sm font-bold uppercase tracking-widest text-tertiary-fixed-dim">
+              // NEXT_COHORT_OPEN
+            </span>
+            <h2 className="mt-space-sm font-display text-headline-lg uppercase tracking-tight text-primary">
+              SECURE A BUILD SLOT.
+            </h2>
+          </div>
+          <div className="flex flex-wrap gap-space-sm">
+            <Link
+              href="/contact"
+              className="bg-primary-container px-space-xl py-space-md text-headline-sm uppercase font-bold tracking-widest text-on-primary-container shadow-magenta-sm transition-all hover:bg-secondary-container hover:text-on-secondary"
+            >
+              [ INITIALIZE DISCOVERY ↗ ]
+            </Link>
+            <Link
+              href="/projects"
+              className="border border-outline-variant/50 px-space-lg py-space-md font-mono text-label-mono-md uppercase tracking-wider text-on-surface transition-colors hover:border-tertiary-fixed-dim hover:text-tertiary-fixed-dim"
+            >
+              [ SEE THE OUTPUT ]
+            </Link>
+          </div>
         </div>
-      </ColorBlock>
+      </section>
     </div>
   );
 }
