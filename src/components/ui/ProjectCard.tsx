@@ -62,6 +62,7 @@ export default function ProjectCard({
               src={image}
               alt={name}
               loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
             />
           ) : (

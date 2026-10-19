@@ -51,6 +51,7 @@ export default function CaseStudyView({ project }: { project: CaseStudyData }) {
               src={project.heroImage}
               alt=""
               aria-hidden
+              decoding="async"
               className="h-full w-full object-cover opacity-30 saturate-150"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/85 to-surface-container-lowest/40" />
@@ -126,6 +127,8 @@ export default function CaseStudyView({ project }: { project: CaseStudyData }) {
                 <img
                   src={project.solutionImage}
                   alt="Solution context"
+                  loading="lazy"
+                  decoding="async"
                   className="aspect-video w-full object-cover"
                 />
                 <span className={`absolute bottom-space-sm right-space-sm bg-surface-container-lowest/90 px-space-xs py-0.5 font-mono text-label-mono-sm uppercase backdrop-blur-md ${tone.text}`}>
@@ -217,6 +220,8 @@ export default function CaseStudyView({ project }: { project: CaseStudyData }) {
                   <img
                     src={project.process.dfd.image}
                     alt="Data flow diagram"
+                    loading="lazy"
+                    decoding="async"
                     className="aspect-video w-full object-cover grayscale transition-all duration-700 hover:grayscale-0"
                   />
                   <span className={`absolute right-space-sm top-space-sm bg-surface-container-lowest/90 px-space-xs py-0.5 font-mono text-label-mono-sm uppercase backdrop-blur-md ${tone.text}`}>
@@ -234,6 +239,8 @@ export default function CaseStudyView({ project }: { project: CaseStudyData }) {
                   <img
                     src={project.process.prototyping.image}
                     alt="Prototyping iterations"
+                    loading="lazy"
+                    decoding="async"
                     className="aspect-video w-full object-cover opacity-90 transition-opacity hover:opacity-100"
                   />
                   <span className={`absolute bottom-space-sm left-space-sm bg-surface-container-lowest/90 px-space-xs py-0.5 font-mono text-label-mono-sm uppercase backdrop-blur-md ${tone.text}`}>

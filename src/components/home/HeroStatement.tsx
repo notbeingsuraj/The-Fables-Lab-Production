@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Marquee from "@/components/ui/Marquee";
 import { useSynth } from "@/components/providers/SynthProvider";
@@ -15,31 +15,34 @@ const STATS = [
 const RADAR_ITEMS =
   "STRATEGY // INTERACTIVE 3D // AI-POWERED EXPERIENCES // RAPID MVP ENGINEERING // WEBGL SHADERS // SPATIAL SOUND // HARDWARE PROTOTYPING // GENERATIVE LORE // NYC AFTER HOURS";
 
-function useEstClock() {
-  const [time, setTime] = useState("02:14:59");
+// Ref-based tick — the hero is above the fold on every visit; a per-second
+// setState here would re-render the whole section (counters, radar, stats)
+// once per second for a clock the size of a fingernail.
+function useEstClockRef() {
+  const ref = useRef<HTMLSpanElement>(null);
   useEffect(() => {
     const tick = () => {
+      const el = ref.current;
+      if (!el) return;
       try {
-        setTime(
-          new Date().toLocaleTimeString("en-US", {
-            timeZone: "America/New_York",
-            hour12: false,
-          })
-        );
+        el.textContent = new Date().toLocaleTimeString("en-US", {
+          timeZone: "America/New_York",
+          hour12: false,
+        });
       } catch {
-        setTime(new Date().toLocaleTimeString());
+        el.textContent = new Date().toLocaleTimeString();
       }
     };
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
-  return time;
+  return ref;
 }
 
 /** SECTION 02 — Monumental hero statement with telemetry impact stats. */
 export default function HeroStatement() {
-  const clock = useEstClock();
+  const clockRef = useEstClockRef();
   const { play } = useSynth();
 
   return (
@@ -56,7 +59,9 @@ export default function HeroStatement() {
         </div>
         <div className="flex items-center gap-space-xs font-mono text-label-mono-sm uppercase tracking-wider text-tertiary-fixed-dim">
           <span className="text-[16px] leading-none">▸</span>
-          <span className="tabular-nums">SYS_TIME: {clock} EST</span>
+          <span className="tabular-nums">
+            SYS_TIME: <span ref={clockRef}>02:14:59</span> EST
+          </span>
           <span className="text-outline-variant">:: [NYC_CHAMBER]</span>
         </div>
       </div>

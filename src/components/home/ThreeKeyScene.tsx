@@ -35,8 +35,11 @@ export default function ThreeKeyScene() {
       powerPreference: "high-performance",
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-    renderer.shadowMap.enabled = true;
+    // Cap DPR at 1.5 — full 2x on retina doubles fragment cost for a
+    // decorative stage with no perceptible quality loss at 1.5.
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    // No light in this scene casts shadows — keep shadow maps off entirely.
+    renderer.shadowMap.enabled = false;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.35;
     container.appendChild(renderer.domElement);
@@ -91,18 +94,19 @@ export default function ThreeKeyScene() {
     stemGroup.position.y = 0.6;
     switchGroup.add(stemGroup);
 
+    // Translucent keycap. MeshPhysicalMaterial transmission forces an extra
+    // full-scene render pass every frame — plain alpha blending gets the same
+    // frosted-glass read for a fraction of the GPU cost (keeps the gateway
+    // lag-free on retina and low-power GPUs).
     const capMesh = new THREE.Mesh(
       new THREE.BoxGeometry(6.6, 3.4, 6.6),
-      new THREE.MeshPhysicalMaterial({
-        color: 0x161820,
+      new THREE.MeshStandardMaterial({
+        color: 0x9aa4c4,
         emissive: 0x050608,
-        roughness: 0.15,
-        metalness: 0.1,
-        transmission: 0.85,
-        thickness: 2.2,
+        roughness: 0.12,
+        metalness: 0.2,
         transparent: true,
-        opacity: 0.96,
-        reflectivity: 0.9,
+        opacity: 0.22,
       })
     );
     capMesh.position.y = 2.4;

@@ -91,7 +91,7 @@ export default function CapabilityMatrix() {
 
       <div className="grid grid-cols-1 gap-space-lg lg:grid-cols-12">
         {/* Engine 01 — Digital products (span 7) */}
-        <div className="group flex flex-col justify-between border border-outline-variant/30 bg-surface-container-low p-space-lg shadow-acid">
+        <div className="group flex flex-col justify-between border border-outline-variant/30 bg-surface-container-low p-space-lg shadow-acid lg:col-span-7">
           <div>
             <div className="mb-space-md flex items-center justify-between border-b border-outline-variant/30 pb-space-sm">
               <span className="bg-tertiary-container px-space-xs py-0.5 font-mono text-label-mono-sm font-bold uppercase tracking-wider text-on-tertiary-container">
@@ -145,7 +145,7 @@ export default function CapabilityMatrix() {
         </div>
 
         {/* Engine 02 — AI experiences (span 5) */}
-        <div className="flex flex-col justify-between border border-outline-variant/30 bg-surface-container p-space-lg shadow-magenta">
+        <div className="flex flex-col justify-between border border-outline-variant/30 bg-surface-container p-space-lg shadow-magenta lg:col-span-5">
           <div>
             <div className="mb-space-md flex items-center justify-between border-b border-outline-variant/30 pb-space-sm">
               <span className="bg-secondary-container px-space-xs py-0.5 font-mono text-label-mono-sm font-bold uppercase tracking-wider text-on-secondary">
@@ -209,7 +209,7 @@ export default function CapabilityMatrix() {
         </div>
 
         {/* Engine 03 — Immersive worldbuilding (span 12) */}
-        <div className="border border-outline-variant/30 bg-surface-container-low p-space-lg shadow-cyan lg:p-space-xl">
+        <div className="border border-outline-variant/30 bg-surface-container-low p-space-lg shadow-cyan lg:p-space-xl lg:col-span-12">
           <div className="grid grid-cols-1 items-center gap-space-lg lg:grid-cols-12">
             <div className="space-y-space-md lg:col-span-7">
               <div className="flex flex-wrap items-center gap-space-sm">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Marquee from "@/components/ui/Marquee";
 import { useSynth } from "@/components/providers/SynthProvider";
@@ -15,26 +15,28 @@ const FEED_ITEMS = [
   { label: "NYC After Hours", tone: "text-on-surface-variant", href: "/about" },
 ];
 
-function useEstClock() {
-  const [time, setTime] = useState("02:00:00");
+// Writes the timestamp straight to the DOM via ref — a per-second setState
+// would re-render this always-mounted fixed bar (and its marquees) 60x/min.
+function useEstClockRef() {
+  const ref = useRef<HTMLSpanElement>(null);
   useEffect(() => {
     const tick = () => {
+      const el = ref.current;
+      if (!el) return;
       try {
-        setTime(
-          new Date().toLocaleTimeString("en-US", {
-            timeZone: "America/New_York",
-            hour12: true,
-          })
-        );
+        el.textContent = new Date().toLocaleTimeString("en-US", {
+          timeZone: "America/New_York",
+          hour12: true,
+        });
       } catch {
-        setTime(new Date().toLocaleTimeString());
+        el.textContent = new Date().toLocaleTimeString();
       }
     };
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, []);
-  return time;
+  return ref;
 }
 
 /**
@@ -42,7 +44,7 @@ function useEstClock() {
  * ticker, and the global synth (SFX) toggle.
  */
 export default function Footer() {
-  const clock = useEstClock();
+  const clockRef = useEstClockRef();
   const { play, toggle, enabled } = useSynth();
 
   return (
@@ -70,7 +72,9 @@ export default function Footer() {
         <div className="flex items-center gap-space-md shrink-0">
           <span className="hidden sm:flex items-center gap-space-xs font-mono text-label-mono-sm text-on-surface-variant uppercase tracking-wider">
             <span className="text-tertiary-fixed-dim">NYC_LOC:</span>
-            <span className="tabular-nums">{clock} EST</span>
+            <span className="tabular-nums">
+              <span ref={clockRef}>02:00:00</span> EST
+            </span>
           </span>
           <button
             type="button"
