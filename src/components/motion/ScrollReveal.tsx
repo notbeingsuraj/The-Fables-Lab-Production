@@ -28,7 +28,7 @@ export default function ScrollReveal({
 
     let cleanup: () => void;
     if (stagger) {
-      cleanup = revealGroupOnScroll(el, "> *", {
+      cleanup = revealGroupOnScroll(el, {
         duration: 0.8,
         y: 30,
         stagger: 0.15,

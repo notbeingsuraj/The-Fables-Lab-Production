@@ -86,7 +86,6 @@ export function revealOnScroll(
 // ──────────────── Reveal Group (staggered children) ────────────────
 export function revealGroupOnScroll(
   container: HTMLElement | null,
-  selector: string,
   options: {
     duration?: number;
     ease?: string;
@@ -106,7 +105,9 @@ export function revealGroupOnScroll(
     delay = 0,
   } = options;
 
-  const children = Array.from(container.querySelectorAll<HTMLElement>(selector));
+  const children = Array.from(container.children).filter(
+    (el): el is HTMLElement => el instanceof HTMLElement
+  );
   children.forEach((el) => gsap.set(el, { opacity: 0, y }));
 
   const trigger = ScrollTrigger.create({
