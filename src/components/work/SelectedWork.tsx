@@ -55,53 +55,73 @@ export default function SelectedWork() {
   const showFallback = projects === null || projects.length === 0;
 
   return (
-    <section id="work" className="w-full bg-surface py-section lg:py-[8rem] px-4 lg:px-8 overflow-hidden">
-      {showFallback ? (
-        <>
-          <div className="max-w-5xl mx-auto text-center">
-            <span className="inline-block mb-6 px-3 py-1.5 border border-bronze/30 bg-bronze/10 text-[10px] font-mono font-bold uppercase tracking-wider text-bronze">
-              Selected experiments
+    <section id="work" className="w-full bg-surface py-section lg:py-[10rem] px-6 lg:px-8 overflow-hidden">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-24 lg:mb-32">
+          <div>
+            <span className="inline-block mb-8 px-3 py-1.5 border border-bronze/30 bg-bronze/10 text-[11px] font-mono font-bold uppercase tracking-wider text-bronze">
+              Selected work
             </span>
-            <h2 className="mb-8 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
-              What we build
+            <h2
+              className="mb-6 font-display text-[clamp(2.5rem,8vw,3.75rem)] leading-[1.05] tracking-tight text-on-surface text-balance"
+            >
+              Case studies from the lab
             </h2>
-            <p className="text-body-lg text-on-surface-variant leading-relaxed max-w-xl">
-              The studio builds full-stack products, AI systems, marketing sites,
-              UI/UX design, community platforms, and content management systems.
+          </div>
+          <Link
+            href="/projects"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-bronze bg-bronze text-[10px] font-bold uppercase tracking-wider text-surface transition-colors hover:bg-bronze-hover focus-visible:outline-bronze focus-visible:outline-2 focus-visible:outline-offset-2"
+          >
+            View archive
+          </Link>
+        </div>
+
+        {showFallback ? (
+          <>
+            <p className="text-body-lg text-on-surface-variant leading-relaxed max-w-[560px] mb-24 lg:mb-32">
               Verified case studies appear here once client work clears review.
+              Below are the types of work we build.
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {FALLBACK_ITEMS.map((item) => <div key={item.title} className="border border-outline-variant/20 rounded-xl p-8 lg:p-12 bg-surface-elevated flex flex-col h-full"><div className="flex h-16 w-16 items-center justify-center rounded-lg border border-bronze/20 bg-bronze/5 mb-6" aria-hidden="true"><div className="h-4 w-4 bg-bronze/20 rounded-sm" /></div><h3 className="font-display text-lg lg:text-xl leading-tight text-on-surface">{item.title}</h3><p className="mt-4 text-sm text-on-surface-variant leading-relaxed">A core capability of The Fables Lab. See our services for details.</p></div>)}
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16 lg:mb-24">
-              <div>
-                <span className="inline-block mb-6 px-3 py-1.5 border border-bronze/30 bg-bronze/10 text-[10px] font-mono font-bold uppercase tracking-wider text-bronze">
-                  Selected work
-                </span>
-                <h2 className="mb-8 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
-                  Case studies from the lab
-                </h2>
-              </div>
-              <Link
-                href="/projects"
-                className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-wider text-bronze hover:underline transition-colors"
-              >
-                View archive
-              </Link>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+              {FALLBACK_ITEMS.map((item) => (
+                <div
+                  key={item.title}
+                  className="border border-outline-variant/20 rounded-lg p-8 lg:p-12 bg-background flex flex-col h-full group hover:border-bronze/40 transition-colors"
+                >
+                  <div className="relative h-48 lg:h-56 rounded-lg overflow-hidden border border-outline-variant/30 bg-surface-elevated mb-8">
+                    <div className="absolute inset-0 flex items-center justify-center bg-bronze/5">
+                      <div className="w-16 h-16 rounded-lg border border-bronze/20 bg-bronze/10 flex items-center justify-center">
+                        <span className="text-bronze font-mono text-[11px]">▭</span>
+                      </div>
+                    </div>
+                  </div>
+                  <h3 className="font-display text-lg lg:text-xl leading-tight tracking-tight text-on-surface mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-on-surface-variant leading-relaxed">
+                    A core capability of The Fables Lab. See our services for
+                    details.
+                  </p>
+                </div>
+              ))}
             </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {projects.map((project) => <ProjectCard key={project.id} id={project.id} name={project.name} description={project.description} image={project.image} tags={project.tags} color={project.color} />)}
-            </div>
+          </>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+            {projects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                id={project.id}
+                name={project.name}
+                description={project.description}
+                image={project.image}
+                tags={project.tags}
+                color={project.color}
+              />
+            ))}
           </div>
-        </>
-      )}
+        )}
+      </div>
     </section>
   );
 }

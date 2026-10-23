@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import Hero from "@/components/hero/Hero";
-import Capabilities from "@/components/capabilities/Capabilities";
+import StudioIntro from "@/components/studio-intro/StudioIntro";
 import Services from "@/components/services/Services";
 import Process from "@/components/process/Process";
-import Principles from "@/components/principles/Principles";
 import About from "@/components/about/About";
 import Pricing from "@/components/pricing/Pricing";
 import SelectedWork from "@/components/work/SelectedWork";
@@ -30,35 +29,24 @@ export default function Home() {
   return (
     <div className="w-full selection:bg-bronze/20 selection:text-surface">
       <Hero />
-
       <ScrollReveal>
-        <Capabilities />
+        <StudioIntro />
       </ScrollReveal>
-
       <ScrollReveal stagger>
         <Services />
       </ScrollReveal>
-
       <ScrollReveal>
         <Process />
       </ScrollReveal>
-
       <ScrollReveal stagger>
-        <Principles />
-      </ScrollReveal>
-
-      <ScrollReveal>
         <About />
       </ScrollReveal>
-
       <ScrollReveal>
         <Pricing />
       </ScrollReveal>
-
       <ScrollReveal>
         <SelectedWork />
       </ScrollReveal>
-
       <ProjectInquiry />
     </div>
   );

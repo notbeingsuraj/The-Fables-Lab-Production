@@ -136,36 +136,36 @@ export default function ProjectInquiry() {
   };
 
   const inputClass =
-    "w-full border border-outline-variant/50 bg-surface-low px-3 py-2 text-sm font-mono text-on-surface placeholder:text-on-surface-muted focus:border-bronze focus:outline-none transition-colors rounded-sm";
+    "w-full border border-outline-variant/40 bg-surface-low px-4 py-3 text-sm font-sans text-on-surface placeholder:text-on-surface-muted focus:border-bronze focus:outline-none transition-colors rounded-sm";
   const labelClass =
-    "mb-1.5 block text-[10px] font-mono font-bold uppercase tracking-wider text-on-surface-muted";
+    "mb-2 block text-xs font-mono font-bold uppercase tracking-wider text-on-surface-muted";
 
   if (status === "sent") {
     return (
       <section
         id="inquiry"
-        className="w-full bg-surface py-section lg:py-[8rem] px-4 lg:px-8"
+        className="w-full bg-background py-section lg:py-[10rem] px-6 lg:px-8 overflow-hidden"
       >
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-[640px] mx-auto text-center">
           <div
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-bronze bg-bronze text-xs font-mono font-bold text-surface mb-6"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-bronze bg-bronze text-[11px] font-mono font-bold text-surface mb-8"
           >
             ✓
           </div>
-          <h2 className="mb-4 font-display text-[clamp(2rem,5vw,3rem)] leading-[1.05] tracking-tight text-on-surface">
+          <h2 className="mb-6 font-display text-[clamp(2.5rem,8vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
             Transmission received
           </h2>
-          <p className="mb-8 text-body-md text-on-surface-variant leading-relaxed">
+          <p className="mb-10 text-body-lg text-on-surface-variant leading-relaxed">
             {message}
             {submissionId && (
-              <span className="block mt-2 text-xs font-mono text-on-surface-muted">
+              <span className="block mt-4 text-xs font-mono text-on-surface-muted">
                 Reference: {submissionId}
               </span>
             )}
           </p>
           <Link
             href="/services"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-outline-variant/50 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:border-bronze hover:text-bronze transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-7 py-3 border border-outline-variant/40 text-[11px] font-bold uppercase tracking-wider text-on-surface-variant transition-colors hover:border-bronze hover:text-bronze focus-visible:outline-bronze focus-visible:outline-2 focus-visible:outline-offset-2"
           >
             Explore capabilities
           </Link>
@@ -177,29 +177,33 @@ export default function ProjectInquiry() {
   return (
     <section
       id="inquiry"
-      className="w-full bg-background py-section lg:py-[8rem] px-4 lg:px-8 overflow-hidden"
+      className="w-full bg-background py-section lg:py-[10rem] px-6 lg:px-8 overflow-hidden"
     >
-      <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-16 items-start">
+      <div className="max-w-[1000px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-24 items-start">
           <div className="lg:col-span-5">
-            <span className="inline-block mb-4 px-3 py-1 border border-bronze/30 bg-bronze/10 text-xs font-mono font-bold uppercase tracking-wider text-bronze">
+            <span className="inline-block mb-8 px-3 py-1.5 border border-bronze/30 bg-bronze/10 text-[11px] font-mono font-bold uppercase tracking-wider text-bronze">
               Project inquiry
             </span>
-            <h2 className="mb-6 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
+            <h2
+              className="mb-10 font-display text-[clamp(2.5rem,8vw,3.75rem)] leading-[1.05] tracking-tight text-on-surface text-balance"
+            >
               Have a problem worth building for
             </h2>
-            <p className="mb-8 text-body-md text-on-surface-variant leading-relaxed max-w-xs">
+            <p className="text-body-lg text-on-surface-variant leading-relaxed max-w-[480px]">
               Tell us what you are working on. We will help define the right
               digital solution.
             </p>
 
-            <div className="space-y-3">
+            <div className="mt-16 space-y-4">
               <div className="flex items-start gap-3">
+                <span className="mt-0.5 w-1 h-1 rounded-full bg-bronze/40" />
                 <span className="text-sm text-on-surface-variant">
                   Fixed-bid sprints — no open-ended hourly meters
                 </span>
               </div>
               <div className="flex items-start gap-3">
+                <span className="mt-0.5 w-1 h-1 rounded-full bg-bronze/40" />
                 <span className="text-sm text-on-surface-variant">
                   Response within 24 operational hours
                 </span>
@@ -208,12 +212,12 @@ export default function ProjectInquiry() {
           </div>
 
           <div className="lg:col-span-7">
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label className={labelClass} htmlFor="inq-name">
                     Name
-                    <span className="text-bronze/50">Required</span>
+                    <span className="text-bronze/40">Required</span>
                   </label>
                   <input
                     id="inq-name"
@@ -224,13 +228,15 @@ export default function ProjectInquiry() {
                     disabled={isSubmitting}
                   />
                   {errors.name && (
-                    <p className="mt-1 text-[11px] text-bronze-dim">{errors.name}</p>
+                    <p className="mt-2 text-[11px] font-mono text-bronze-dim">
+                      {errors.name}
+                    </p>
                   )}
                 </div>
                 <div>
                   <label className={labelClass} htmlFor="inq-email">
                     Work email
-                    <span className="text-bronze/50">Required</span>
+                    <span className="text-bronze/40">Required</span>
                   </label>
                   <input
                     id="inq-email"
@@ -242,7 +248,9 @@ export default function ProjectInquiry() {
                     disabled={isSubmitting}
                   />
                   {errors.email && (
-                    <p className="mt-1 text-[11px] text-bronze-dim">{errors.email}</p>
+                    <p className="mt-2 text-[11px] font-mono text-bronze-dim">
+                      {errors.email}
+                    </p>
                   )}
                 </div>
               </div>
@@ -250,7 +258,7 @@ export default function ProjectInquiry() {
               <div>
                 <label className={labelClass} htmlFor="inq-company">
                   Company or project name
-                  <span className="text-bronze/50">Required</span>
+                  <span className="text-bronze/40">Required</span>
                 </label>
                 <input
                   id="inq-company"
@@ -261,14 +269,16 @@ export default function ProjectInquiry() {
                   disabled={isSubmitting}
                 />
                 {errors.company && (
-                  <p className="mt-1 text-[11px] text-bronze-dim">{errors.company}</p>
+                  <p className="mt-2 text-[11px] font-mono text-bronze-dim">
+                    {errors.company}
+                  </p>
                 )}
               </div>
 
               <div>
                 <label className={labelClass} htmlFor="inq-services">
                   Services required
-                  <span className="text-bronze/50">Required</span>
+                  <span className="text-bronze/40">Required</span>
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {SERVICES.map((service) => (
@@ -278,10 +288,10 @@ export default function ProjectInquiry() {
                       role="checkbox"
                       aria-checked={data.services.includes(service.id)}
                       onClick={() => toggleService(service.id)}
-                      className={`flex items-center gap-2 border rounded-sm px-3 py-2 text-xs font-mono font-bold uppercase tracking-wider transition-all ${
+                      className={`flex items-center gap-2 border rounded-sm px-4 py-3 text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                         data.services.includes(service.id)
                           ? "border-bronze bg-bronze text-surface shadow-soft"
-                          : "border-outline-variant/50 bg-surface-low text-on-surface-variant hover:border-bronze/50 hover:text-bronze"
+                          : "border-outline-variant/40 bg-surface-low text-on-surface-variant hover:border-bronze/40 hover:text-bronze"
                       }`}
                     >
                       {service.number}. {service.title}
@@ -289,7 +299,9 @@ export default function ProjectInquiry() {
                   ))}
                 </div>
                 {errors.services && (
-                  <p className="mt-1 text-[11px] text-bronze-dim">{errors.services}</p>
+                  <p className="mt-2 text-[11px] font-mono text-bronze-dim">
+                    {errors.services}
+                  </p>
                 )}
               </div>
 
@@ -316,7 +328,7 @@ export default function ProjectInquiry() {
               <div>
                 <label className={labelClass} htmlFor="inq-brief">
                   Project brief
-                  <span className="text-bronze/50">Required</span>
+                  <span className="text-bronze/40">Required</span>
                 </label>
                 <textarea
                   id="inq-brief"
@@ -324,16 +336,18 @@ export default function ProjectInquiry() {
                   onChange={(e) => updateField("brief", e.target.value)}
                   rows={6}
                   placeholder="Describe the problem, the constraints, the deadline, and what done looks like."
-                  className={`${inputClass} h-32 resize-y leading-relaxed`}
+                  className={`${inputClass} h-48 resize-y leading-relaxed`}
                   disabled={isSubmitting}
                 />
                 {errors.brief && (
-                  <p className="mt-1 text-[11px] text-bronze-dim">{errors.brief}</p>
+                  <p className="mt-2 text-[11px] font-mono text-bronze-dim">
+                    {errors.brief}
+                  </p>
                 )}
               </div>
 
               {message && status === "error" && (
-                <div className="border border-bronze/30 bg-bronze/5 p-3 text-[11px] uppercase font-mono text-bronze-dim">
+                <div className="border border-bronze/30 bg-bronze/5 p-4 text-[11px] font-mono text-bronze-dim">
                   &gt; {message}
                 </div>
               )}
@@ -342,7 +356,7 @@ export default function ProjectInquiry() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`inline-flex items-center justify-center gap-2 w-full px-6 py-3 border text-xs font-bold uppercase tracking-wider transition-colors focus-visible:outline-bronze focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-60 disabled:cursor-not-allowed ${
+                  className={`inline-flex items-center justify-center gap-2 w-full px-7 py-3.5 border text-[11px] font-bold uppercase tracking-wider transition-colors focus-visible:outline-bronze focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-60 disabled:cursor-not-allowed ${
                     isSubmitting
                       ? "border-outline-variant/40 bg-surface-low text-on-surface-muted"
                       : "border-bronze bg-bronze text-surface hover:bg-bronze-hover"
