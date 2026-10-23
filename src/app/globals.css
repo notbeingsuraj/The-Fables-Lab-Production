@@ -1,26 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Design Tokens ──────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────────
+   THE FABLES LAB — Design Tokens (CSS)
+   Restrained · Luxurious · Editorial
+   ───────────────────────────────────────────────────────────────── */
 :root {
-  --background: #121317;
-  --surface-lowest: #0d0e12;
-  --surface-low: #1a1b20;
-  --surface: #1e1f24;
-  --surface-high: #292a2e;
-  --foreground: #e3e2e8;
-  --muted: #c5c9ac;
-  --outline: #8f9378;
-  --outline-variant: #454932;
-  --acid: #ccf200;
-  --acid-dim: #b3d400;
-  --magenta: #ff42ad;
-  --cyan: #00daf3;
-  --signal: #ff5a1f;
+  --font-geist: "Geist", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-geist-mono: "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", monospace;
+  --background: #0a0a0a;
+  --surface-lowest: #0d0d0d;
+  --surface-low: #141414;
+  --surface: #1e1e1e;
+  --surface-high: #2a2a2a;
+  --foreground: #f5f5f0;
+  --muted: #a8a8a2;
+  --muted-dim: #5a5a52;
+  --outline: #242424;
+  --outline-variant: #1a1a1a;
+  --bronze: #a67c52;
+  --bronze-dim: #8c6844;
+  --bronze-hover: #b48a6c;
+  --bronze-subtle: rgba(166, 124, 82, 0.12);
 }
 
-/* ─── Base ───────────────────────────────────────────────────────────────── */
+/* ──────────────── Base ──────────────── */
 @layer base {
   html,
   body {
@@ -34,11 +41,9 @@
   }
 
   body {
-    /* Clear the fixed telemetry feed bar pinned to the bottom edge. */
-    padding-bottom: 3rem;
     color: var(--foreground);
     background: var(--background);
-    font-family: var(--font-chivo), system-ui, -apple-system, sans-serif;
+    font-family: var(--font-geist), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     overscroll-behavior: none;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -54,33 +59,44 @@
   }
 
   ::selection {
-    background: rgba(204, 242, 0, 0.22);
-    color: #f5f4ef;
+    background: var(--bronze-subtle);
+    color: var(--foreground);
   }
 
-  /* Brutalist focus ring — hard acid outline, no soft glow. */
   :focus-visible {
-    outline: 2px solid var(--acid);
+    outline: 2px solid var(--bronze);
     outline-offset: 2px;
+  }
+
+  /* Reduced motion — respect user preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
-/* ─── Scrollbar — industrial rail ────────────────────────────────────────── */
+/* ──────────────── Scrollbar ──────────────── */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0d0e12;
+  background: #0d0d0d;
 }
 ::-webkit-scrollbar-thumb {
-  background: #343439;
+  background: #242424;
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ccf200;
+  background: var(--bronze-dim);
 }
 
-/* ─── Utilities ──────────────────────────────────────────────────────────── */
+/* ──────────────── Utilities ──────────────── */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -89,104 +105,40 @@
     text-wrap: pretty;
   }
 
-  /* CRT / phosphor raster — 2px scanline grid at low opacity. */
-  .scanline-overlay {
-    background-image: linear-gradient(rgba(18, 19, 23, 0) 50%, rgba(0, 0, 0, 0.35) 50%),
-      linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-    background-size: 100% 3px, 6px 100%;
-    pointer-events: none;
+  .letter-tracking-tight {
+    letter-spacing: -0.02em;
+  }
+  .letter-tracking-wide {
+    letter-spacing: 0.1em;
   }
 
-  /* RGB-split aberration for hero words. */
-  .chromatic-glitch {
-    text-shadow: 2px 0 0 #ff42ad, -2px 0 0 #00daf3;
+  /* Hairline divider */
+  .hairline {
+    border-top: 1px solid var(--outline);
   }
 
-  /* 45° chamfered corner cuts for hero blocks and primary buttons. */
-  .clip-chamfer {
-    clip-path: polygon(
-      0 0,
-      calc(100% - 12px) 0,
-      100% 12px,
-      100% 100%,
-      12px 100%,
-      0 calc(100% - 12px)
-    );
-  }
-  .clip-chamfer-sm {
-    clip-path: polygon(
-      0 0,
-      calc(100% - 8px) 0,
-      100% 8px,
-      100% 100%,
-      8px 100%,
-      0 calc(100% - 8px)
-    );
+  .hairline-bronze {
+    border-top: 1px solid var(--bronze-subtle);
   }
 
-  /* Corner registration ticks — L-shaped marks at container extremities. */
-  .corner-ticks::before,
-  .corner-ticks::after {
-    content: "";
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    pointer-events: none;
+  /* Reveal utility for ScrollTrigger */
+  .reveal {
+    opacity: 0;
   }
-  .corner-ticks::before {
-    top: -1px;
-    left: -1px;
-    border-top: 2px solid currentColor;
-    border-left: 2px solid currentColor;
-  }
-  .corner-ticks::after {
-    bottom: -1px;
-    right: -1px;
-    border-bottom: 2px solid currentColor;
-    border-right: 2px solid currentColor;
-  }
-
-  /* Legacy glow utilities — translated to hard displacement per design rules. */
-  .glow-cyan {
-    box-shadow: 3px 3px 0 0 #00daf3;
-  }
-  .glow-yellow {
-    box-shadow: 3px 3px 0 0 #d7ff00;
-  }
-  .glow-pink {
-    box-shadow: 3px 3px 0 0 #ff42ad;
-  }
-
-  /* Legacy outlined display text. */
-  .text-stroke {
-    color: transparent;
-    -webkit-text-stroke: 1px #e3e2e8;
-  }
-  .text-stroke-acid {
-    color: transparent;
-    -webkit-text-stroke: 1px #ccf200;
-  }
-
-  .hide-scrollbar {
-    scrollbar-width: none;
-  }
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Blinking terminal cursor block. */
-  .cursor-block::after {
-    content: "_";
-    animation: blink 1s steps(1) infinite;
-  }
-}
-
-@keyframes blink {
-  0%,
-  100% {
+  .reveal.revealed {
     opacity: 1;
   }
-  50% {
-    opacity: 0;
+
+  /* Canvas containment */
+  .canvas-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .canvas-wrap canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
   }
 }

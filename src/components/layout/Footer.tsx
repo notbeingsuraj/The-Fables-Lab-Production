@@ -1,95 +1,131 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Link from "next/link";
-import Marquee from "@/components/ui/Marquee";
-import { useSynth } from "@/components/providers/SynthProvider";
 
-const FEED_ITEMS = [
-  { label: "Strategy", tone: "text-tertiary-fixed-dim", href: "/services" },
-  { label: "Interactive 3D", tone: "text-primary", href: "/services" },
-  { label: "AI-Powered Experiences", tone: "text-secondary-fixed-dim", href: "/services" },
-  { label: "Rapid MVP Engineering", tone: "text-primary-fixed", href: "/services" },
-  { label: "WebGL Shaders", tone: "text-tertiary-fixed", href: "/services" },
-  { label: "Kinetic Hardware", tone: "text-secondary", href: "/process" },
-  { label: "NYC After Hours", tone: "text-on-surface-variant", href: "/about" },
-];
+const SERVICE_LINKS = [
+  { label: "Full-Stack Solutions", href: "/services" },
+  { label: "AI Solutions", href: "/services" },
+  { label: "Marketing Solutions", href: "/services" },
+  { label: "UI/UX Design", href: "/services" },
+  { label: "Community Building", href: "/services" },
+  { label: "Content Management", href: "/services" },
+] as const;
 
-// Writes the timestamp straight to the DOM via ref — a per-second setState
-// would re-render this always-mounted fixed bar (and its marquees) 60x/min.
-function useEstClockRef() {
-  const ref = useRef<HTMLSpanElement>(null);
-  useEffect(() => {
-    const tick = () => {
-      const el = ref.current;
-      if (!el) return;
-      try {
-        el.textContent = new Date().toLocaleTimeString("en-US", {
-          timeZone: "America/New_York",
-          hour12: true,
-        });
-      } catch {
-        el.textContent = new Date().toLocaleTimeString();
-      }
-    };
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-  return ref;
-}
+const SOCIAL_LINKS = [
+  { label: "X", href: "https://x.com/thefableslab", ariaLabel: "The Fables Lab on X" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/thefableslab", ariaLabel: "The Fables Lab on LinkedIn" },
+  { label: "GitHub", href: "https://github.com/notbeingsuraj", ariaLabel: "The Fables Lab on GitHub" },
+] as const;
 
-/**
- * Fixed bottom-edge telemetry feed bar — live NYC clock, looping capability
- * ticker, and the global synth (SFX) toggle.
- */
 export default function Footer() {
-  const clockRef = useEstClockRef();
-  const { play, toggle, enabled } = useSynth();
-
   return (
-    <footer className="fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest/95 backdrop-blur-md">
-      <div className="w-full h-0.5 bg-outline-variant/30" />
-      <div className="h-11 w-full px-space-md flex items-center justify-between gap-space-md overflow-hidden">
-        <div className="flex items-center gap-space-sm flex-1 overflow-hidden">
-          <span className="font-mono text-label-mono-sm text-secondary uppercase font-bold shrink-0">
-            FEED &gt;&gt;
-          </span>
-          <Marquee>
-            {FEED_ITEMS.map((item, i) => (
-              <span key={`${item.label}-${i}`}>
-                <Link
-                  href={item.href}
-                  className={`${item.tone} uppercase tracking-wider hover:text-primary-fixed transition-colors`}
-                >
-                  {item.label}
-                </Link>
-                <span className="text-outline-variant">{" // "}</span>
+    <footer className="border-t border-outline-variant/20 bg-surface/90 backdrop-blur">
+      <div className="px-4 lg:px-6 py-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-4 lg:gap-12">
+          {/* Brand */}
+          <div className="lg:col-span-1">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="flex h-7 w-7 items-center justify-center border border-outline rounded-sm font-mono text-xs font-bold uppercase tracking-wider text-bronze">
+                FL
               </span>
-            ))}
-          </Marquee>
+              <span className="text-sm font-semibold uppercase tracking-tight text-on-surface">
+                The Fables Lab
+              </span>
+            </div>
+            <p className="text-sm text-on-surface-variant leading-relaxed max-w-xs">
+              An independent digital solutions studio where ancient stories meet future tech.
+              We help businesses build, launch, market, and scale digital products.
+            </p>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h3 className="text-xs font-mono uppercase tracking-wider text-on-surface-muted mb-4">
+              Services
+            </h3>
+            <ul className="space-y-2">
+              {SERVICE_LINKS.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-on-surface-variant transition-colors hover:text-bronze"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Connect */}
+          <div>
+            <h3 className="text-xs font-mono uppercase tracking-wider text-on-surface-muted mb-4">
+              Connect
+            </h3>
+            <ul className="space-y-2">
+              {SOCIAL_LINKS.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-on-surface-variant transition-colors hover:text-bronze"
+                    aria-label={item.ariaLabel}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a
+                  href="mailto:hello@thefableslab.com"
+                  className="text-sm text-on-surface-variant transition-colors hover:text-bronze"
+                >
+                  hello@thefableslab.com
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* About */}
+          <div>
+            <h3 className="text-xs font-mono uppercase tracking-wider text-on-surface-muted mb-4">
+              About
+            </h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/about" className="text-sm text-on-surface-variant transition-colors hover:text-bronze">
+                  Our Approach
+                </Link>
+              </li>
+              <li>
+                <Link href="/projects" className="text-sm text-on-surface-variant transition-colors hover:text-bronze">
+                  Selected Work
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm text-on-surface-variant transition-colors hover:text-bronze">
+                  Start a Project
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className="flex items-center gap-space-md shrink-0">
-          <span className="hidden sm:flex items-center gap-space-xs font-mono text-label-mono-sm text-on-surface-variant uppercase tracking-wider">
-            <span className="text-tertiary-fixed-dim">NYC_LOC:</span>
-            <span className="tabular-nums">
-              <span ref={clockRef}>02:00:00</span> EST
-            </span>
-          </span>
-          <button
-            type="button"
-            onClick={() => {
-              toggle();
-              play(600, 0.05);
-            }}
-            aria-pressed={enabled}
-            className="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-1 font-mono text-label-mono-sm uppercase tracking-wider text-tertiary-fixed-dim transition-colors hover:bg-surface-bright"
-          >
-            <span
-              className={`inline-block w-1.5 h-1.5 rounded-full ${enabled ? "bg-tertiary-fixed-dim animate-ping" : "bg-outline"}`}
-            />
-            [SFX: {enabled ? "44.1kHz" : "MUTED"}]
-          </button>
+
+        {/* Bottom band */}
+        <div className="mt-12 pt-8 border-t border-outline-variant/20 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-on-surface-muted">
+            &copy; {new Date().getFullYear()} The Fables Lab. All rights reserved.
+          </p>
+          <div className="flex items-center gap-4 text-xs text-on-surface-muted">
+            <a href="/contact" className="transition-colors hover:text-bronze">
+              Contact
+            </a>
+            <span className="text-outline-variant">·</span>
+            <a href="/projects" className="transition-colors hover:text-bronze">
+              Work
+            </a>
+          </div>
         </div>
       </div>
     </footer>

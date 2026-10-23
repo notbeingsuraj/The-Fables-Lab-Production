@@ -59,16 +59,25 @@ export default function BootGateway() {
     };
   }, [play]);
 
-  // Cursor coordinate tracker.
+  // Cursor coordinate tracker — rAF-throttled so fast pointer movement can't
+  // schedule more than one React render per frame.
   useEffect(() => {
+    let frame = 0;
     const onMouseMove = (e: MouseEvent) => {
-      setCoords({
-        x: (e.clientX / window.innerWidth).toFixed(2),
-        y: (e.clientY / window.innerHeight).toFixed(2),
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        setCoords({
+          x: (e.clientX / window.innerWidth).toFixed(2),
+          y: (e.clientY / window.innerHeight).toFixed(2),
+        });
       });
     };
     window.addEventListener("mousemove", onMouseMove);
-    return () => window.removeEventListener("mousemove", onMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
 
   // Edge latency jitter for liveliness.

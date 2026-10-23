@@ -1,28 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Chivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { SynthProvider } from "@/components/providers/SynthProvider";
-
-const anton = Anton({
-  subsets: ["latin"],
-  variable: "--font-anton",
-  display: "swap",
-  weight: "400",
-});
-
-const chivo = Chivo({
-  subsets: ["latin"],
-  variable: "--font-chivo",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains",
-  display: "swap",
-});
 
 const SITE_URL = "https://thefableslab.com";
 const SITE_NAME = "The Fables Lab";
@@ -30,22 +9,20 @@ const SITE_NAME = "The Fables Lab";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Creative Technology Studio`,
-    template: `%s // ${SITE_NAME}`,
+    default: `${SITE_NAME} — Digital Solutions Studio`,
+    template: `%s · ${SITE_NAME}`,
   },
   description:
-    "A creative technology studio fusing ancient narrative archetypes with real-time WebGL, agentic AI, and tactile hardware. We turn impossible into interactive.",
+    "The Fables Lab is an independent digital solutions studio. We help businesses build, launch, market, and scale digital products through AI, full-stack engineering, intelligent marketing, and thoughtful design.",
   keywords: [
-    "creative technology studio",
-    "WebGL studio",
-    "Three.js development",
-    "interactive 3D",
-    "AI experiences",
-    "agentic systems",
-    "hardware prototyping",
-    "MVP engineering",
-    "design systems",
-    "New York City studio",
+    "digital solutions studio",
+    "AI solutions",
+    "full-stack engineering",
+    "web application development",
+    "UI/UX design",
+    "digital marketing",
+    "content management systems",
+    "community building",
   ],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
@@ -57,23 +34,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — We Turn Impossible Into Interactive`,
+    title: `${SITE_NAME} — Where Intelligence Becomes Digital Reality`,
     description:
-      "High-voltage digital experiences: WebGL shaders, agentic intelligence, tactical interfaces, and kinetic hardware.",
+      "An independent digital solutions studio combining engineering, intelligence, design, distribution, and content into connected digital products.",
     images: [
       {
         url: "/app-mockup.png",
         width: 1200,
         height: 630,
-        alt: "The Fables Lab — Creative Technology Studio",
+        alt: "The Fables Lab — Digital Solutions Studio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Creative Technology Studio`,
+    title: `${SITE_NAME} — Digital Solutions Studio`,
     description:
-      "WebGL, agentic AI, and tactile hardware. We turn impossible into interactive.",
+      "AI, full-stack engineering, intelligent marketing, and thoughtful design. We build digital products that last.",
     creator: "@thefableslab",
   },
   robots: {
@@ -99,7 +76,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#121317",
+  themeColor: "#0a0a0a",
   width: "device-width",
   initialScale: 1,
 };
@@ -110,22 +87,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${anton.variable} ${chivo.variable} ${jetbrainsMono.variable} dark`}
-      suppressHydrationWarning
-    >
-      <body className="bg-background font-chivo text-on-surface antialiased">
-        <SynthProvider>
-          <Navbar />
-          <main className="min-h-screen flex flex-col">{children}</main>
-          <Footer />
-          {/* Global CRT raster overlay — decorative only. */}
-          <div
-            aria-hidden
-            className="scanline-overlay fixed inset-0 z-[60] opacity-[0.15]"
-          />
-        </SynthProvider>
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className="bg-background font-sans text-on-surface antialiased">
+        <Navbar />
+        <main className="min-h-screen flex flex-col">{children}</main>
+        <Footer />
       </body>
     </html>
   );
