@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: `%s · ${SITE_NAME}`,
   },
   description:
-    "The Fables Lab is an independent digital solutions studio. We help businesses build, launch, market, and scale digital products through AI, full-stack engineering, intelligent marketing, and thoughtful design.",
+    "The Fables Lab is an independent AI and full-stack digital solutions studio. We help businesses design, engineer, launch, and grow digital products.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
+  themeColor: "#080808",
   width: "device-width",
   initialScale: 1,
 };

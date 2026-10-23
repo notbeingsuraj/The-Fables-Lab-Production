@@ -5,13 +5,15 @@ import Capabilities from "@/components/capabilities/Capabilities";
 import Services from "@/components/services/Services";
 import Process from "@/components/process/Process";
 import Principles from "@/components/principles/Principles";
+import About from "@/components/about/About";
+import Pricing from "@/components/pricing/Pricing";
 import SelectedWork from "@/components/work/SelectedWork";
 import ProjectInquiry from "@/components/inquiry/ProjectInquiry";
 
 export const metadata: Metadata = {
   title: "The Fables Lab — Digital Solutions Studio",
   description:
-    "The Fables Lab is an independent digital solutions studio. We help businesses build, launch, market, and scale digital products through AI, full-stack engineering, intelligent marketing, and thoughtful design.",
+    "The Fables Lab is an independent AI and full-stack digital solutions studio. We help businesses design, engineer, launch, and grow digital products.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "The Fables Lab — Where Intelligence Becomes Digital Reality",
@@ -43,6 +45,14 @@ export default function Home() {
 
       <ScrollReveal stagger>
         <Principles />
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <About />
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <Pricing />
       </ScrollReveal>
 
       <ScrollReveal>

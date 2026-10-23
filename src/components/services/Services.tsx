@@ -16,75 +16,78 @@ export default function Services() {
       className="w-full bg-background py-section lg:py-[8rem] px-4 lg:px-8 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16 lg:mb-20">
-          <span className="inline-block mb-4 px-3 py-1 border border-bronze/30 bg-bronze/10 text-xs font-mono font-bold uppercase tracking-wider text-bronze">
+        <div className="mb-16 lg:mb-24 lg:col-start-1 lg:col-span-8">
+          <span className="inline-block mb-6 px-3 py-1.5 border border-bronze/30 bg-bronze/10 text-[10px] font-mono font-bold uppercase tracking-wider text-bronze">
             Core Offerings
           </span>
-          <h2 className="mb-6 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
+          <h2 className="mb-8 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface text-balance">
             Six ways we can build with you
           </h2>
-          <p className="text-body-md text-on-surface-variant leading-relaxed">
+          <p className="text-body-lg text-on-surface-variant leading-relaxed max-w-lg">
             Every service is a complete offering with its own deliverables,
             not a menu line item. Select one, or combine several into a
             connected program.
           </p>
         </div>
 
-        <div className="space-y-16 lg:space-y-24">
+        <div className="space-y-20 lg:space-y-32">
           {SERVICES.map((service, idx) => {
             const isOdd = idx % 2 === 0;
             return (
-              <div
-                key={service.id}
-                className="group relative border border-outline-variant/20 bg-surface rounded-xl overflow-hidden"
-              >
+              <div key={service.id} className="group relative border border-outline-variant/30 rounded-xl overflow-hidden">
+                {/* Visual side */}
                 <div
                   className={`absolute inset-0 z-0 flex items-center justify-center ${
-                    isOdd ? "left-[60%] top-0 w-[40%] h-full" : "right-[60%] top-0 w-[40%] h-full"
+                    isOdd
+                      ? "left-[60%] top-0 w-[40%] h-full"
+                      : "right-[60%] top-0 w-[40%] h-full"
                   } lg:relative lg:static lg:w-full lg:h-auto lg:grid lg:place-items-center lg:px-8`}
                 >
                   <div
                     className={`w-full h-full flex items-center justify-center ${
                       service.visualTone === "bronze"
-                        ? "bg-bronze/5"
+                        ? "bg-bronze/4"
                         : service.visualTone === "graphite"
-                          ? "bg-surface-bright/40"
-                          : "bg-outline-variant/10"
+                          ? "bg-surface-elevated/30"
+                          : "bg-outline-variant/5"
                     }`}
                   >
-                    <div
-                      className="relative w-32 h-32 lg:w-48 lg:h-48"
-                      aria-hidden="true"
-                    >
+                    <div className="relative w-40 h-40 lg:w-64 lg:h-64" aria-hidden="true">
                       <div
-                        className={`absolute inset-0 border-2 ${
+                        className={`absolute inset-0 border border-${
                           service.visualTone === "bronze"
-                            ? "border-bronze"
-                            : "border-outline-variant/40"
-                        } rounded-lg rotate-[12deg] group-hover:rotate-[16deg] transition-transform duration-700`}
+                            ? "bronze/30"
+                            : "outline-variant/40"
+                        } rounded-lg rotate-[12deg] group-hover:rotate-[14deg] transition-transform duration-1000`}
                       />
                       <div
                         className={`absolute inset-1 border border-${
                           service.visualTone === "bronze"
-                            ? "bronze/25"
-                            : "outline-variant/30"
-                        } rounded-sm -rotate-[8deg] group-hover:-rotate-[4deg] transition-transform duration-700`}
+                            ? "bronze/15"
+                            : "outline-variant/25"
+                        } rounded-sm -rotate-[8deg] group-hover:-rotate-[4deg] transition-transform duration-1000`}
+                      />
+                      <div
+                        className={`absolute inset-[8%] border border-${
+                          service.visualTone === "bronze"
+                            ? "bronze/10"
+                            : "outline-variant/15"
+                        } rounded-lg rotate-[-10deg] group-hover:rotate-[-6deg] transition-transform duration-1000`}
                       />
                     </div>
                   </div>
                 </div>
 
+                {/* Content side */}
                 <div
                   className={`relative z-10 ${
                     isOdd
-                      ? "lg:pl-12 lg:pr-[40%] lg:col-start-1"
-                      : "lg:pr-12 lg:pl-[40%] lg:col-start-2"
-                  } px-6 py-10 lg:px-10 lg:py-14`}
+                      ? "lg:pl-12 lg:pr-[40%] lg:col-start-1 lg:col-span-6"
+                      : "lg:pr-12 lg:pl-[40%] lg:col-start-2 lg:col-span-6"
+                  } px-6 py-12 lg:px-10 lg:py-16`}
                 >
-                  <div className="flex items-start gap-3 mb-4">
-                    <span
-                      className={`flex shrink-0 h-9 w-9 items-center justify-center rounded-sm border border-bronze bg-bronze text-[11px] font-mono font-bold uppercase text-surface ${TONE_ACCENT[service.visualTone]}`}
-                    >
+                  <div className="flex items-start gap-3 mb-6">
+                    <span className={`flex shrink-0 h-10 w-10 items-center justify-center rounded-sm border border-bronze bg-bronze text-[11px] font-mono font-bold uppercase text-surface ${TONE_ACCENT[service.visualTone]}`}>
                       {service.number}
                     </span>
                     <span className={`text-xs font-mono font-bold uppercase tracking-wider ${TONE_ACCENT[service.visualTone]}`}>
@@ -92,26 +95,25 @@ export default function Services() {
                     </span>
                   </div>
 
-                  <h3 className="mb-4 font-display text-xl lg:text-2xl leading-[1.15] tracking-tight text-on-surface">
+                  <h3 className="mb-6 font-display text-xl lg:text-2xl leading-[1.15] tracking-tight text-on-surface text-balance">
                     {service.positioning}
                   </h3>
 
-                  <p className="mb-6 text-sm lg:text-base text-on-surface-variant leading-relaxed">
+                  <p className="mb-8 text-sm lg:text-base text-on-surface-variant leading-relaxed max-w-md">
                     {service.description}
                   </p>
 
-                  <div className="mb-6">
-                    <span className="mb-2 block text-[10px] font-mono font-bold uppercase tracking-wider text-on-surface-muted">
+                  <div className="mb-8">
+                    <span className="mb-3 block text-[10px] font-mono font-bold uppercase tracking-wider text-on-surface-muted">
                       Deliverables
                     </span>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {service.deliverables.map((d, i) => (
-                        <li
-                          key={i}
-                          className="flex items-center gap-2 text-xs text-on-surface-variant"
-                        >
-                          <span className="w-1 h-1 rounded-full bg-bronze/50" />
-                          {d.label}
+                        <li key={i} className="flex items-center gap-3">
+                          <span className="w-1 h-1 rounded-full bg-bronze/40" />
+                          <span className="text-xs text-on-surface-variant leading-tight">
+                            {d.label}
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -119,7 +121,7 @@ export default function Services() {
 
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-wider text-bronze hover:underline transition-colors"
+                    className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-wider text-bronze hover:underline transition-colors"
                   >
                     Inquire about {service.inquiryLabel}
                   </Link>

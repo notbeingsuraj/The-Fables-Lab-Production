@@ -5,16 +5,16 @@
  */
 
 export const COLORS = {
-  // Canvas
-  background: 0x0a0a0a,      // matte charcoal
-  surface: 0x141414,         // graphite
-  surfaceElevated: 0x1e1e1e, // secondary surface
-  surfaceBright: 0x2a2a2a,   // deep neutral gray
+  // Canvas — Dark mode (primary)
+  background: 0x080808,        // matte near-black
+  surface: 0x111112,           // secondary background
+  surfaceElevated: 0x19191B,   // elevated surface
+  surfaceBright: 0x2A2A2C,     // surface bright
 
-  // Text (as hex for reference)
-  onSurface: 0xf5f5f0,       // warm white
-  onSurfaceVariant: 0xa8a8a2, // muted gray
-  onSurfaceMuted: 0x5a5a52,
+  // Text
+  onSurface: 0xF5F5F7,         // primary text
+  onSurfaceVariant: 0xA1A1A6,  // secondary text
+  onSurfaceMuted: 0x6E6E73,    // tertiary text
 
   // Accent — muted bronze
   bronze: 0xa67c52,
@@ -24,11 +24,11 @@ export const COLORS = {
 
 export const TYPOGRAPHY = {
   // Editorial type scale (px, approximate for canvas labels)
-  displayHero: 5.5,
-  headlineXl: 4,
-  headlineLg: 3,
-  headlineMd: 1.5,
-  headlineSm: 1.25,
+  displayHero: 4.5,
+  headlineXl: 3.5,
+  headlineLg: 2.5,
+  headlineMd: 1.25,
+  headlineSm: 1,
   bodyLg: 1.125,
   bodyMd: 1,
   labelMd: 0.75,
@@ -48,12 +48,12 @@ export const MOTION = {
   easeInOut: [0.45, 0, 0.55, 1],
 
   // Damping factors for pointer interpolation (0-1, higher = faster snap)
-  pointerDamping: 0.12,
-  rotationDamping: 0.08,
-  scrollDamping: 0.1,
+  pointerDamping: 0.1,
+  rotationDamping: 0.06,
+  scrollDamping: 0.08,
 
   // Bounds for pointer parallax
-  pointerMaxTravel: 0.6, // world units
+  pointerMaxTravel: 0.4, // world units
 } as const;
 
 export const BREAKPOINTS = {

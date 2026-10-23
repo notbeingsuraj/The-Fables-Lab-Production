@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import ProjectCard from "@/components/ui/ProjectCard";
+import { useEffect, useState } from "react";
 
 interface Project {
   id: string;
@@ -12,6 +12,15 @@ interface Project {
   tags: string[];
   color: string;
 }
+
+const FALLBACK_ITEMS = [
+  { title: "Full-Stack Product", tone: "bronze" },
+  { title: "AI System", tone: "graphite" },
+  { title: "Marketing Site", tone: "warm" },
+  { title: "UI/UX Design", tone: "bronze" },
+  { title: "Community Platform", tone: "graphite" },
+  { title: "CMS Implementation", tone: "warm" },
+] as const;
 
 export default function SelectedWork() {
   const [projects, setProjects] = useState<Project[] | null>(null);
@@ -43,102 +52,56 @@ export default function SelectedWork() {
     };
   }, []);
 
-  if (projects === null) {
-    return (
-      <section
-        id="work"
-        className="w-full bg-surface py-section lg:py-[8rem] px-4 lg:px-8 overflow-hidden"
-      >
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-16 lg:mb-20 text-center">
-            <span className="inline-block mb-4 px-3 py-1 border border-bronze/30 bg-bronze/10 text-xs font-mono font-bold uppercase tracking-wider text-bronze">
+  const showFallback = projects === null || projects.length === 0;
+
+  return (
+    <section id="work" className="w-full bg-surface py-section lg:py-[8rem] px-4 lg:px-8 overflow-hidden">
+      {showFallback ? (
+        <>
+          <div className="max-w-5xl mx-auto text-center">
+            <span className="inline-block mb-6 px-3 py-1.5 border border-bronze/30 bg-bronze/10 text-[10px] font-mono font-bold uppercase tracking-wider text-bronze">
               Selected experiments
             </span>
-            <h2 className="mb-6 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
+            <h2 className="mb-8 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
               What we build
             </h2>
-            <p className="text-body-md text-on-surface-variant leading-relaxed">
-              The studio builds full-stack products, AI systems, marketing
-              sites, UI/UX design, community platforms, and content management
-              systems. Verified case studies appear here once client work
-              clears review.
+            <p className="text-body-lg text-on-surface-variant leading-relaxed max-w-xl">
+              The studio builds full-stack products, AI systems, marketing sites,
+              UI/UX design, community platforms, and content management systems.
+              Verified case studies appear here once client work clears review.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { title: "Full-Stack Product", tone: "bronze" },
-              { title: "AI System", tone: "graphite" },
-              { title: "Marketing Site", tone: "warm" },
-              { title: "UI/UX Design", tone: "bronze" },
-              { title: "Community Platform", tone: "graphite" },
-              { title: "CMS Implementation", tone: "warm" },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="border border-outline-variant/20 bg-surface-elevated rounded-xl p-8 flex flex-col h-full"
-              >
-                <div
-                  className="flex h-16 w-16 items-center justify-center rounded-lg border border-bronze/20 bg-bronze/5 mb-6"
-                  aria-hidden="true"
-                >
-                  <div className="h-4 w-4 bg-bronze/20 rounded-sm" />
-                </div>
-                <h3 className="font-display text-lg leading-tight text-on-surface">
-                  {item.title}
-                </h3>
-                <p className="mt-3 text-sm text-on-surface-variant leading-relaxed">
-                  A core capability of The Fables Lab. See our services for details.
-                </p>
+            {FALLBACK_ITEMS.map((item) => <div key={item.title} className="border border-outline-variant/20 rounded-xl p-8 lg:p-12 bg-surface-elevated flex flex-col h-full"><div className="flex h-16 w-16 items-center justify-center rounded-lg border border-bronze/20 bg-bronze/5 mb-6" aria-hidden="true"><div className="h-4 w-4 bg-bronze/20 rounded-sm" /></div><h3 className="font-display text-lg lg:text-xl leading-tight text-on-surface">{item.title}</h3><p className="mt-4 text-sm text-on-surface-variant leading-relaxed">A core capability of The Fables Lab. See our services for details.</p></div>)}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16 lg:mb-24">
+              <div>
+                <span className="inline-block mb-6 px-3 py-1.5 border border-bronze/30 bg-bronze/10 text-[10px] font-mono font-bold uppercase tracking-wider text-bronze">
+                  Selected work
+                </span>
+                <h2 className="mb-8 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
+                  Case studies from the lab
+                </h2>
               </div>
-            ))}
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-wider text-bronze hover:underline transition-colors"
+              >
+                View archive
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {projects.map((project) => <ProjectCard key={project.id} id={project.id} name={project.name} description={project.description} image={project.image} tags={project.tags} color={project.color} />)}
+            </div>
           </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (projects.length === 0) {
-    return null;
-  }
-
-  return (
-    <section
-      id="work"
-      className="w-full bg-surface py-section lg:py-[8rem] px-4 lg:px-8 overflow-hidden"
-    >
-      <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16 lg:mb-20">
-          <div>
-            <span className="inline-block mb-4 px-3 py-1 border border-bronze/30 bg-bronze/10 text-xs font-mono font-bold uppercase tracking-wider text-bronze">
-              Selected work
-            </span>
-            <h2 className="mb-6 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
-              Case studies from the lab
-            </h2>
-          </div>
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-wider text-bronze hover:underline"
-          >
-            View archive
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              id={project.id}
-              name={project.name}
-              description={project.description}
-              image={project.image}
-              tags={project.tags}
-              color={project.color}
-            />
-          ))}
-        </div>
-      </div>
+        </>
+      )}
     </section>
   );
 }

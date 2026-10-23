@@ -7,7 +7,7 @@ interface Principle {
 
 const PRINCIPLES: Principle[] = [
   {
-    title: "Engineering and design considered together",
+    title: "Design and engineering developed together",
     description:
       "We do not hand off designs over a wall. Designers and engineers work in the same pod from day one, so what is designed can be built — and what is built serves the design intent.",
   },
@@ -22,17 +22,12 @@ const PRINCIPLES: Principle[] = [
       "Products are built around how your team already works, not the other way around. We start with your processes and engineer software that fits them.",
   },
   {
-    title: "A connected approach to product, content, and distribution",
-    description:
-      "Engineering, marketing, design, and content are treated as one system. A great product still needs an audience, and a great campaign needs a product worth shipping.",
-  },
-  {
-    title: "Maintainable systems rather than disposable demos",
+    title: "Maintainable architecture",
     description:
       "We ship production code, not throwaway prototypes. Documentation, design systems, and admin tools are included so your team can operate the product after we leave.",
   },
   {
-    title: "Clear scope, transparent communication, measurable objectives",
+    title: "Clear communication, measurable objectives",
     description:
       "Fixed-bid sprints, defined deliverables, and honest timelines. You always know what is being built, why, and what success looks like.",
   },
@@ -40,34 +35,28 @@ const PRINCIPLES: Principle[] = [
 
 export default function Principles() {
   return (
-    <section
-      id="principles"
-      className="w-full bg-background py-section lg:py-[8rem] px-4 lg:px-8 overflow-hidden"
-    >
+    <section id="principles" className="w-full bg-surface py-section lg:py-[8rem] px-4 lg:px-8 overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16 lg:mb-20">
-          <span className="inline-block mb-4 px-3 py-1 border border-bronze/30 bg-bronze/10 text-xs font-mono font-bold uppercase tracking-wider text-bronze">
+        <div className="mb-16 lg:mb-24 lg:col-start-1 lg:col-span-8">
+          <span className="inline-block mb-6 px-3 py-1.5 border border-bronze/30 bg-bronze/10 text-[10px] font-mono font-bold uppercase tracking-wider text-bronze">
             Our approach
           </span>
-          <h2 className="mb-6 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
+          <h2 className="mb-8 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface text-balance">
             What makes the lab different
           </h2>
-          <p className="text-body-md text-on-surface-variant leading-relaxed max-w-xl">
+          <p className="text-body-lg text-on-surface-variant leading-relaxed max-w-xl">
             Concrete principles, not marketing adjectives. No claims of being
             revolutionary or world-class — just how we actually work.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
           {PRINCIPLES.map((principle, idx) => (
-            <div
-              key={principle.title}
-              className="border border-outline-variant/20 bg-surface rounded-xl p-6 lg:p-8 hover:border-bronze/50 transition-colors"
-            >
-              <span className="inline-block mb-4 h-8 w-8 rounded-sm border border-bronze bg-bronze/10 flex items-center justify-center text-[11px] font-mono font-bold uppercase text-bronze">
+            <div key={principle.title} className="group border border-outline-variant/20 rounded-xl p-8 lg:p-10 hover:border-bronze/40 transition-colors">
+              <span className="inline-block mb-4 h-9 w-9 rounded-sm border border-bronze bg-bronze/10 flex items-center justify-center text-[11px] font-mono font-bold uppercase text-bronze">
                 {idx + 1}
               </span>
-              <h3 className="mb-3 font-display text-lg lg:text-xl leading-tight tracking-tight text-on-surface">
+              <h3 className="mb-4 font-display text-lg lg:text-xl leading-tight tracking-tight text-on-surface">
                 {principle.title}
               </h3>
               <p className="text-sm lg:text-base text-on-surface-variant leading-relaxed">
