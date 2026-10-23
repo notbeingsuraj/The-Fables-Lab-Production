@@ -47,10 +47,10 @@ export default function ProjectCard({
         <div className="flex items-center justify-between border-b border-outline-variant/40 px-space-sm py-2">
           <span className="flex items-center gap-2 font-mono text-label-mono-sm uppercase tracking-widest text-outline">
             <span className={`inline-block h-1.5 w-1.5 ${tone.chip}`} />
-            REF // {id.toUpperCase().slice(0, 18)}
+            Reference {id.toUpperCase().slice(0, 18)}
           </span>
           <span className="font-mono text-label-mono-sm uppercase tracking-wider text-primary-fixed opacity-0 transition-opacity group-hover:opacity-100">
-            OPEN ↗
+            Open
           </span>
         </div>
 

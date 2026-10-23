@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const NAV_LINKS = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/projects" },
-  { label: "Our Approach", href: "/about" },
+  { label: "Approach", href: "/about" },
   { label: "About", href: "/about" },
 ];
 
@@ -33,31 +33,24 @@ export default function Navbar() {
       <header
         className={`fixed inset-x-0 top-0 z-40 border-b transition-colors duration-300 ${
           scrolled || isOpen
-            ? "border-outline-variant/40 bg-surface/85 backdrop-blur-md"
+            ? "border-outline-variant/40 bg-surface/90 backdrop-blur-md"
             : "border-outline-variant/10 bg-surface/60 backdrop-blur-sm"
         }`}
       >
         <div className="flex h-14 items-center justify-between gap-4 px-4 lg:px-6">
-          {/* Wordmark */}
           <Link
             href="/"
-            className="flex items-center gap-2"
+            className="flex items-center gap-2.5"
             aria-label="The Fables Lab home"
           >
-            <span className="flex h-8 w-8 items-center justify-center border border-outline rounded-sm font-mono text-xs font-bold uppercase tracking-wider text-bronze transition-colors hover:bg-bronze hover:text-surface">
+            <span className="flex h-8 w-8 items-center justify-center border border-outline rounded-sm text-[15px] font-mono font-bold uppercase tracking-wider text-bronze transition-colors hover:bg-bronze hover:text-surface">
               FL
             </span>
-            <span className="hidden sm:block">
-              <span className="block text-sm font-semibold uppercase tracking-tight text-on-surface">
-                The Fables Lab
-              </span>
-              <span className="block mt-0.5 text-[10px] font-mono uppercase tracking-[0.16em] text-on-surface-muted">
-                Independent Digital Solutions Studio
-              </span>
+            <span className="hidden sm:block text-sm font-semibold uppercase tracking-tight text-on-surface">
+              The Fables Lab
             </span>
           </Link>
 
-          {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-6">
             {NAV_LINKS.map((link) => (
               <Link
@@ -72,16 +65,14 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Right rail */}
           <div className="flex items-center gap-3">
             <Link
               href="/contact"
-              className="hidden sm:inline-flex items-center justify-center gap-1.5 px-4 py-2 border border-bronze bg-bronze text-xs font-bold uppercase tracking-wider text-surface transition-colors hover:bg-bronze-hover"
+              className="hidden sm:inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-bronze bg-bronze text-xs font-bold uppercase tracking-wider text-surface transition-colors hover:bg-bronze-hover focus-visible:outline-bronze focus-visible:outline-2 focus-visible:outline-offset-2"
             >
               Start a Project
             </Link>
 
-            {/* Mobile toggle */}
             <button
               onClick={() => setIsOpen((v) => !v)}
               aria-label="Toggle menu"
@@ -104,7 +95,6 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile menu */}
       {isOpen && (
         <div
           className="fixed inset-0 z-30 flex flex-col bg-surface/98 backdrop-blur-xl lg:hidden"
@@ -112,7 +102,7 @@ export default function Navbar() {
         >
           <div className="flex items-center justify-between px-6 py-6 border-b border-outline-variant/30">
             <span className="text-xs font-mono uppercase tracking-wider text-on-surface-muted">
-              MENU
+              Menu
             </span>
             <button
               onClick={() => setIsOpen(false)}
@@ -143,7 +133,7 @@ export default function Navbar() {
             <div className="mt-8 pt-6 border-t border-outline-variant/30">
               <Link
                 href="/contact"
-                className="flex items-center justify-between gap-1.5 px-4 py-3 border border-bronze bg-bronze text-xs font-bold uppercase tracking-wider text-surface"
+                className="flex items-center justify-between gap-2 px-5 py-2.5 border border-bronze bg-bronze text-xs font-bold uppercase tracking-wider text-surface"
               >
                 Start a Project
               </Link>

@@ -3,16 +3,6 @@
 import Link from "next/link";
 import { SERVICES, type Service } from "@/lib/services";
 
-/**
- * Services — Six core offerings in an alternating editorial grid.
- *
- * Each service occupies a full-width band with alternating content/visual
- * sides. Odd-numbered services: text left, visual right. Even: visual left,
- * text right. Every service includes its number, name, description,
- * deliverables, a restrained visual detail (CSS-drawn geometry sharing the
- * bronze/graphite/warm system), and a route to the inquiry form.
- */
-
 const TONE_ACCENT: Record<Service["visualTone"], string> = {
   bronze: "text-bronze",
   graphite: "text-on-surface-variant",
@@ -26,13 +16,12 @@ export default function Services() {
       className="w-full bg-background py-section lg:py-[8rem] px-4 lg:px-8 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
-        {/* Section header */}
-        <div className="mb-16 lg:mb-20 lg:col-span-8">
+        <div className="mb-16 lg:mb-20">
           <span className="inline-block mb-4 px-3 py-1 border border-bronze/30 bg-bronze/10 text-xs font-mono font-bold uppercase tracking-wider text-bronze">
             Core Offerings
           </span>
           <h2 className="mb-6 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
-            Six Ways We Can Build With You
+            Six ways we can build with you
           </h2>
           <p className="text-body-md text-on-surface-variant leading-relaxed">
             Every service is a complete offering with its own deliverables,
@@ -41,7 +30,6 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Service bands */}
         <div className="space-y-16 lg:space-y-24">
           {SERVICES.map((service, idx) => {
             const isOdd = idx % 2 === 0;
@@ -50,7 +38,6 @@ export default function Services() {
                 key={service.id}
                 className="group relative border border-outline-variant/20 bg-surface rounded-xl overflow-hidden"
               >
-                {/* Visual column */}
                 <div
                   className={`absolute inset-0 z-0 flex items-center justify-center ${
                     isOdd ? "left-[60%] top-0 w-[40%] h-full" : "right-[60%] top-0 w-[40%] h-full"
@@ -61,11 +48,10 @@ export default function Services() {
                       service.visualTone === "bronze"
                         ? "bg-bronze/5"
                         : service.visualTone === "graphite"
-                          ? "bg-surface-bright/50"
+                          ? "bg-surface-bright/40"
                           : "bg-outline-variant/10"
                     }`}
                   >
-                    {/* CSS-drawn geometric detail — shares the 3D system's language */}
                     <div
                       className="relative w-32 h-32 lg:w-48 lg:h-48"
                       aria-hidden="true"
@@ -75,23 +61,19 @@ export default function Services() {
                           service.visualTone === "bronze"
                             ? "border-bronze"
                             : "border-outline-variant/40"
-                        } rounded-lg rotate-[15deg] group-hover:rotate-[20deg] transition-transform duration-700`}
+                        } rounded-lg rotate-[12deg] group-hover:rotate-[16deg] transition-transform duration-700`}
                       />
                       <div
                         className={`absolute inset-1 border border-${
                           service.visualTone === "bronze"
-                            ? "bronze/30"
+                            ? "bronze/25"
                             : "outline-variant/30"
-                        } rounded-sm -rotate-[10deg] group-hover:-rotate-[5deg] transition-transform duration-700`}
-                      />
-                      <div
-                        className={`absolute -inset-0.5 border-t border-bronze/20 rounded-lg rotate-[-15deg] opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                        } rounded-sm -rotate-[8deg] group-hover:-rotate-[4deg] transition-transform duration-700`}
                       />
                     </div>
                   </div>
                 </div>
 
-                {/* Content column */}
                 <div
                   className={`relative z-10 ${
                     isOdd
@@ -118,7 +100,6 @@ export default function Services() {
                     {service.description}
                   </p>
 
-                  {/* Capabilities */}
                   <div className="mb-6">
                     <span className="mb-2 block text-[10px] font-mono font-bold uppercase tracking-wider text-on-surface-muted">
                       Deliverables
@@ -136,12 +117,11 @@ export default function Services() {
                     </ul>
                   </div>
 
-                  {/* Route to inquiry */}
                   <Link
                     href="/contact"
                     className="inline-flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-wider text-bronze hover:underline transition-colors"
                   >
-                    Inquire about {service.inquiryLabel} →
+                    Inquire about {service.inquiryLabel}
                   </Link>
                 </div>
               </div>

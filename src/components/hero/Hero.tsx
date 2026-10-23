@@ -4,17 +4,6 @@ import Link from "next/link";
 import FablesArtifact from "@/components/three/FablesArtifact";
 import { useReducedMotion } from "@/lib/motion";
 
-/**
- * Hero — The Digital Laboratory.
- *
- * Editorial asymmetric layout:
- *   • Background: signature 3D artifact canvas (full viewport)
- *   • Foreground: positioning label, headline, supporting copy, CTAs
- *
- * The 3D canvas drives the visual experience; copy remains fully readable
- * with sufficient contrast and a static fallback when WebGL is unavailable.
- */
-
 export default function Hero() {
   const reducedMotion = useReducedMotion();
 
@@ -23,29 +12,22 @@ export default function Hero() {
       id="hero"
       className="relative w-full min-h-screen flex flex-col bg-background overflow-hidden"
     >
-      {/* 3D canvas layer — full viewport behind content */}
       <div className="absolute inset-0 z-0 flex items-center justify-center" aria-hidden="true">
         <FablesArtifact reducedMotion={reducedMotion} />
       </div>
 
-      {/* Content overlay — readable, high contrast */}
       <div className="relative z-10 flex flex-col justify-center py-16 px-4 lg:px-8 text-on-surface">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Positioning label + headline — left columns */}
             <div className="lg:col-span-6">
               <span className="inline-block mb-6 px-3 py-1 border border-bronze/30 bg-bronze/10 text-xs font-mono font-bold uppercase tracking-wider text-bronze">
                 Independent Digital Solutions Studio
               </span>
 
               <h1
-                className="mb-6 font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.02] tracking-tight text-on-surface"
+                className="mb-6 font-display text-[clamp(2.5rem,7vw,4.5rem)] leading-[1.05] tracking-tight text-on-surface"
               >
-                Where Intelligence{" "}
-                <span className="text-bronze">
-                  Becomes Digital Reality
-                </span>
-                .
+                Where Intelligence Becomes Digital Reality
               </h1>
 
               <p className="mb-8 max-w-xs text-body-md text-on-surface-variant leading-relaxed">
@@ -70,13 +52,11 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Empty right columns preserve asymmetric composition */}
             <div className="lg:col-span-6 hidden lg:block" />
           </div>
 
-          {/* Scroll cue */}
           <div className="mt-12 flex items-center justify-between gap-4">
-            <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-on-surface-muted">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-on-surface-muted">
               Scroll to explore
             </span>
             <div className="h-[1px] flex-1 bg-outline-variant/30" />

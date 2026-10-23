@@ -14,7 +14,7 @@ const PRINCIPLES: Principle[] = [
   {
     title: "AI applied where it solves a genuine problem",
     description:
-      "We integrate AI into workflows where it reduces real friction — knowledge retrieval, automation, data extraction — not where it adds hype. No autonomous-intelligence promises, no guaranteed accuracy.",
+      "We integrate AI into workflows where it reduces real friction — knowledge retrieval, automation, data extraction — not where it adds hype. No promises of autonomous intelligence or guaranteed accuracy.",
   },
   {
     title: "Solutions shaped around actual workflows",
@@ -47,14 +47,14 @@ export default function Principles() {
       <div className="max-w-6xl mx-auto">
         <div className="mb-16 lg:mb-20">
           <span className="inline-block mb-4 px-3 py-1 border border-bronze/30 bg-bronze/10 text-xs font-mono font-bold uppercase tracking-wider text-bronze">
-            Our Approach
+            Our approach
           </span>
           <h2 className="mb-6 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
-            What Makes the Lab Different
+            What makes the lab different
           </h2>
           <p className="text-body-md text-on-surface-variant leading-relaxed max-w-xl">
-            Concrete principles, not marketing adjectives. No &quot;revolutionary,&quot;
-            no &quot;world-class&quot; — just how we actually work.
+            Concrete principles, not marketing adjectives. No claims of being
+            revolutionary or world-class — just how we actually work.
           </p>
         </div>
 

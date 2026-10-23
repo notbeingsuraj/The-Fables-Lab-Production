@@ -4,15 +4,6 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import { SERVICES } from "@/lib/services";
 
-/**
- * ProjectInquiry — polished lead-generation section.
- *
- * Posts to the existing POST /api/contact endpoint (MongoDB-backed, with
- * validation, dedup, and rate limiting). Reports genuine submission state:
- * idle → sending → sent/error. Never pretends an inquiry was delivered unless
- * the server confirmed it.
- */
-
 interface FormData {
   name: string;
   email: string;
@@ -89,7 +80,6 @@ export default function ProjectInquiry() {
     setMessage("");
     setErrors({});
 
-    // Client-side validation mirroring the server contract.
     const nextErrors: FieldErrors = {};
     if (!data.name.trim()) nextErrors.name = "Name is required.";
     if (!data.email.trim()) nextErrors.email = "Email is required.";
@@ -150,7 +140,6 @@ export default function ProjectInquiry() {
   const labelClass =
     "mb-1.5 block text-[10px] font-mono font-bold uppercase tracking-wider text-on-surface-muted";
 
-  // Success state
   if (status === "sent") {
     return (
       <section
@@ -164,7 +153,7 @@ export default function ProjectInquiry() {
             ✓
           </div>
           <h2 className="mb-4 font-display text-[clamp(2rem,5vw,3rem)] leading-[1.05] tracking-tight text-on-surface">
-            Signal Locked.
+            Transmission received
           </h2>
           <p className="mb-8 text-body-md text-on-surface-variant leading-relaxed">
             {message}
@@ -178,7 +167,7 @@ export default function ProjectInquiry() {
             href="/services"
             className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-outline-variant/50 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:border-bronze hover:text-bronze transition-colors"
           >
-            Explore Capabilities
+            Explore capabilities
           </Link>
         </div>
       </section>
@@ -192,28 +181,25 @@ export default function ProjectInquiry() {
     >
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-16 items-start">
-          {/* Heading column */}
           <div className="lg:col-span-5">
             <span className="inline-block mb-4 px-3 py-1 border border-bronze/30 bg-bronze/10 text-xs font-mono font-bold uppercase tracking-wider text-bronze">
-              Project Inquiry
+              Project inquiry
             </span>
             <h2 className="mb-6 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
-              Have a Problem Worth Building For?
+              Have a problem worth building for
             </h2>
             <p className="mb-8 text-body-md text-on-surface-variant leading-relaxed max-w-xs">
-              Tell us what you&apos;re working on. We&apos;ll help define the right
+              Tell us what you are working on. We will help define the right
               digital solution.
             </p>
 
             <div className="space-y-3">
               <div className="flex items-start gap-3">
-                <span className="flex shrink-0 mt-1 text-bronze font-mono text-xs">▸</span>
                 <span className="text-sm text-on-surface-variant">
                   Fixed-bid sprints — no open-ended hourly meters
                 </span>
               </div>
               <div className="flex items-start gap-3">
-                <span className="flex shrink-0 mt-1 text-bronze font-mono text-xs">▸</span>
                 <span className="text-sm text-on-surface-variant">
                   Response within 24 operational hours
                 </span>
@@ -221,13 +207,13 @@ export default function ProjectInquiry() {
             </div>
           </div>
 
-          {/* Form column */}
           <div className="lg:col-span-7">
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClass} htmlFor="inq-name">
-                    Name <span className="text-bronze/50">REQ</span>
+                    Name
+                    <span className="text-bronze/50">Required</span>
                   </label>
                   <input
                     id="inq-name"
@@ -238,12 +224,13 @@ export default function ProjectInquiry() {
                     disabled={isSubmitting}
                   />
                   {errors.name && (
-                    <p className="mt-1 text-[11px] text-error">{errors.name}</p>
+                    <p className="mt-1 text-[11px] text-bronze-dim">{errors.name}</p>
                   )}
                 </div>
                 <div>
                   <label className={labelClass} htmlFor="inq-email">
-                    Work Email <span className="text-bronze/50">REQ</span>
+                    Work email
+                    <span className="text-bronze/50">Required</span>
                   </label>
                   <input
                     id="inq-email"
@@ -255,14 +242,15 @@ export default function ProjectInquiry() {
                     disabled={isSubmitting}
                   />
                   {errors.email && (
-                    <p className="mt-1 text-[11px] text-error">{errors.email}</p>
+                    <p className="mt-1 text-[11px] text-bronze-dim">{errors.email}</p>
                   )}
                 </div>
               </div>
 
               <div>
                 <label className={labelClass} htmlFor="inq-company">
-                  Company or Project Name <span className="text-bronze/50">REQ</span>
+                  Company or project name
+                  <span className="text-bronze/50">Required</span>
                 </label>
                 <input
                   id="inq-company"
@@ -273,13 +261,14 @@ export default function ProjectInquiry() {
                   disabled={isSubmitting}
                 />
                 {errors.company && (
-                  <p className="mt-1 text-[11px] text-error">{errors.company}</p>
+                  <p className="mt-1 text-[11px] text-bronze-dim">{errors.company}</p>
                 )}
               </div>
 
               <div>
                 <label className={labelClass} htmlFor="inq-services">
-                  Services Required <span className="text-bronze/50">REQ</span>
+                  Services required
+                  <span className="text-bronze/50">Required</span>
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {SERVICES.map((service) => (
@@ -291,7 +280,7 @@ export default function ProjectInquiry() {
                       onClick={() => toggleService(service.id)}
                       className={`flex items-center gap-2 border rounded-sm px-3 py-2 text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                         data.services.includes(service.id)
-                          ? "border-bronze bg-bronze text-surface shadow-magenta-sm"
+                          ? "border-bronze bg-bronze text-surface shadow-soft"
                           : "border-outline-variant/50 bg-surface-low text-on-surface-variant hover:border-bronze/50 hover:text-bronze"
                       }`}
                     >
@@ -300,13 +289,13 @@ export default function ProjectInquiry() {
                   ))}
                 </div>
                 {errors.services && (
-                  <p className="mt-1 text-[11px] text-error">{errors.services}</p>
+                  <p className="mt-1 text-[11px] text-bronze-dim">{errors.services}</p>
                 )}
               </div>
 
               <div>
                 <label className={labelClass} htmlFor="inq-budget">
-                  Project Budget (optional)
+                  Project budget (optional)
                 </label>
                 <select
                   id="inq-budget"
@@ -326,24 +315,25 @@ export default function ProjectInquiry() {
 
               <div>
                 <label className={labelClass} htmlFor="inq-brief">
-                  Project Brief <span className="text-bronze/50">REQ</span>
+                  Project brief
+                  <span className="text-bronze/50">Required</span>
                 </label>
                 <textarea
                   id="inq-brief"
                   value={data.brief}
                   onChange={(e) => updateField("brief", e.target.value)}
                   rows={6}
-                  placeholder="Describe the problem, the constraints, the deadline, and what “done” looks like."
+                  placeholder="Describe the problem, the constraints, the deadline, and what done looks like."
                   className={`${inputClass} h-32 resize-y leading-relaxed`}
                   disabled={isSubmitting}
                 />
                 {errors.brief && (
-                  <p className="mt-1 text-[11px] text-error">{errors.brief}</p>
+                  <p className="mt-1 text-[11px] text-bronze-dim">{errors.brief}</p>
                 )}
               </div>
 
               {message && status === "error" && (
-                <div className="border border-error/40 bg-error-container/20 p-3 text-[11px] uppercase font-mono text-error">
+                <div className="border border-bronze/30 bg-bronze/5 p-3 text-[11px] uppercase font-mono text-bronze-dim">
                   &gt; {message}
                 </div>
               )}
@@ -358,7 +348,7 @@ export default function ProjectInquiry() {
                       : "border-bronze bg-bronze text-surface hover:bg-bronze-hover"
                   }`}
                 >
-                  {isSubmitting ? "Transmitting…" : "Start a Project"}
+                  {isSubmitting ? "Transmitting" : "Start a Project"}
                 </button>
               </div>
             </form>

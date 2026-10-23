@@ -4,14 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import ProjectCard from "@/components/ui/ProjectCard";
 
-/**
- * Selected Work — case studies drawn from the repository's project database.
- *
- * Falls back to an elegant "What We Build" section when no verified projects
- * are available (e.g. MongoDB unreachable). Never fabricates customer names,
- * screenshots, or metrics.
- */
-
 interface Project {
   id: string;
   name: string;
@@ -51,7 +43,6 @@ export default function SelectedWork() {
     };
   }, []);
 
-  // No verified case studies → show the "What We Build" fallback.
   if (projects === null) {
     return (
       <section
@@ -61,16 +52,16 @@ export default function SelectedWork() {
         <div className="max-w-5xl mx-auto">
           <div className="mb-16 lg:mb-20 text-center">
             <span className="inline-block mb-4 px-3 py-1 border border-bronze/30 bg-bronze/10 text-xs font-mono font-bold uppercase tracking-wider text-bronze">
-              Selected Experiments
+              Selected experiments
             </span>
             <h2 className="mb-6 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
-              What We Build
+              What we build
             </h2>
             <p className="text-body-md text-on-surface-variant leading-relaxed">
-              The studio&apos;s work spans full-stack products, AI systems, marketing
+              The studio builds full-stack products, AI systems, marketing
               sites, UI/UX design, community platforms, and content management
-              systems. Verified case studies appear here once client work clears
-              review.
+              systems. Verified case studies appear here once client work
+              clears review.
             </p>
           </div>
 
@@ -91,14 +82,13 @@ export default function SelectedWork() {
                   className="flex h-16 w-16 items-center justify-center rounded-lg border border-bronze/20 bg-bronze/5 mb-6"
                   aria-hidden="true"
                 >
-                  <span className="text-bronze/50 font-mono text-xs">▭</span>
+                  <div className="h-4 w-4 bg-bronze/20 rounded-sm" />
                 </div>
                 <h3 className="font-display text-lg leading-tight text-on-surface">
                   {item.title}
                 </h3>
                 <p className="mt-3 text-sm text-on-surface-variant leading-relaxed">
-                  A core capability of The Fables Lab. See our services for
-                  details.
+                  A core capability of The Fables Lab. See our services for details.
                 </p>
               </div>
             ))}
@@ -121,17 +111,17 @@ export default function SelectedWork() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16 lg:mb-20">
           <div>
             <span className="inline-block mb-4 px-3 py-1 border border-bronze/30 bg-bronze/10 text-xs font-mono font-bold uppercase tracking-wider text-bronze">
-              Selected Work
+              Selected work
             </span>
             <h2 className="mb-6 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-tight text-on-surface">
-              Case Studies From the Lab
+              Case studies from the lab
             </h2>
           </div>
           <Link
             href="/projects"
             className="inline-flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-wider text-bronze hover:underline"
           >
-            View Archive →
+            View archive
           </Link>
         </div>
 

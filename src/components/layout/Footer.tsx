@@ -22,10 +22,9 @@ export default function Footer() {
     <footer className="border-t border-outline-variant/20 bg-surface/90 backdrop-blur">
       <div className="px-4 lg:px-6 py-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-4 lg:gap-12">
-          {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="flex h-7 w-7 items-center justify-center border border-outline rounded-sm font-mono text-xs font-bold uppercase tracking-wider text-bronze">
+            <div className="flex items-center gap-2.5 mb-5">
+              <span className="flex h-7 w-7 items-center justify-center border border-outline rounded-sm text-[14px] font-mono font-bold uppercase tracking-wider text-bronze">
                 FL
               </span>
               <span className="text-sm font-semibold uppercase tracking-tight text-on-surface">
@@ -33,17 +32,16 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm text-on-surface-variant leading-relaxed max-w-xs">
-              An independent digital solutions studio where ancient stories meet future tech.
+              An independent digital solutions studio where stories meet technology.
               We help businesses build, launch, market, and scale digital products.
             </p>
           </div>
 
-          {/* Services */}
           <div>
-            <h3 className="text-xs font-mono uppercase tracking-wider text-on-surface-muted mb-4">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-on-surface-muted mb-5">
               Services
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {SERVICE_LINKS.map((item) => (
                 <li key={item.label}>
                   <Link
@@ -57,12 +55,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Connect */}
           <div>
-            <h3 className="text-xs font-mono uppercase tracking-wider text-on-surface-muted mb-4">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-on-surface-muted mb-5">
               Connect
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {SOCIAL_LINKS.map((item) => (
                 <li key={item.label}>
                   <a
@@ -87,20 +84,19 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* About */}
           <div>
-            <h3 className="text-xs font-mono uppercase tracking-wider text-on-surface-muted mb-4">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-on-surface-muted mb-5">
               About
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               <li>
                 <Link href="/about" className="text-sm text-on-surface-variant transition-colors hover:text-bronze">
-                  Our Approach
+                  Approach
                 </Link>
               </li>
               <li>
                 <Link href="/projects" className="text-sm text-on-surface-variant transition-colors hover:text-bronze">
-                  Selected Work
+                  Work
                 </Link>
               </li>
               <li>
@@ -112,12 +108,11 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom band */}
         <div className="mt-12 pt-8 border-t border-outline-variant/20 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-on-surface-muted">
-            &copy; {new Date().getFullYear()} The Fables Lab. All rights reserved.
+            &copy; {new Date().getFullYear()} The Fables Lab.
           </p>
-          <div className="flex items-center gap-4 text-xs text-on-surface-muted">
+          <div className="flex items-center gap-5 text-xs text-on-surface-muted">
             <a href="/contact" className="transition-colors hover:text-bronze">
               Contact
             </a>

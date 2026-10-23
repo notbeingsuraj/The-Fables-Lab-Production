@@ -24,12 +24,6 @@ export const metadata: Metadata = {
   },
 };
 
-/**
- * Home — the Fables Lab public site.
- *
- * Sections are scroll-revealed via GSAP + ScrollTrigger. The 3D hero canvas
- * loads lazily and degrades gracefully when WebGL is unavailable.
- */
 export default function Home() {
   return (
     <div className="w-full selection:bg-bronze/20 selection:text-surface">
