@@ -118,7 +118,7 @@ export default function DispatchForm() {
         <span className="font-mono text-label-mono-sm font-bold uppercase tracking-widest text-primary-fixed">
           &gt; /dispatch --open --priority=HIGH
         </span>
-        <span className="font-mono text-label-mono-sm text-outline">FORM://CONTACT</span>
+        <span className="font-mono text-label-mono-sm text-outline">FORM:CONTACT</span>
       </div>
 
       <div className="grid grid-cols-1 gap-space-md sm:grid-cols-2">

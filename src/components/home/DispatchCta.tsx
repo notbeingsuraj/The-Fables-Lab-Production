@@ -73,7 +73,7 @@ export default function DispatchCta() {
           <div className="space-y-space-md font-mono text-label-mono-md">
             <div className="flex items-center justify-between border-b border-outline-variant/30 pb-space-sm">
               <span className="text-outline">&gt; /dispatch --open</span>
-              <span className="text-primary-fixed">[FORM://CONTACT]</span>
+              <span className="text-primary-fixed">[FORM: CONTACT]</span>
             </div>
             <p className="text-on-surface-variant">
               <span className="text-primary-fixed">&gt;</span> Name the entity. Declare the
