@@ -19,7 +19,13 @@ export async function GET(
       return NextResponse.json({ error: "Project not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ data: toProjectJSON(project) }, { status: 200 });
+    try {
+      const data = toProjectJSON(project);
+      return NextResponse.json({ data }, { status: 200 });
+    } catch (err) {
+      console.error("[projects] detail serialization failed:", err);
+      return NextResponse.json({ error: "Failed to load project" }, { status: 500 });
+    }
   } catch (error) {
     console.error("[projects] detail failed:", error);
     return NextResponse.json({ error: "Failed to load project" }, { status: 500 });
