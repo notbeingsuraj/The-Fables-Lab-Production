@@ -3,10 +3,10 @@
 import Link from "next/link";
 
 const NAV_LINKS = [
-  { label: "Services", href: "/#services" },
-  { label: "Work", href: "/#work" },
-  { label: "Approach", href: "/#approach" },
-  { label: "About", href: "/#about" },
+  { label: "Work", href: "/work" },
+  { label: "Services", href: "/services" },
+  { label: "Process", href: "/process" },
+  { label: "About", href: "/about" },
   { label: "Start a project", href: "/contact" },
 ];
 
