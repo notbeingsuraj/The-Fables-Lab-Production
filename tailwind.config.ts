@@ -11,8 +11,8 @@ const config: Config = {
   theme: {
     extend: {
       // ─────────────────────────────────────────────────────────────
-      // THE FABLES LAB — Apple-inspired Premium Light
-      // White, soft grays, restrained accent
+      // THE FABLES LAB — Expressive Apple-inspired Premium Light
+      // White canvas with deliberate color accents
       // ─────────────────────────────────────────────────────────────
       colors: {
         background: "#FFFFFF",
@@ -21,6 +21,11 @@ const config: Config = {
         "surface-elevated": "#FFFFFF",
         "surface-glass": "rgba(255, 255, 255, 0.78)",
         tertiary: "#FAFAFA",
+        "surface-tint-blue": "rgba(0, 113, 227, 0.03)",
+        "surface-tint-violet": "rgba(119, 85, 232, 0.03)",
+        "surface-tint-coral": "rgba(255, 107, 90, 0.03)",
+        "surface-tint-teal": "rgba(32, 164, 168, 0.03)",
+        "surface-tint-amber": "rgba(245, 166, 35, 0.03)",
 
         "on-surface": "#1D1D1F",
         "on-surface-variant": "#6E6E73",
@@ -31,8 +36,19 @@ const config: Config = {
         "outline-glass": "rgba(255, 255, 255, 0.72)",
         "border-subtle": "rgba(0, 0, 0, 0.06)",
 
-        accent: "#0066CC",
-        "accent-subtle": "rgba(0, 102, 204, 0.06)",
+        accent: "#0071E3",
+        "accent-subtle": "rgba(0, 113, 227, 0.08)",
+        "accent-strong": "#0059B3",
+        violet: "#7755E8",
+        "violet-subtle": "rgba(119, 85, 232, 0.08)",
+        coral: "#FF6B5A",
+        "coral-subtle": "rgba(255, 107, 90, 0.08)",
+        teal: "#20A4A8",
+        "teal-subtle": "rgba(32, 164, 168, 0.08)",
+        amber: "#F5A623",
+        "amber-subtle": "rgba(245, 166, 35, 0.08)",
+        green: "#34C759",
+        "green-subtle": "rgba(52, 199, 89, 0.08)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "-apple-system", "BlinkMacSystemFont", "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Arial", "sans-serif"],
