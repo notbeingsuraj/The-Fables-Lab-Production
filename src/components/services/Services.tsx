@@ -20,10 +20,20 @@ export default function Services() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {SERVICES.map((service) => (
+          {SERVICES.map((service) => {
+            const tintMap: Record<string, string> = {
+              "full-stack": "bg-surface-tint-blue",
+              ai: "bg-surface-tint-violet",
+              marketing: "bg-surface-tint-amber",
+              design: "bg-surface-tint-coral",
+              community: "bg-surface-tint-teal",
+              content: "bg-surface-tint-blue",
+            };
+            const tint = tintMap[service.id] ?? "bg-surface-tint-blue";
+            return (
             <article
               key={service.id}
-              className="group relative flex flex-col rounded-2xl border border-outline-variant p-8 transition-all duration-300 hover:border-outline lg:p-10"
+              className={`group relative flex flex-col rounded-2xl border border-outline-variant p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg lg:p-10 ${tint}`}
             >
               <div className="flex items-center justify-between">
                 <span className="text-sm text-on-surface-muted">{service.number}</span>
@@ -53,7 +63,8 @@ export default function Services() {
                 </Link>
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

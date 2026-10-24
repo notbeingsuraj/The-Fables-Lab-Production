@@ -13,10 +13,31 @@ interface Project {
   color: string;
 }
 
-const FALLBACK_ITEMS = [
-  { title: "Full-Stack Solutions", desc: "Custom web applications, scalable backends, and digital platforms." },
-  { title: "AI Solutions", desc: "Practical AI integrations, automation, and intelligent workflows." },
-  { title: "UI/UX Design", desc: "Product strategy, user journeys, and refined interfaces." },
+const VERIFIED_FALLBACK = [
+  {
+    id: "webloom",
+    name: "Webloom",
+    description: "AI-powered business intelligence and website-planning pipeline that extracts, validates, and structures business data to produce personalized website specifications.",
+    image: "",
+    tags: ["Next.js", "AI", "Data Pipelines"],
+    color: "neon-cyan",
+  },
+  {
+    id: "astrovetro",
+    name: "AstroVetro.com",
+    description: "Full-stack e-commerce experience for crystals and spiritual products with product discovery, responsive UX, and MongoDB-backed catalog.",
+    image: "",
+    tags: ["Next.js", "E-commerce", "MongoDB"],
+    color: "electric-blue",
+  },
+  {
+    id: "monetra",
+    name: "Monetra",
+    description: "Peer-to-peer lending record and trust-scoring platform (no fund transfers). Mobile app (React Native/TypeScript) with Node.js/Express + MongoDB backend.",
+    image: "",
+    tags: ["React Native", "TypeScript", "Node.js"],
+    color: "neon-green",
+  },
 ];
 
 export default function SelectedWork() {
@@ -47,41 +68,32 @@ export default function SelectedWork() {
     };
   }, []);
 
-  const showFallback = projects === null || projects.length === 0;
+  const hasProjects = projects !== null && projects.length > 0;
+  const displayProjects = hasProjects
+    ? projects
+    : (projects === null
+        ? VERIFIED_FALLBACK
+        : []);
 
   return (
-    <section id="work" className="section-padding">
-      <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+    <section id="work" className="section-padding relative">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[320px] bg-gradient-to-b from-violet-subtle/30 via-background to-background" />
+      <div className="relative mx-auto max-w-[1200px] px-6 lg:px-10">
         <div className="mb-16 lg:mb-24">
-          <p className="mb-6 text-label-sm uppercase tracking-[0.12em] text-on-surface-muted">
+          <p className="mb-6 text-label-sm uppercase tracking-[0.14em] text-on-surface-muted">
             Selected Work
           </p>
           <h2 className="text-headline-xl text-on-surface text-balance">
-            Work that speaks for itself
+            Real projects, real engineering
           </h2>
           <p className="mt-6 max-w-[720px] text-body-xl text-on-surface-variant text-pretty">
-            Each project is built with restraint, clarity, and intent.
+            Only verified work from public repositories — built with restraint, clarity, and intent.
           </p>
         </div>
 
-        {showFallback ? (
+        {displayProjects.length > 0 ? (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {FALLBACK_ITEMS.map((item) => (
-              <article
-                key={item.title}
-                className="rounded-2xl border border-outline-variant p-8"
-              >
-                <div className="aspect-[4/3] w-full rounded-xl bg-background-secondary" />
-                <h3 className="mt-6 text-lg text-on-surface">{item.title}</h3>
-                <p className="mt-3 text-sm text-on-surface-variant">
-                  {item.desc}
-                </p>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project) => (
+            {displayProjects.map((project) => (
               <ProjectCard
                 key={project.id}
                 id={project.id}
@@ -92,6 +104,13 @@ export default function SelectedWork() {
                 color={project.color}
               />
             ))}
+          </div>
+        ) : (
+          <div className="rounded-2xl border border-outline-variant p-10 text-center">
+            <p className="text-on-surface">No verified projects available yet.</p>
+            <p className="mt-2 text-sm text-on-surface-variant">
+              Check back soon — this portfolio will showcase only verifiable work.
+            </p>
           </div>
         )}
 
