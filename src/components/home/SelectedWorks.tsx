@@ -46,7 +46,11 @@ export default function SelectedWorks() {
             <div className="lg:col-span-7">
               <div className="relative w-full rounded-xl overflow-hidden shadow-md bg-canvas-white p-space-md">
                 <div className="w-full h-80 lg:h-96 rounded-lg bg-gradient-to-br from-surface-container to-canvas-parchment flex items-center justify-center">
-                  <span className="font-caption text-ink-muted">Project Preview</span>
+                  <img
+        src="/Users/surajkumar/Desktop/TheFablesLab/The-Fables-Lab-Production/public/webloom-preview.png"
+        alt="The Fables Lab project preview"
+        className="w-full h-full object-cover rounded-lg"
+      />
                 </div>
               </div>
             </div>
