@@ -21,10 +21,10 @@ export default function ProjectInquiry() {
               Start a conversation
             </Link>
             <a
-              href="mailto:hello@thefableslab.com"
+              href="mailto:IMYSURAJ1218@gmail.COM"
               className="inline-flex items-center justify-center rounded-full px-2 py-2.5 text-sm text-on-surface-variant transition-colors duration-300 hover:text-on-surface"
             >
-              hello@thefableslab.com
+              IMYSURAJ1218@gmail.COM
             </a>
           </div>
         </div>

@@ -44,7 +44,7 @@ export default function DispatchCta() {
               </div>
               <div className="flex items-center gap-space-sm font-mono text-label-mono-sm">
                 <span className="w-24 uppercase text-outline">COMMS:</span>
-                <span className="text-primary-fixed">HELLO@THEFABLESLAB.COM</span>
+                <span className="text-primary-fixed">IMYSURAJ1218@gmail.COM</span>
               </div>
               <div className="flex items-center gap-space-sm font-mono text-label-mono-sm">
                 <span className="w-24 uppercase text-outline">OPERATIONS:</span>

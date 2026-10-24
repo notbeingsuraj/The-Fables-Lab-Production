@@ -11,8 +11,8 @@ const NAV_LINKS = [
 ];
 
 const SOCIAL_LINKS = [
-  { label: "X", href: "https://x.com/thefableslab" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/109757348" },
+  { label: "X", href: "https://x.com/notbeingsuraj" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/surajprocode" },
   { label: "GitHub", href: "https://github.com/notbeingsuraj" },
 ];
 
@@ -63,10 +63,10 @@ export default function Footer() {
               ))}
               <li>
                 <a
-                  href="mailto:hello@thefableslab.com"
+                  href="mailto:IMYSURAJ1218@gmail.COM"
                   className="text-sm text-on-surface-variant transition-colors hover:text-on-surface"
                 >
-                  hello@thefableslab.com
+                  imysuraj1218@gmail.com
                 </a>
               </li>
             </ul>

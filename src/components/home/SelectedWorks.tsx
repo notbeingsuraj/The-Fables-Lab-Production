@@ -39,7 +39,7 @@ export default function SelectedWorks() {
               <div className="pt-space-sm">
                 <Link href="/work" className="inline-flex items-center gap-space-xs font-body-strong text-body-strong text-action-blue-base hover:text-action-blue-focus transition-colors">
                   View Case Archive
-                  <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                  <span className="material-symbols-outlined text-[18px]">➜</span>
                 </Link>
               </div>
             </div>
@@ -47,10 +47,10 @@ export default function SelectedWorks() {
               <div className="relative w-full rounded-xl overflow-hidden shadow-md bg-canvas-white p-space-md">
                 <div className="w-full h-80 lg:h-96 rounded-lg bg-gradient-to-br from-surface-container to-canvas-parchment flex items-center justify-center">
                   <img
-        src="/Users/surajkumar/Desktop/TheFablesLab/The-Fables-Lab-Production/public/webloom-preview.png"
-        alt="The Fables Lab project preview"
-        className="w-full h-full object-cover rounded-lg"
-      />
+    src="/webloom-preview.png"
+    alt="Webloom platform preview"
+    className="w-full h-full object-cover object-top rounded-lg"
+                  />
                 </div>
               </div>
             </div>

@@ -56,7 +56,7 @@ export default function WorkPage() {
               </p>
               <Link href="/projects" className="inline-flex items-center gap-space-xs font-body-strong text-body-strong text-action-blue-base hover:text-action-blue-focus transition-colors">
                 Explore Case Files
-                <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                <span className="material-symbols-outlined text-[18px]">➜</span>
               </Link>
             </div>
             <div className="lg:col-span-7">

@@ -32,7 +32,7 @@ export default function NewHero() {
                 className="inline-flex items-center justify-center bg-transparent hover:bg-surface-container text-action-blue-base font-body-strong text-body-strong px-space-xl py-space-md rounded-full transition-colors"
               >
                 Explore Our Work
-                <span className="material-symbols-outlined ml-space-xs text-[20px]">arrow_forward</span>
+                <span className="material-symbols-outlined ml-space-xs text-[20px]">➜</span>
               </Link>
             </div>
             <div className="pt-space-md flex items-center gap-space-lg">
@@ -82,7 +82,7 @@ export default function NewHero() {
                     <div className="w-full bg-surface-container rounded-t h-[84%]"></div>
                   </div>
                   <div className="flex items-center justify-between pt-space-xs font-label-sm text-label-sm text-ink-muted">
-                    <span>Latency: 18ms</span>
+                    <span>Latency: 10ms</span>
                     <span>Tokens/s: 1,420</span>
                     <span className="text-green font-semibold">Live stream ↑</span>
                   </div>
@@ -104,7 +104,7 @@ export default function NewHero() {
                 <div className="col-span-12 -mt-space-sm bg-canvas-warm rounded-xl p-space-md shadow-lg flex items-center justify-between">
                   <div className="flex items-center gap-space-md">
                     <div className="w-12 h-12 rounded-lg bg-surface-tile-dark flex items-center justify-center text-ink-inverse">
-                      <span className="material-symbols-outlined text-[24px]">terminal</span>
+                      <span className="material-symbols-outlined text-[10px]">terminal</span>
                     </div>
                     <div>
                       <div className="font-body-strong text-body-strong text-ink-primary">TypeScript • Rust • PyTorch</div>

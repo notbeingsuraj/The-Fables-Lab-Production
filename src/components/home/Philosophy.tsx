@@ -14,27 +14,27 @@ export default function Philosophy() {
             <div className="pt-space-sm">
               <Link href="/about" className="inline-flex items-center gap-space-xs font-body-strong text-body-strong text-action-blue-base hover:text-action-blue-focus transition-colors">
                 Read Our Full Studio Manifesto
-                <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                <span className="material-symbols-outlined text-[18px]">➜</span>
               </Link>
             </div>
           </div>
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-gutter mt-space-xl lg:mt-0">
             <div className="bg-surface-container rounded-2xl p-space-lg space-y-space-sm">
-              <span className="material-symbols-outlined text-action-blue-base text-[28px]">search_check</span>
+              <span className="material-symbols-outlined text-action-blue-base text-[28px]">Search Check</span>
               <h3 className="font-body-strong text-body-strong text-ink-primary">Clear Problem Definition</h3>
               <p className="font-caption text-caption text-ink-secondary">
                 We never write a single line of code until we understand what metrics truly define victory for your business.
               </p>
             </div>
             <div className="bg-surface-container rounded-2xl p-space-lg space-y-space-sm">
-              <span className="material-symbols-outlined text-green text-[28px]">code_blocks</span>
+              <span className="material-symbols-outlined text-green text-[28px]">Code Blocks</span>
               <h3 className="font-body-strong text-body-strong text-ink-primary">Maintainable Engineering</h3>
               <p className="font-caption text-caption text-ink-secondary">
                 Clean typing, comprehensive test harnesses, and predictable data flow your internal team can gladly adopt.
               </p>
             </div>
             <div className="bg-surface-container rounded-2xl p-space-lg space-y-space-sm">
-              <span className="material-symbols-outlined text-electric-violet text-[28px]">handshake</span>
+              <span className="material-symbols-outlined text-electric-violet text-[28px]">Handshake</span>
               <h3 className="font-body-strong text-body-strong text-ink-primary">Honest Communication</h3>
               <p className="font-caption text-caption text-ink-secondary">
                 Radical transparency around technical tradeoffs, schedules, and costs. No account management telephone games.

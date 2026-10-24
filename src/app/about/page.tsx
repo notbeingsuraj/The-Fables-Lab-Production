@@ -24,7 +24,7 @@ export default function AboutPage() {
       <section className="w-full bg-surface-container py-space-section px-margin-mobile lg:px-margin">
         <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-gutter">
           <div className="bg-canvas-white rounded-2xl p-space-lg space-y-space-sm">
-            <span className="material-symbols-outlined text-action-blue-base text-[28px]">search_check</span>
+            <span className="material-symbols-outlined text-action-blue-base text-[28px]">Search Check</span>
             <h3 className="font-body-strong text-body-strong text-ink-primary">Clear Problem Definition</h3>
             <p className="font-caption text-caption text-ink-secondary">
               We never write a single line of code until we understand what metrics truly define victory for your business.

@@ -19,8 +19,8 @@ export default function ContactPage() {
             </p>
             <div className="space-y-space-xs pt-space-sm">
               <p className="font-caption text-caption text-ink-muted">Email</p>
-              <a href="mailto:hello@thefableslab.com" className="font-body-strong text-body-strong text-ink-primary hover:text-action-blue-base transition-colors">
-                hello@thefableslab.com
+              <a href="mailto:imysuraj1218@gmail.com" className="font-body-strong text-body-strong text-ink-primary hover:text-action-blue-base transition-colors">
+                imysuraj1218@gmail.com
               </a>
             </div>
           </div>
