@@ -32,7 +32,7 @@ export interface SeedProject {
   };
 }
 
-const PROJECTS_DATA: Record<string, any> = {
+const PROJECTS_DATA: Record<string, SeedProject> = {
   carefree: {
     name: "Carefree Mobility",
     client: "Carefree Auth",
