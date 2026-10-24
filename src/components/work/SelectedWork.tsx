@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import ProjectCard from "@/components/ui/ProjectCard";
 import { useEffect, useState } from "react";
+import ProjectCard from "@/components/ui/ProjectCard";
 
 interface Project {
   id: string;
@@ -14,13 +14,10 @@ interface Project {
 }
 
 const FALLBACK_ITEMS = [
-  { title: "Full-Stack Product", tone: "bronze" },
-  { title: "AI System", tone: "graphite" },
-  { title: "Marketing Site", tone: "warm" },
-  { title: "UI/UX Design", tone: "bronze" },
-  { title: "Community Platform", tone: "graphite" },
-  { title: "CMS Implementation", tone: "warm" },
-] as const;
+  { title: "Full-Stack Solutions", desc: "Custom web applications, scalable backends, and digital platforms." },
+  { title: "AI Solutions", desc: "Practical AI integrations, automation, and intelligent workflows." },
+  { title: "UI/UX Design", desc: "Product strategy, user journeys, and refined interfaces." },
+];
 
 export default function SelectedWork() {
   const [projects, setProjects] = useState<Project[] | null>(null);
@@ -40,13 +37,11 @@ export default function SelectedWork() {
           description: String(p.description),
           image: String(p.image),
           tags: Array.isArray(p.tags) ? p.tags.map(String) : [],
-          color: String(p.color || "neon-cyan"),
+          color: String(p.color || "neutral"),
         }));
         setProjects(items);
       })
-      .catch(() => {
-        // DB unreachable — leave projects as null to show the fallback.
-      });
+      .catch(() => {});
     return () => {
       cancelled = true;
     };
@@ -55,59 +50,37 @@ export default function SelectedWork() {
   const showFallback = projects === null || projects.length === 0;
 
   return (
-    <section id="work" className="w-full bg-surface py-section lg:py-[10rem] px-6 lg:px-8 overflow-hidden">
-      <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-24 lg:mb-32">
-          <div>
-            <span className="inline-block mb-8 px-3 py-1.5 border border-bronze/30 bg-bronze/10 text-[11px] font-mono font-bold uppercase tracking-wider text-bronze">
-              Selected work
-            </span>
-            <h2
-              className="mb-6 font-display text-[clamp(2.5rem,8vw,3.75rem)] leading-[1.05] tracking-tight text-on-surface text-balance"
-            >
-              Case studies from the lab
-            </h2>
-          </div>
-          <Link
-            href="/projects"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-bronze bg-bronze text-[10px] font-bold uppercase tracking-wider text-surface transition-colors hover:bg-bronze-hover focus-visible:outline-bronze focus-visible:outline-2 focus-visible:outline-offset-2"
-          >
-            View archive
-          </Link>
+    <section id="work" className="section-padding">
+      <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+        <div className="mb-16 lg:mb-24">
+          <p className="mb-6 text-label-sm uppercase tracking-[0.12em] text-on-surface-muted">
+            Selected Work
+          </p>
+          <h2 className="text-headline-xl text-on-surface text-balance">
+            Work that speaks for itself
+          </h2>
+          <p className="mt-6 max-w-[720px] text-body-xl text-on-surface-variant text-pretty">
+            Each project is built with restraint, clarity, and intent.
+          </p>
         </div>
 
         {showFallback ? (
-          <>
-            <p className="text-body-lg text-on-surface-variant leading-relaxed max-w-[560px] mb-24 lg:mb-32">
-              Verified case studies appear here once client work clears review.
-              Below are the types of work we build.
-            </p>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-              {FALLBACK_ITEMS.map((item) => (
-                <div
-                  key={item.title}
-                  className="border border-outline-variant/20 rounded-lg p-8 lg:p-12 bg-background flex flex-col h-full group hover:border-bronze/40 transition-colors"
-                >
-                  <div className="relative h-48 lg:h-56 rounded-lg overflow-hidden border border-outline-variant/30 bg-surface-elevated mb-8">
-                    <div className="absolute inset-0 flex items-center justify-center bg-bronze/5">
-                      <div className="w-16 h-16 rounded-lg border border-bronze/20 bg-bronze/10 flex items-center justify-center">
-                        <span className="text-bronze font-mono text-[11px]">▭</span>
-                      </div>
-                    </div>
-                  </div>
-                  <h3 className="font-display text-lg lg:text-xl leading-tight tracking-tight text-on-surface mb-4">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-on-surface-variant leading-relaxed">
-                    A core capability of The Fables Lab. See our services for
-                    details.
-                  </p>
-                </div>
-              ))}
-            </div>
-          </>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {FALLBACK_ITEMS.map((item) => (
+              <article
+                key={item.title}
+                className="rounded-2xl border border-outline-variant p-8"
+              >
+                <div className="aspect-[4/3] w-full rounded-xl bg-background-secondary" />
+                <h3 className="mt-6 text-lg text-on-surface">{item.title}</h3>
+                <p className="mt-3 text-sm text-on-surface-variant">
+                  {item.desc}
+                </p>
+              </article>
+            ))}
+          </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
               <ProjectCard
                 key={project.id}
@@ -121,6 +94,16 @@ export default function SelectedWork() {
             ))}
           </div>
         )}
+
+        <div className="mt-12">
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-2 text-sm text-on-surface transition-colors hover:text-on-surface-variant"
+          >
+            View all projects
+            <span aria-hidden="true">→</span>
+          </Link>
+        </div>
       </div>
     </section>
   );

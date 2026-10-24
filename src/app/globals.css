@@ -1,27 +1,30 @@
-@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-geist: "Geist", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-geist-mono: "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", monospace;
-  --background: #080808;
-  --background-secondary: #111112;
-  --surface: #19191B;
-  --surface-elevated: #2A2A2C;
-  --surface-glass: rgba(25, 25, 27, 0.55);
-  --on-surface: #F5F5F7;
-  --on-surface-variant: #A1A1A6;
-  --on-surface-muted: #6E6E73;
-  --outline: rgba(255, 255, 255, 0.10);
-  --outline-variant: rgba(255, 255, 255, 0.05);
-  --outline-glass: rgba(255, 255, 255, 0.14);
-  --bronze: #a67c52;
-  --bronze-dim: #8c6844;
-  --bronze-hover: #b48a6c;
-  --bronze-subtle: rgba(166, 124, 82, 0.10);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --font-geist-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  /* Apple-inspired light palette */
+  --background: #FFFFFF;
+  --background-secondary: #F5F5F7;
+  --surface: #FFFFFF;
+  --surface-elevated: #FFFFFF;
+  --surface-glass: rgba(255, 255, 255, 0.78);
+  --tertiary: #FAFAFA;
+  --on-surface: #1D1D1F;
+  --on-surface-variant: #6E6E73;
+  --on-surface-muted: #86868B;
+  --outline: #D2D2D7;
+  --outline-variant: rgba(0, 0, 0, 0.06);
+  --outline-glass: rgba(255, 255, 255, 0.72);
+  --accent: #0066CC;
+  --accent-subtle: rgba(0, 102, 204, 0.06);
+  --border-subtle: rgba(0, 0, 0, 0.06);
 }
 
 @layer base {
@@ -34,17 +37,19 @@
 
   html {
     -webkit-text-size-adjust: 100%;
+    font-feature-settings: "ss01", "ss03", "cv01", "cv02";
   }
 
   body {
     color: var(--on-surface);
     background: var(--background);
-    font-family: var(--font-geist), system-ui, -apple-system, sans-serif;
+    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
     overscroll-behavior: none;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    line-height: 1.6;
   }
 
   main > :first-child {
@@ -55,13 +60,13 @@
   }
 
   ::selection {
-    background: var(--bronze-subtle);
+    background: rgba(0, 102, 204, 0.12);
     color: var(--on-surface);
   }
 
   :focus-visible {
-    outline: 2px solid var(--bronze);
-    outline-offset: 2px;
+    outline: 2px solid rgba(0, 102, 204, 0.6);
+    outline-offset: 3px;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -77,17 +82,17 @@
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0d0d0d;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #242424;
-  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #8c6844;
+  background: rgba(0, 0, 0, 0.24);
 }
 
 @layer utilities {
@@ -98,23 +103,24 @@
     text-wrap: pretty;
   }
   .hairline {
-    border-top: 1px solid var(--outline);
+    border-top: 1px solid var(--outline-variant);
   }
-  .hairline-glass {
-    border-top: 1px solid var(--outline-glass);
-  }
-  .reveal {
-    opacity: 0;
-  }
-  .reveal.revealed {
-    opacity: 1;
+  .hairline-bottom {
+    border-bottom: 1px solid var(--outline-variant);
   }
   .glass-nav {
-    background: var(--surface-glass);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-bottom: 1px solid var(--outline-glass);
-    box-shadow: var(--glass);
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.72);
+    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.02);
+  }
+  .glass-surface {
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.045);
   }
   .canvas-wrap {
     position: relative;
@@ -126,5 +132,13 @@
     display: block;
     width: 100% !important;
     height: 100% !important;
+  }
+  .section-padding {
+    padding-top: clamp(6rem, 14vw, 12rem);
+    padding-bottom: clamp(6rem, 14vw, 12rem);
+  }
+  .section-padding-sm {
+    padding-top: clamp(4rem, 10vw, 8rem);
+    padding-bottom: clamp(4rem, 10vw, 8rem);
   }
 }

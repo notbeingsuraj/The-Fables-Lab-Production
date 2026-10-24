@@ -1,72 +1,53 @@
 "use client";
 
-interface Principle {
-  title: string;
-  description: string;
-}
-
-const PRINCIPLES: Principle[] = [
+const DIFFERENTIATORS = [
   {
-    title: "Design and engineering developed together",
-    description:
-      "We do not hand off designs over a wall. Designers and engineers work in the same pod from day one, so what is designed can be built — and what is built serves the design intent.",
+    title: "Connected thinking",
+    description: "Strategy, design, engineering, and growth are treated as connected parts of one process.",
   },
   {
-    title: "AI applied where it solves a genuine problem",
-    description:
-      "We integrate AI into workflows where it reduces real friction — knowledge retrieval, automation, data extraction — not where it adds hype. No promises of autonomous intelligence or guaranteed accuracy.",
+    title: "Solutions tailored to the problem",
+    description: "We build around your actual needs, not off-the-shelf templates or forced scope.",
   },
   {
-    title: "Solutions shaped around actual workflows",
-    description:
-      "Products are built around how your team already works, not the other way around. We start with your processes and engineer software that fits them.",
+    title: "Clear communication",
+    description: "Defined scope, transparent updates, and deliberate execution from first conversation to launch.",
   },
   {
-    title: "Maintainable architecture",
-    description:
-      "We ship production code, not throwaway prototypes. Documentation, design systems, and admin tools are included so your team can operate the product after we leave.",
+    title: "Practical technology choices",
+    description: "We choose tools that are reliable, maintainable, and fit the problem at hand.",
   },
   {
-    title: "Clear communication, measurable objectives",
-    description:
-      "Fixed-bid sprints, defined deliverables, and honest timelines. You always know what is being built, why, and what success looks like.",
+    title: "A focus on outcomes",
+    description: "Success is measured by what the product helps you achieve, not by the technology used.",
   },
-] as const;
+];
 
 export default function About() {
   return (
-    <section id="about" className="w-full bg-background py-section lg:py-[10rem] px-6 lg:px-8 overflow-hidden">
-      <div className="max-w-[900px] mx-auto">
-        <div className="mb-24 lg:mb-32 text-center lg:text-left">
-          <span className="inline-block mb-8 px-3 py-1.5 border border-bronze/30 bg-bronze/10 text-[11px] font-mono font-bold uppercase tracking-wider text-bronze">
-            Where stories meet technology
-          </span>
-          <h2
-            className="mb-10 font-display text-[clamp(2.5rem,8vw,3.75rem)] leading-[1.05] tracking-tight text-on-surface text-balance"
-          >
-            Thoughtful ideas. Serious engineering.
+    <section id="about" className="section-padding">
+      <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+        <div className="mb-16 lg:mb-24">
+          <p className="mb-6 text-label-sm uppercase tracking-[0.12em] text-on-surface-muted">
+            Why The Fables Lab
+          </p>
+          <h2 className="text-headline-xl text-on-surface text-balance">
+            Precision without pretension
           </h2>
-          <p className="text-body-lg text-on-surface-variant leading-relaxed max-w-[640px]">
-            The Fables Lab is an independent AI and full-stack digital
-            solutions studio. We help businesses design, engineer, launch,
-            and grow digital products — combining thoughtful design, serious
-            engineering, practical AI, and business understanding.
+          <p className="mt-6 max-w-[720px] text-body-xl text-on-surface-variant text-pretty">
+            The Fables Lab is a premium digital solutions studio. Where Ancient Stories Meet Future Tech.
           </p>
         </div>
 
-        <div className="space-y-12 lg:space-y-16">
-          {PRINCIPLES.map((principle, idx) => (
-            <div key={principle.title} className="border border-outline-variant/20 rounded-lg p-8 lg:p-10 hover:border-bronze/40 transition-colors group">
-              <span className="inline-block mb-6 h-9 w-9 rounded-sm border border-bronze bg-bronze/10 flex items-center justify-center text-[11px] font-mono font-bold uppercase text-bronze group-hover:bg-bronze group-hover:text-surface transition-colors">
-                {idx + 1}
-              </span>
-              <h3 className="mb-4 font-display text-lg lg:text-xl leading-tight tracking-tight text-on-surface">
-                {principle.title}
-              </h3>
-              <p className="text-sm lg:text-base text-on-surface-variant leading-relaxed">
-                {principle.description}
-              </p>
-            </div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {DIFFERENTIATORS.map((item) => (
+            <article
+              key={item.title}
+              className="rounded-2xl border border-outline-variant p-8"
+            >
+              <h3 className="text-lg text-on-surface">{item.title}</h3>
+              <p className="mt-3 text-sm text-on-surface-variant">{item.description}</p>
+            </article>
           ))}
         </div>
       </div>

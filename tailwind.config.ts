@@ -11,46 +11,48 @@ const config: Config = {
   theme: {
     extend: {
       // ─────────────────────────────────────────────────────────────
-      // THE FABLES LAB — Cinematic Premium
-      // Near-black, graphite, warm white, single bronze accent
+      // THE FABLES LAB — Apple-inspired Premium Light
+      // White, soft grays, restrained accent
       // ─────────────────────────────────────────────────────────────
       colors: {
-        background: "#080808",
-        "background-secondary": "#111112",
-        surface: "#19191B",
-        "surface-elevated": "#2A2A2C",
-        "surface-glass": "rgba(25, 25, 27, 0.55)",
+        background: "#FFFFFF",
+        "background-secondary": "#F5F5F7",
+        surface: "#FFFFFF",
+        "surface-elevated": "#FFFFFF",
+        "surface-glass": "rgba(255, 255, 255, 0.78)",
+        tertiary: "#FAFAFA",
 
-        "on-surface": "#F5F5F7",
-        "on-surface-variant": "#A1A1A6",
-        "on-surface-muted": "#6E6E73",
+        "on-surface": "#1D1D1F",
+        "on-surface-variant": "#6E6E73",
+        "on-surface-muted": "#86868B",
 
-        outline: "rgba(255, 255, 255, 0.10)",
-        "outline-variant": "rgba(255, 255, 255, 0.05)",
-        "outline-glass": "rgba(255, 255, 255, 0.14)",
+        outline: "#D2D2D7",
+        "outline-variant": "rgba(0, 0, 0, 0.06)",
+        "outline-glass": "rgba(255, 255, 255, 0.72)",
+        "border-subtle": "rgba(0, 0, 0, 0.06)",
 
-        bronze: "#a67c52",
-        "bronze-dim": "#8c6844",
-        "bronze-hover": "#b48a6c",
-        "bronze-subtle": "rgba(166, 124, 82, 0.10)",
-        "bronze-glass": "rgba(166, 124, 82, 0.06)",
+        accent: "#0066CC",
+        "accent-subtle": "rgba(0, 102, 204, 0.06)",
       },
       fontFamily: {
-        sans: ["var(--font-geist)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "ui-monospace", "SFMono-Regular", "SF Mono", "monospace"],
+        sans: ["var(--font-sans)", "-apple-system", "BlinkMacSystemFont", "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Arial", "sans-serif"],
+        mono: ["var(--font-geist-mono)", "ui-monospace", "SFMono-Regular", "SF Mono", "Menlo", "monospace"],
       },
       fontSize: {
         // Editorial scale — oversized headlines
-        "display-hero": ["clamp(3.5rem, 11vw, 6rem)", { lineHeight: "1.0", letterSpacing: "-0.03em" }],
-        "headline-xl": ["clamp(2.75rem, 8vw, 4rem)", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
-        "headline-lg": ["clamp(2rem, 5vw, 2.75rem)", { lineHeight: "1.1", letterSpacing: "-0.015em" }],
-        "headline-md": ["1.5rem", { lineHeight: "1.35" }],
-        "body-lg": ["1.125rem", { lineHeight: "1.75" }],
-        "body-md": ["1rem", { lineHeight: "1.75" }],
-        "body-sm": ["0.875rem", { lineHeight: "1.65" }],
-        "label-lg": ["0.875rem", { lineHeight: "1.5", letterSpacing: "0.14em" }],
-        "label-md": ["0.75rem", { lineHeight: "1.5", letterSpacing: "0.16em" }],
-        "label-sm": ["0.6875rem", { lineHeight: "1.4", letterSpacing: "0.18em" }],
+        "display-hero": ["clamp(3.5rem, 11vw, 8.5rem)", { lineHeight: "1.0", letterSpacing: "-0.055em" }],
+        "display-xl": ["clamp(3rem, 10vw, 7rem)", { lineHeight: "1.0", letterSpacing: "-0.055em" }],
+        "headline-xl": ["clamp(2.75rem, 8vw, 5rem)", { lineHeight: "1.0", letterSpacing: "-0.05em" }],
+        "headline-lg": ["clamp(2.25rem, 6vw, 3.75rem)", { lineHeight: "1.02", letterSpacing: "-0.04em" }],
+        "headline-md": ["clamp(1.75rem, 4vw, 2.75rem)", { lineHeight: "1.08", letterSpacing: "-0.03em" }],
+        "headline-sm": ["clamp(1.5rem, 3vw, 2rem)", { lineHeight: "1.12", letterSpacing: "-0.02em" }],
+        "body-xl": ["clamp(1.125rem, 2vw, 1.375rem)", { lineHeight: "1.8" }],
+        "body-lg": ["1.125rem", { lineHeight: "1.8" }],
+        "body-md": ["1rem", { lineHeight: "1.8" }],
+        "body-sm": ["0.9375rem", { lineHeight: "1.7" }],
+        "label-lg": ["0.875rem", { lineHeight: "1.6", letterSpacing: "0.08em" }],
+        "label-md": ["0.8125rem", { lineHeight: "1.6", letterSpacing: "0.08em" }],
+        "label-sm": ["0.75rem", { lineHeight: "1.5", letterSpacing: "0.1em" }],
       },
       spacing: {
         1: "0.25rem",
@@ -77,19 +79,18 @@ const config: Config = {
         md: "8px",
         lg: "12px",
         xl: "16px",
+        "2xl": "20px",
         none: "0",
       },
       boxShadow: {
-        soft: "0 4px 24px -4px rgba(0, 0, 0, 0.35)",
-        "soft-lg": "0 8px 48px -8px rgba(0, 0, 0, 0.4)",
-        edge: "1px 1px 0px 0px #a67c52",
-        glass: "0 1px 0px 0px rgba(255, 255, 255, 0.08)",
+        soft: "0 1px 2px rgba(0, 0, 0, 0.02), 0 4px 16px rgba(0, 0, 0, 0.03)",
+        "soft-lg": "0 1px 2px rgba(0, 0, 0, 0.02), 0 12px 40px rgba(0, 0, 0, 0.04)",
+        glass: "0 4px 24px rgba(0, 0, 0, 0.045)",
       },
       animation: {
-        "fade-up": "fadeUp 0.9s cubic-bezier(0.23, 1, 0.32, 1) both",
+        "fade-up": "fadeUp 0.9s cubic-bezier(0.25, 0.1, 0.25, 1) both",
         "fade-in": "fadeIn 1s ease both",
-        "scale-in": "scaleIn 0.7s cubic-bezier(0.23, 1, 0.32, 1) both",
-        "float": "float 6s ease-in-out infinite",
+        "scale-in": "scaleIn 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) both",
       },
       keyframes: {
         fadeUp: {

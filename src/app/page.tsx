@@ -1,23 +1,20 @@
 import type { Metadata } from "next";
-import ScrollReveal from "@/components/motion/ScrollReveal";
 import Hero from "@/components/hero/Hero";
-import StudioIntro from "@/components/studio-intro/StudioIntro";
 import Services from "@/components/services/Services";
 import Process from "@/components/process/Process";
-import About from "@/components/about/About";
-import Pricing from "@/components/pricing/Pricing";
 import SelectedWork from "@/components/work/SelectedWork";
+import About from "@/components/about/About";
 import ProjectInquiry from "@/components/inquiry/ProjectInquiry";
 
 export const metadata: Metadata = {
-  title: "The Fables Lab — Digital Solutions Studio",
+  title: "The Fables Lab — Where Ancient Stories Meet Future Tech",
   description:
-    "The Fables Lab is an independent AI and full-stack digital solutions studio. We help businesses design, engineer, launch, and grow digital products.",
+    "The Fables Lab is a premium digital solutions studio combining software engineering, AI, design, marketing, community building, and content management to build products that move businesses forward.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "The Fables Lab — Where Intelligence Becomes Digital Reality",
+    title: "The Fables Lab — Where Ancient Stories Meet Future Tech",
     description:
-      "An independent digital solutions studio combining engineering, intelligence, design, distribution, and content into connected digital products.",
+      "Strategy, design, engineering, and AI brought together to build products that move businesses forward.",
     type: "website",
     images: [
       { url: "/app-mockup.png", width: 1200, height: 630, alt: "The Fables Lab" },
@@ -27,26 +24,12 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="w-full selection:bg-bronze/20 selection:text-surface">
+    <div className="w-full">
       <Hero />
-      <ScrollReveal>
-        <StudioIntro />
-      </ScrollReveal>
-      <ScrollReveal stagger>
-        <Services />
-      </ScrollReveal>
-      <ScrollReveal>
-        <Process />
-      </ScrollReveal>
-      <ScrollReveal stagger>
-        <About />
-      </ScrollReveal>
-      <ScrollReveal>
-        <Pricing />
-      </ScrollReveal>
-      <ScrollReveal>
-        <SelectedWork />
-      </ScrollReveal>
+      <Services />
+      <Process />
+      <SelectedWork />
+      <About />
       <ProjectInquiry />
     </div>
   );

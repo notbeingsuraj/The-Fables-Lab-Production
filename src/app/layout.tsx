@@ -9,20 +9,20 @@ const SITE_NAME = "The Fables Lab";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Digital Solutions Studio`,
+    default: `${SITE_NAME} — Where Ancient Stories Meet Future Tech`,
     template: `%s · ${SITE_NAME}`,
   },
   description:
-    "The Fables Lab is an independent AI and full-stack digital solutions studio. We help businesses design, engineer, launch, and grow digital products.",
+    "The Fables Lab is a premium digital solutions studio combining software engineering, AI, design, marketing, community building, and content management to build products that move businesses forward.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — Where Intelligence Becomes Digital Reality`,
+    title: `${SITE_NAME} — Where Ancient Stories Meet Future Tech`,
     description:
-      "An independent digital solutions studio combining engineering, intelligence, design, distribution, and content into connected digital products.",
+      "Strategy, design, engineering, and AI brought together to build products that move businesses forward.",
     images: [
       { url: "/app-mockup.png", width: 1200, height: 630, alt: "The Fables Lab" },
     ],
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE_NAME} — Digital Solutions Studio`,
     description:
-      "AI, full-stack engineering, intelligent marketing, and thoughtful design.",
+      "Strategy, design, engineering, and AI brought together to build products that move businesses forward.",
   },
   robots: {
     index: true,
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#080808",
+  themeColor: "#FFFFFF",
   width: "device-width",
   initialScale: 1,
 };
@@ -58,7 +58,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className="bg-background font-sans text-on-surface antialiased">
         <Navbar />
         <main className="min-h-screen flex flex-col">{children}</main>

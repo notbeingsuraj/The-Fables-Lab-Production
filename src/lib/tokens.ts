@@ -5,21 +5,21 @@
  */
 
 export const COLORS = {
-  // Canvas — Dark mode (primary)
-  background: 0x080808,        // matte near-black
-  surface: 0x111112,           // secondary background
-  surfaceElevated: 0x19191B,   // elevated surface
-  surfaceBright: 0x2A2A2C,     // surface bright
+  // Canvas — Light mode (primary)
+  background: 0xFFFFFF,
+  surface: 0xFFFFFF,
+  surfaceElevated: 0xFFFFFF,
+  surfaceBright: 0xFAFAFA,
+  backgroundSecondary: 0xF5F5F7,
 
   // Text
-  onSurface: 0xF5F5F7,         // primary text
-  onSurfaceVariant: 0xA1A1A6,  // secondary text
-  onSurfaceMuted: 0x6E6E73,    // tertiary text
+  onSurface: 0x1D1D1F,
+  onSurfaceVariant: 0x6E6E73,
+  onSurfaceMuted: 0x86868B,
 
-  // Accent — muted bronze
-  bronze: 0xa67c52,
-  bronzeDim: 0x8c6844,
-  bronzeHover: 0xb48a6c,
+  // Accent
+  accent: 0x0066CC,
+  accentDim: 0x0051A8,
 } as const;
 
 export const TYPOGRAPHY = {
