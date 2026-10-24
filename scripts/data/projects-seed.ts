@@ -34,7 +34,13 @@ export interface SeedProject {
 
 const PROJECTS_DATA: Record<string, SeedProject> = {
   carefree: {
+    slug: "carefree",
     name: "Carefree Mobility",
+    description:
+      "Premium car rental MVP built with Next.js. Fluid UI and performance-focused implementation.",
+    thumbnail:
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000&auto=format&fit=crop",
+    tags: ["Next.js", "Tailwind", "Supabase"],
     client: "Carefree Auth",
     role: "Full-Stack Architect",
     duration: "4 Weeks",
@@ -102,6 +108,10 @@ const PROJECTS_DATA: Record<string, SeedProject> = {
     },
   },
   aethos: {
+    slug: "aethos",
+    description: "DeFi dashboard for institutional crypto management.",
+    thumbnail: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop",
+    tags: ["React", "Web3", "D3.js"],
     name: "Aethos Finance",
     client: "Aethos Core",
     role: "Lead UI/UX & UI Engineer",
@@ -164,6 +174,10 @@ const PROJECTS_DATA: Record<string, SeedProject> = {
     },
   },
   lumina: {
+    slug: "lumina",
+    description: "Enterprise AI content generator prototype.",
+    thumbnail: "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=2000&auto=format&fit=crop",
+    tags: ["OpenAI", "Next.js", "Pinecone"],
     name: "Lumina AI",
     client: "Lumina Intelligence",
     role: "AI Systems Architect",
@@ -226,6 +240,10 @@ const PROJECTS_DATA: Record<string, SeedProject> = {
     },
   },
   strata: {
+    slug: "strata",
+    description: "PropTech marketplace for fractional real estate.",
+    thumbnail: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop",
+    tags: ["React Native", "Firebase", "Stripe"],
     name: "Strata Homes",
     client: "Strata Investments",
     role: "Mobile/Web Architect",
@@ -288,6 +306,10 @@ const PROJECTS_DATA: Record<string, SeedProject> = {
     },
   },
   nexus: {
+    slug: "nexus",
+    description: "Telehealth scheduling app for boutique clinics.",
+    thumbnail: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2000&auto=format&fit=crop",
+    tags: ["Nuxt", "Vue", "PostgreSQL"],
     name: "Nexus Health",
     client: "Nexus Clinics",
     role: "Full-Stack Engineer",
@@ -350,6 +372,10 @@ const PROJECTS_DATA: Record<string, SeedProject> = {
     },
   },
   vertex: {
+    slug: "vertex",
+    description: "B2B SaaS data visualization tool.",
+    thumbnail: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2000&auto=format&fit=crop",
+    tags: ["Next.js", "Prisma", "AWS"],
     name: "Vertex Analytics",
     client: "Vertex B2B",
     role: "Founding Engineer",
