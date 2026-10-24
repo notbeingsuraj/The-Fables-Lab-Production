@@ -18,7 +18,7 @@ export interface ContactJSON {
  */
 export function toContactJSON(doc: ContactDoc): ContactJSON {
   return {
-    id: String(doc._id),
+    id: doc._id ? String(doc._id) : "",
     name: doc.name,
     email: doc.email,
     project_name: doc.project_name,
@@ -58,7 +58,7 @@ export interface ProjectJSON {
 
 export function toProjectJSON(doc: ProjectDoc): ProjectJSON {
   return {
-    id: String(doc._id),
+    id: doc._id ? String(doc._id) : doc.slug,
     slug: doc.slug,
     name: doc.name,
     description: doc.description ?? "",
